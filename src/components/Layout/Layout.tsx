@@ -2,11 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { House, Search, FileCheck, Heart, CircleUserRound } from 'lucide-react'
 
-interface LayoutProps {
-  children: React.ReactNode
-}
-
-export const LinkList = [
+export const linkList = [
   {
     href: '/',
     icon: <House size={24} />,
@@ -34,13 +30,17 @@ export const LinkList = [
   },
 ]
 
+interface LayoutProps {
+  children: React.ReactNode
+}
+
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <main className="h-screen">{children}</main>
       <nav className="fixed bottom-0 z-50 h-14 w-full border-t-2 bg-white">
         <ul className="flex h-full items-center justify-between px-8">
-          {LinkList.map((link) => (
+          {linkList.map((link) => (
             <li key={link.href}>
               <Link className="flex flex-col items-center" href={link.href}>
                 {link.icon}
