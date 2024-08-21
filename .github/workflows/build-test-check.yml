@@ -1,4 +1,4 @@
-name: Test Check
+name: Build Test Check
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
     branches: [dev]
 
 jobs:
-  unit-test:
+  build-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
