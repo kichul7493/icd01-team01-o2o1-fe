@@ -42,5 +42,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5",
     "@tanstack/react-query-devtools": "^5.51.24"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
