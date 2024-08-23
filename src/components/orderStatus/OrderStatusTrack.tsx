@@ -2,6 +2,26 @@ import clsx from 'clsx'
 import { Dot } from 'lucide-react'
 import React from 'react'
 
+const OrderStatusItemList = [
+  {
+    name: '주문 수락됨',
+    status: 'accepted',
+  },
+  {
+    name: '메뉴 준비중',
+    status: 'preparing',
+  },
+  {
+    name: '배달중',
+
+    status: 'delivering',
+  },
+  {
+    name: '배달 완료',
+    status: 'delivered',
+  },
+]
+
 interface OrderDetailProps {
   status: 'pending' | 'accepted' | 'preparing' | 'delivering' | 'delivered'
   address: string
@@ -40,38 +60,18 @@ const OrderStatusTrack = ({
             <p>{orderArrivalTime} 도착예정</p>
           </div>
           <ul className="mb-6 ml-6 flex flex-col gap-4">
-            <li
-              className={clsx('flex', {
-                'text-main': status === 'accepted',
-              })}
-            >
-              <Dot />
-              <p className="font-semibold">주문 수락됨</p>
-            </li>
-            <li
-              className={clsx('flex', {
-                'text-main': status === 'preparing',
-              })}
-            >
-              <Dot />
-              <p className="font-semibold">메뉴 준비중</p>
-            </li>
-            <li
-              className={clsx('flex', {
-                'text-main': status === 'delivering',
-              })}
-            >
-              <Dot />
-              <p className="font-semibold">배달중</p>
-            </li>
-            <li
-              className={clsx('flex', {
-                'text-main': status === 'delivered',
-              })}
-            >
-              <Dot />
-              <p className="font-semibold">배달 완료</p>
-            </li>
+            {OrderStatusItemList.map((item) => (
+              <li key={item.status} className="flex">
+                <Dot className={status === item.status ? 'text-main' : ''} />
+                <p
+                  className={clsx('font-semibold', {
+                    'text-main': status === item.status,
+                  })}
+                >
+                  {item.name}
+                </p>
+              </li>
+            ))}
           </ul>
         </>
       )}
