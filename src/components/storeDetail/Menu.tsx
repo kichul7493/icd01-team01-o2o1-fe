@@ -15,7 +15,12 @@ const Menu: React.FC<MenuProps> = ({ name, price, image }) => {
           <p className="pt-2 text-base/[18px] font-normal">{price}원</p>
         </div>
         <figure className="relative h-[100px] w-[100px] bg-gray-200">
-          <Image src={image} alt="menu-image" fill objectFit="cover" />
+          <Image
+            src={image}
+            alt={`menu-image-${name}`}
+            fill
+            sizes="(max-width: 768px) 100px, (max-width: 1200px) 50px, 33px"
+          />
         </figure>
       </article>
     </section>

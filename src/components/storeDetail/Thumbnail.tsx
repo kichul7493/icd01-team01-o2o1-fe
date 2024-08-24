@@ -20,7 +20,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({ images }) => {
     <Slider {...settings}>
       {images.map((src, index) => (
         <figure key={index} className="relative h-[220px] w-full bg-gray-200">
-          <Image src={src} alt={`Slide ${index + 1}`} fill objectFit="cover" />
+          <Image src={src} alt={`Thumbnail ${index + 1}`} fill priority={index === 0} />
         </figure>
       ))}
     </Slider>
