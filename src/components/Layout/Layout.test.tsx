@@ -20,8 +20,8 @@ describe('Layout', () => {
   })
 
   it('has correct max-width/min-width class ', () => {
-    const { container } = render(<Layout>children</Layout>)
-    const mainElement = container.querySelector('main')
+    render(<Layout>children</Layout>)
+    const mainElement = screen.getByRole('main')
 
     expect(mainElement).toHaveClass('max-w-[480px]')
     expect(mainElement).toHaveClass('min-w-[280px]')
