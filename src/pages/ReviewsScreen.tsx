@@ -32,7 +32,7 @@ const ReviewsScreen = () => {
         <p className="font-semibold">후라이드 참 잘하는집 미아점</p>
       </div>
       {reviews.map((review, index) => (
-        <ReviewItem key={index} rating={review.rating} content={review.content} />
+        <ReviewItem key={review.content + index} rating={review.rating} content={review.content} />
       ))}
     </div>
   )
