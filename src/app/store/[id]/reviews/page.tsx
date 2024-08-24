@@ -1,4 +1,4 @@
-import ReviewsScreen from '@/pages/ReviewsScreen'
+import ReviewsScreen from '@/page/ReviewsScreen'
 import React from 'react'
 
 const page = () => {
