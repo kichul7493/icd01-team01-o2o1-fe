@@ -17,7 +17,7 @@ const StoreInfo: React.FC<StoreInfoProps> = ({ address, contact, star, reviewCou
           <p className="pt-2 text-base/[18px]">{contact}</p>
         </div>
         <nav>
-          <Link href="/store">
+          <Link href="/store/1/detail">
             <div className="flex items-center gap-1">
               <span className="text-base/[18px]">매장 정보</span>
               <ChevronRight />
