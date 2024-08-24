@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import QueryProvider from '@/context/QueryProvider'
 import Layout from '@/components/Layout/Layout'
+import MSWProvider from '@/mocks/MSWProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,9 +20,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryProvider>
-          <Layout>{children}</Layout>
-        </QueryProvider>
+        {process.env.NODE_ENV === 'development' ? (
+          <MSWProvider>
+            <QueryProvider>
+              <Layout>{children}</Layout>
+            </QueryProvider>
+          </MSWProvider>
+        ) : (
+          <QueryProvider>
+            <Layout>{children}</Layout>
+          </QueryProvider>
+        )}
       </body>
     </html>
   )
