@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -20,17 +21,20 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-npm-cache-
-            ${{ runner.OS }}
+            ${{ runner.OS }}-node-
+
       - name: Install dependencies
-        run: npm ci
-      - name: Build packages/ui
-        run: npm run build
+        run: npm install
+
       - name: Generate .env in project
         run: |
           # 추후 환경 변수 넣을 곳
           # echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_DEV_URL }}" >> .env
+
       - name: Test
         run: npm run test
+
+      - name: Build
+        run: npm run build
