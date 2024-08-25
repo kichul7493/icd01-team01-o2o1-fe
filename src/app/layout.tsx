@@ -3,13 +3,22 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import QueryProvider from '@/context/QueryProvider'
 import Layout from '@/components/Layout/Layout'
-import MSWProvider from '@/mocks/MSWProvider'
+import { MSWProvider } from '@/mocks/MSWProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '배달이써',
   description: '배달 서비스를 이용해보세요',
+}
+
+if (process.env.NEXT_RUNTIME === 'nodejs') {
+  console.log('SERVER LISTEN')
+
+  const { server } = require('../mocks/node')
+  server.listen()
+
+  Reflect.set(fetch, '__FOO', 'YES')
 }
 
 export default function RootLayout({

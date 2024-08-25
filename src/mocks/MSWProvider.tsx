@@ -1,30 +1,36 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import { Suspense, use } from 'react'
 
-interface MSWProviderProps {
+let mockingPromise: Promise<boolean> | undefined
+
+// if we're running in the browser, start the worker
+if (typeof window !== 'undefined') {
+  const { worker } = require('./browser')
+  mockingPromise = worker.start()
+}
+
+export function MSWProvider({
+  children,
+}: Readonly<{
   children: React.ReactNode
+}>) {
+  // if MSW is enabled, we need to wait for the worker to start, so we wrap the
+  // children in a Suspense boundary until the worker is ready
+  return (
+    <Suspense fallback={null}>
+      <MSWProviderWrapper>{children}</MSWProviderWrapper>
+    </Suspense>
+  )
 }
 
-const MSWProvider = ({ children }: MSWProviderProps) => {
-  const [mswReady, setMswReady] = useState(false)
-  useEffect(() => {
-    const init = async () => {
-      const initMsw = await import('./index').then((res) => res.initMsw)
-      await initMsw()
-      setMswReady(true)
-    }
-
-    if (!mswReady) {
-      init()
-    }
-  }, [mswReady])
-
-  if (!mswReady) {
-    return null
+function MSWProviderWrapper({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  if (mockingPromise) {
+    use(mockingPromise!)
   }
-
-  return <>{children}</>
+  return children
 }
-
-export default MSWProvider

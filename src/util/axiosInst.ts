@@ -1,12 +1,11 @@
+import { baseURL } from '@/constants/api'
 import axios from 'axios'
-
-const API_URL = process.env.REACT_APP_API_URL
 
 const AUTHORIZATION_TOKEN = 'Authorization'
 const REFRESH_TOKEN = 'RefreshAuth'
 
 const axiosInst = axios.create({
-  baseURL: `${API_URL}/api/v1`,
+  baseURL: baseURL,
 })
 
 axiosInst.interceptors.request.use((config) => {
