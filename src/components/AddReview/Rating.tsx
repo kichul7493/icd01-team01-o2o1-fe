@@ -13,6 +13,7 @@ const Rating = () => {
       {Array.from({ length: 5 }).map((_, i) => (
         <button key={i} onClick={() => handleChangeRating(i + 1)}>
           <StarFilledIcon
+            data-testid={`starIcon`}
             width={20}
             height={20}
             key={i}

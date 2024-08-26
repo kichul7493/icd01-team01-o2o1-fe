@@ -7,29 +7,32 @@ describe('Rating', () => {
     render(<Rating />)
 
     const buttons = screen.getAllByRole('button')
+    const stars = screen.getAllByTestId('starIcon')
 
     expect(buttons).toHaveLength(5)
+    expect(stars).toHaveLength(5)
   })
 
   it('버튼을 클릭하면 등급이 변경된다. 변경된 등급만큼 버튼(별)의 색상이 변경된다.', async () => {
     render(<Rating />)
 
     const buttons = screen.getAllByRole('button')
+    const stars = screen.getAllByTestId('starIcon')
 
     await userEvent.click(buttons[2])
 
-    expect(buttons[0].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[1].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[2].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[3].firstChild).toHaveClass('text-gray-300')
-    expect(buttons[4].firstChild).toHaveClass('text-gray-300')
+    expect(stars[0]).toHaveClass('text-yellow-400')
+    expect(stars[1]).toHaveClass('text-yellow-400')
+    expect(stars[2]).toHaveClass('text-yellow-400')
+    expect(stars[3]).toHaveClass('text-gray-300')
+    expect(stars[4]).toHaveClass('text-gray-300')
 
     await userEvent.click(buttons[4])
 
-    expect(buttons[0].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[1].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[2].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[3].firstChild).toHaveClass('text-yellow-400')
-    expect(buttons[4].firstChild).toHaveClass('text-yellow-400')
+    expect(stars[0]).toHaveClass('text-yellow-400')
+    expect(stars[1]).toHaveClass('text-yellow-400')
+    expect(stars[2]).toHaveClass('text-yellow-400')
+    expect(stars[3]).toHaveClass('text-yellow-400')
+    expect(stars[4]).toHaveClass('text-yellow-400')
   })
 })
