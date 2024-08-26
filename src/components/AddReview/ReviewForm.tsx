@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import ImageUploader from '../AddReview/ImageUploader'
-import Rating from '../AddReview/Rating'
+import ImageUploader from './ImageUploader'
+import Rating from './Rating'
 
 const ReviewForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

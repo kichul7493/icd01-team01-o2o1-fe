@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import Link from 'next/link'
-import ReviewForm from '@/components/review/ReviewForm'
+import ReviewForm from '@/components/AddReview/ReviewForm'
 
 const AddReviewScreen = () => {
   return (
