@@ -1,8 +1,8 @@
-import { baseURL } from '@/constants/api'
+import { BASE_URL } from '@/constants/api'
 import axios from 'axios'
 
 const axiosInst = axios.create({
-  baseURL: baseURL,
+  baseURL: BASE_URL,
 })
 
 export default axiosInst

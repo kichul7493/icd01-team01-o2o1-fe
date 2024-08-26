@@ -1,8 +1,8 @@
-import { baseURL } from '@/constants/api'
+import { BASE_URL } from '@/constants/api'
 import { HttpResponse, http } from 'msw'
 
 export const reviewHandlers = [
-  http.get(`${baseURL}/store/test/reviews`, () => {
+  http.get(`${BASE_URL}/store/test/reviews`, () => {
     return HttpResponse.json({
       response: {
         reviews: [
