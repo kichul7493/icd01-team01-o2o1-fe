@@ -1,6 +1,15 @@
 import clsx from 'clsx'
 import { Dot } from 'lucide-react'
-import React from 'react'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 
 const OrderStatusItemList = [
   {
@@ -27,6 +36,7 @@ interface OrderDetailProps {
   address: string
   remainingDeliveryTime?: number
   orderArrivalTime?: string
+  handleCancelOrder: () => void
 }
 
 const OrderStatusTrack = ({
@@ -45,7 +55,21 @@ const OrderStatusTrack = ({
             <p className="text-base font-semibold text-main">매장에서 주문을 확인하고 있습니다.</p>
           </div>
           <div className="mb-12 flex flex-col items-center gap-4">
-            <button className="h-8 w-24 rounded-sm border-2">주문 취소</button>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <button className="h-8 w-24 rounded-sm border-2">주문 취소</button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>정말 주문을 취소하실건가요?</AlertDialogTitle>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>돌아가기</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleCancelOrder}>취소하기</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+
             <p className="text-sm">매장에서 조리를 시작하면 취소 할 수 없습니다.</p>
           </div>
         </>
