@@ -45,7 +45,7 @@ function generateRandomReviews(): Review[] {
       reviewId: i + 1,
       contents: randomContent,
       rating: randomRating,
-      reviewImages: [`https://via.placeholder.com/354x232`],
+      reviewImages: [`https://via.placeholder.com/354x232`, `https://via.placeholder.com/354x232`],
     }
 
     reviews.push(review)
