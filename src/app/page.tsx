@@ -14,6 +14,7 @@ export default function LoginPage() {
   const router = useRouter()
 
   const login = async () => {
+    // Todo : 다음 코드에서 API + msw 대체
     setIsLoading(true)
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsLoading(false)

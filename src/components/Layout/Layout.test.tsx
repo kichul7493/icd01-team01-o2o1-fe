@@ -1,6 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import Layout, { linkList } from './Layout'
 
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(),
+}))
+
+// 테스트 내부
+import { usePathname } from 'next/navigation'
+
 describe('Layout', () => {
   it('renders children correctly', () => {
     render(
@@ -12,6 +19,7 @@ describe('Layout', () => {
   })
 
   it('하단 GNB가 LinkList 배열에 설정된 이름과 href 속성을 가진 Link 태그를 출력해야 한다.', () => {
+    ;(usePathname as jest.Mock).mockReturnValue('/home')
     render(<Layout>children</Layout>)
 
     linkList.forEach((link) => {
