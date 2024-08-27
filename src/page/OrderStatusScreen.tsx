@@ -34,7 +34,10 @@ const OrderStatusScreen = () => {
         </Link>
       </div>
       <div className="h-[240px] w-full">
-        <OrderTrackMap />
+        <OrderTrackMap
+          storeAdress={data.response.store.storeAddress}
+          userAddress={data.response.address}
+        />
       </div>
       <div className="mx-6 py-5">
         <OrderStatusTrack
