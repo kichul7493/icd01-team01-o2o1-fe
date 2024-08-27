@@ -1,5 +1,7 @@
+import { OrderStatus } from '@/features/order-status/types'
 import clsx from 'clsx'
 import { Dot } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,23 +34,34 @@ const OrderStatusItemList = [
 ]
 
 interface OrderDetailProps {
-  status: 'pending' | 'accepted' | 'preparing' | 'delivering' | 'delivered'
+  status: OrderStatus
   address: string
-  remainingDeliveryTime?: number
-  orderArrivalTime?: string
   handleCancelOrder: () => void
 }
 
-const OrderStatusTrack = ({
-  status,
-  address,
-  orderArrivalTime,
-  remainingDeliveryTime,
-}: OrderDetailProps) => {
+const OrderStatusTrack = ({ status, address, handleCancelOrder }: OrderDetailProps) => {
+  const [orderStatus, setOrderStatus] = useState<OrderStatus>(status)
+
+  useEffect(() => {
+    const source = new EventSource('http://example.com/stream')
+
+    source.addEventListener('orderStatusUpdate', (event) => {
+      console.log(JSON.parse(event.data).orderStatus)
+
+      const { orderStatus } = JSON.parse(event.data)
+
+      setOrderStatus(orderStatus)
+    })
+
+    return () => {
+      source.close()
+    }
+  }, [])
+
   return (
     <div className="border-b-2">
       {/* 주문 수락 전 */}
-      {status === 'pending' && (
+      {orderStatus === 'pending' && (
         <>
           <div className="mb-8 flex items-center gap-4">
             <Dot className="text-main" />
@@ -75,29 +88,21 @@ const OrderStatusTrack = ({
         </>
       )}
       {/* 주문 수락 후 */}
-      {status !== 'pending' && (
-        <>
-          <div className="mb-6 flex items-center justify-between">
-            <p className="font-semibold">
-              <span className="text-3xl">{remainingDeliveryTime}</span>분
-            </p>
-            <p>{orderArrivalTime} 도착예정</p>
-          </div>
-          <ul className="mb-6 ml-6 flex flex-col gap-4">
-            {OrderStatusItemList.map((item) => (
-              <li key={item.status} className="flex">
-                <Dot className={status === item.status ? 'text-main' : ''} />
-                <p
-                  className={clsx('font-semibold', {
-                    'text-main': status === item.status,
-                  })}
-                >
-                  {item.name}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </>
+      {orderStatus !== 'pending' && (
+        <ul className="mb-6 ml-6 mt-6 flex flex-col gap-4">
+          {OrderStatusItemList.map((item) => (
+            <li key={item.status} className="flex">
+              <Dot className={orderStatus === item.status ? 'text-main' : ''} />
+              <p
+                className={clsx('font-semibold', {
+                  'text-main': orderStatus === item.status,
+                })}
+              >
+                {item.name}
+              </p>
+            </li>
+          ))}
+        </ul>
       )}
       <div className="flex flex-col gap-4 pb-12">
         <p className="text-xl font-semibold">배달 주소</p>
