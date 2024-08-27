@@ -9,8 +9,17 @@ export const orderHandlers = [
         orderTime: '2024-08-24 09:15',
         orderStatus: 'pending',
         orderPrice: 35500,
-        storeId: 2,
-        storeName: '홍길동 한식당',
+        store: {
+          storeId: 2,
+          storeName: '홍길동 한식당',
+          storeAddress: {
+            latitude: 37.5665,
+            longitude: 126.978,
+            address: '서울시 블라',
+            addressDetail: '몇동 몇호',
+            zipCode: '12345',
+          },
+        },
         menus: [
           {
             menuId: 2,
@@ -48,8 +57,8 @@ export const orderHandlers = [
           },
         ],
         address: {
-          latitude: '37.5665',
-          longitude: '126.9780',
+          latitude: 37.5667,
+          longitude: 126.98,
           address: '서울시 블라',
           addressDetail: '몇동 몇호',
           zipCode: '12345',
