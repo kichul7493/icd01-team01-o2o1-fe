@@ -1,6 +1,8 @@
 import { BASE_URL } from '@/constants/api'
 import { http, HttpResponse } from 'msw'
 
+const encoder = new TextEncoder()
+
 export const orderHandlers = [
   http.get(`${BASE_URL}/order/pending`, () => {
     return HttpResponse.json({
@@ -112,6 +114,70 @@ export const orderHandlers = [
       },
       statusCode: 200,
       msg: 'success',
+    })
+  }),
+  http.delete(`${BASE_URL}/order/pending`, () => {
+    return HttpResponse.json({
+      response: {
+        orderId: 2,
+      },
+      statusCode: 200,
+      msg: 'success',
+    })
+  }),
+  http.get('http://example.com/stream', () => {
+    const stream = new ReadableStream({
+      start(controller) {
+        let counter = 0
+
+        const orderStatus = [
+          {
+            orderId: 12,
+            orderStatus: 'pending',
+            timestamp: '2024-08-22T10:00:00Z',
+          },
+          {
+            orderId: 12,
+            orderStatus: 'accepted',
+            timestamp: '2024-08-22T10:05:00Z',
+          },
+          {
+            orderId: 12,
+            orderStatus: 'preparing',
+            timestamp: '2024-08-22T10:10:00Z',
+          },
+          {
+            orderId: 12,
+            orderStatus: 'delivering',
+            timestamp: '2024-08-22T10:15:00Z',
+          },
+          {
+            orderId: 12,
+            orderStatus: 'delivered',
+            timestamp: '2024-08-22T10:20:00Z',
+          },
+        ]
+
+        function push() {
+          if (counter < 5) {
+            // 5번의 이벤트를 보낼 예시
+            const data = JSON.stringify(orderStatus[counter])
+            controller.enqueue(encoder.encode(`event:orderStatusUpdate\ndata:${data}\n\n`))
+            counter++
+            setTimeout(push, 3000)
+          } else {
+            controller.close() // 모든 데이터 전송 후 스트림 닫기
+          }
+        }
+
+        push() // 첫 번째 데이터 전송 시작
+      },
+    })
+
+    return new HttpResponse(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+      },
     })
   }),
 ]
