@@ -1,7 +1,8 @@
-import { Address, Store } from '@/features/order-status/types'
-import { CircleUser, Store as StoreIcon } from 'lucide-react'
+import { useStreamDeliveryLocation } from '@/features/order-status/hooks/useStreamDeliveryLocation'
+import { Address } from '@/features/order-status/types'
+import { Car, CircleUser, Store as StoreIcon } from 'lucide-react'
 import React from 'react'
-import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
+import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk'
 
 interface OrderTrackMapProps {
   storeAdress: Address
@@ -9,6 +10,8 @@ interface OrderTrackMapProps {
 }
 
 const OrderTrackMap = ({ storeAdress, userAddress }: OrderTrackMapProps) => {
+  const { deliveryLocation } = useStreamDeliveryLocation(1)
+
   return (
     <Map
       center={{
@@ -39,6 +42,19 @@ const OrderTrackMap = ({ storeAdress, userAddress }: OrderTrackMapProps) => {
           <CircleUser width={24} height={24} strokeWidth={1.25} color="white" />
         </div>
       </CustomOverlayMap>
+
+      {deliveryLocation && (
+        <CustomOverlayMap
+          position={{
+            lat: deliveryLocation.latitude,
+            lng: deliveryLocation.longitude,
+          }}
+        >
+          <div className="rounded-full bg-yellow-300 p-2">
+            <Car width={24} height={24} strokeWidth={1.25} color="white" />
+          </div>
+        </CustomOverlayMap>
+      )}
     </Map>
   )
 }
