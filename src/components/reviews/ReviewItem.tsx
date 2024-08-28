@@ -1,11 +1,11 @@
 import React from 'react'
-import { StarFilledIcon } from '@radix-ui/react-icons'
 import { Review } from '@/app/features/reviews/types'
 import Image from 'next/image'
 import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import StarRatingIcon from '../shared/StarRatingIcon'
 
 interface ReviewItemProps {
   review: Review
@@ -23,14 +23,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
     <div className="m-4 border-b-2">
       <div className="mb-2 flex gap-1">
         {Array.from({ length: 5 }, (_, i) => {
-          return (
-            <StarFilledIcon
-              key={i}
-              width={16}
-              height={16}
-              className={i < review.rating ? 'text-yellow-400' : 'text-gray-400'}
-            />
-          )
+          return <StarRatingIcon key={i} fill={i < review.rating} />
         })}
       </div>
       <div>
