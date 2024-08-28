@@ -63,7 +63,7 @@ describe('ReviewItem', () => {
     }
   })
 
-  it('리뷰 내용이 주어진다면, 해당 내용이 출력되어야 합니다', () => {
+  it('리뷰 내용과 이미지가 주어진다면, 해당 내용이 출력되어야 합니다', () => {
     const content = '리뷰 내용'
 
     const review: Review = {
@@ -75,21 +75,9 @@ describe('ReviewItem', () => {
 
     render(<ReviewItem review={review} />)
 
-    expect(screen.getByText(content)).toBeInTheDocument()
-  })
-
-  it('리뷰 이미지가 주어진다면 이미지가 출력되어야 합니다', () => {
-    const review: Review = {
-      rating: 3,
-      reviewImages: ['https://via.placeholder.com/500x240'],
-      contents: '리뷰 내용',
-      reviewId: 1,
-    }
-
-    render(<ReviewItem review={review} />)
-
     const images = screen.getAllByAltText('review picture 1')
 
     expect(images).toHaveLength(review.reviewImages.length)
+    expect(screen.getByText(content)).toBeInTheDocument()
   })
 })
