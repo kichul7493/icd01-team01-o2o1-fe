@@ -1,6 +1,10 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import StoreInfo from './StoreInfo'
-import { ChevronRight, Star } from 'lucide-react'
+import { useParams } from 'next/navigation'
+
+jest.mock('next/navigation', () => ({
+  useParams: jest.fn(),
+}))
 
 const mockProps = {
   address: '서울시 강남구 테헤란로 123',
@@ -10,6 +14,10 @@ const mockProps = {
 }
 
 describe('StoreInfo 컴포넌트', () => {
+  beforeEach(() => {
+    ;(useParams as jest.Mock).mockReturnValue({ id: '1' })
+  })
+
   it('주소, 연락처, 별점, 리뷰 개수를 렌더링한다', () => {
     render(<StoreInfo {...mockProps} />)
 
@@ -26,4 +34,6 @@ describe('StoreInfo 컴포넌트', () => {
     const backButton = screen.getByRole('link')
     expect(backButton).toBeInTheDocument()
   })
+
+  it('링크 클릭 시 페이지 이동을 테스트한다', () => {})
 })
