@@ -3,10 +3,10 @@ interface InfoProps {
   phone: string
   openTime: string
   closeTime: string
-  location: string
+  location: boolean
 }
 
-const Info = ({ address, phone, openTime, closeTime, location }: InfoProps) => {
+const StoreDescribe = ({ address, phone, openTime, closeTime, location }: InfoProps) => {
   return (
     <div className="flex flex-col gap-2 text-base/[18px] font-normal">
       <address className="not-italic">{address}</address>
@@ -19,4 +19,4 @@ const Info = ({ address, phone, openTime, closeTime, location }: InfoProps) => {
   )
 }
 
-export default Info
+export default StoreDescribe
