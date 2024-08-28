@@ -1,62 +1,30 @@
 import { OrderStatus } from '@/features/order-status/types'
 import clsx from 'clsx'
 import { Dot } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-
-const OrderStatusItemList = [
-  {
-    name: '주문 수락됨',
-    status: 'accepted',
-  },
-  {
-    name: '메뉴 준비중',
-    status: 'preparing',
-  },
-  {
-    name: '배달중',
-
-    status: 'delivering',
-  },
-  {
-    name: '배달 완료',
-    status: 'delivered',
-  },
-]
+import { useStreamOrderStatus } from '@/features/order-status/hooks/useStreamOrderStatus'
+import { OrderStatusItemList } from '@/constants/order'
 
 interface OrderDetailProps {
+  orderId: number
   status: OrderStatus
   address: string
   handleCancelOrder: () => void
 }
 
-const OrderStatusTrack = ({ status, address, handleCancelOrder }: OrderDetailProps) => {
-  const [orderStatus, setOrderStatus] = useState<OrderStatus>(status)
-
-  useEffect(() => {
-    const source = new EventSource('http://example.com/stream')
-
-    source.addEventListener('orderStatusUpdate', (event) => {
-      console.log(JSON.parse(event.data).orderStatus)
-
-      const { orderStatus } = JSON.parse(event.data)
-
-      setOrderStatus(orderStatus)
-    })
-
-    return () => {
-      source.close()
-    }
-  }, [])
+const OrderStatusTrack = ({ orderId, status, address, handleCancelOrder }: OrderDetailProps) => {
+  const { orderStatus } = useStreamOrderStatus({ orderId, initStatus: status })
 
   return (
     <div className="border-b-2">
@@ -69,13 +37,14 @@ const OrderStatusTrack = ({ status, address, handleCancelOrder }: OrderDetailPro
           </div>
           <div className="mb-12 flex flex-col items-center gap-4">
             <AlertDialog>
-              <AlertDialogTrigger>
-                <button className="h-8 w-24 rounded-sm border-2">주문 취소</button>
+              <AlertDialogTrigger className="h-8 w-24 rounded-sm border-2">
+                주문 취소
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>정말 주문을 취소하실건가요?</AlertDialogTitle>
                 </AlertDialogHeader>
+                <AlertDialogDescription>주문이 취소되면 복구할 수 없습니다.</AlertDialogDescription>
                 <AlertDialogFooter>
                   <AlertDialogCancel>돌아가기</AlertDialogCancel>
                   <AlertDialogAction onClick={handleCancelOrder}>취소하기</AlertDialogAction>
