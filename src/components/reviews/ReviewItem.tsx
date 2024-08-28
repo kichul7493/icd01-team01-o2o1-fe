@@ -39,7 +39,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
             <div key={image + index}>
               <Image
                 className="h-[232px] w-full object-cover"
-                alt="review-image"
+                alt={`review picture ${index + 1}`}
                 width={500}
                 height={240}
                 src={image}

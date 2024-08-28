@@ -88,7 +88,7 @@ describe('ReviewItem', () => {
 
     render(<ReviewItem review={review} />)
 
-    const images = screen.getAllByAltText('review-image')
+    const images = screen.getAllByAltText('review picture 1')
 
     expect(images).toHaveLength(review.reviewImages.length)
   })
