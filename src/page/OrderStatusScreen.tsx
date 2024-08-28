@@ -6,15 +6,25 @@ import Link from 'next/link'
 import OrderDetail from '@/components/orderStatus/OrderDetail'
 import OrderTrackMap from '@/components/orderStatus/OrderTrackMap'
 import OrderStatusTrack from '@/components/orderStatus/OrderStatusTrack'
-import { useParams } from 'next/navigation'
-import { useOrderStatus } from '@/features/order-status/hooks'
+import { useParams, useRouter } from 'next/navigation'
+
+import { useOrderStatus } from '@/features/order-status/hooks/useOrderStatus'
+import { useCancelOrder } from '@/features/order-status/hooks/useCancelOrder'
 
 const OrderStatusScreen = () => {
   const params = useParams<{ orderId: string }>()
+  const router = useRouter()
 
   const { orderId } = params
 
   const { data, isLoading } = useOrderStatus(orderId)
+
+  const { handleCancelOrder } = useCancelOrder({
+    orderId,
+    onSuccessCallback: () => {
+      router.push('/')
+    },
+  })
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -27,26 +37,31 @@ const OrderStatusScreen = () => {
   const { response } = data
 
   return (
-    <div>
+    <div className="pb-20">
       <div className="absolute top-0 z-50 w-full p-4">
-        <Link href={'/'}>
+        <Link
+          href="#"
+          onClick={(e) => {
+            e.preventDefault()
+            router.back()
+          }}
+        >
           <X />
         </Link>
       </div>
       <div className="h-[240px] w-full">
-        <OrderTrackMap
-          storeAdress={data.response.store.storeAddress}
-          userAddress={data.response.address}
-        />
+        <OrderTrackMap storeAdress={response.store.storeAddress} userAddress={response.address} />
       </div>
       <div className="mx-6 py-5">
         <OrderStatusTrack
+          orderId={response.orderId}
           status={response.orderStatus}
           address={`${response.address.address} ${response.address.addressDetail}`}
+          handleCancelOrder={handleCancelOrder}
         />
         <OrderDetail
           orderId={response.orderId}
-          storeName={response.storeName}
+          storeName={response.store.storeName}
           menuList={response.menus}
           totalPrice={`${response.orderPrice.toLocaleString()}`}
         />

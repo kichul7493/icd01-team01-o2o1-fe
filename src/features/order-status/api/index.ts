@@ -10,3 +10,7 @@ export const getOrderStatus = async (orderId: string) => {
 
   return res.data
 }
+
+export const cancelOrder = async (orderId: string) => {
+  return axiosInst.delete(`/order/${orderId}`)
+}
