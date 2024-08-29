@@ -1,11 +1,18 @@
 import { render, screen } from '@testing-library/react'
 import ReviewItem from './ReviewItem'
+import { Review } from '@/app/features/reviews/types'
 
 describe('ReviewItem', () => {
   it('리뷰 평점이 0일 때, 별점이 색칠되지 않아야 합니다', () => {
     const rating = 0
+    const review: Review = {
+      rating,
+      reviewImages: ['https://via.placeholder.com/500x240'],
+      contents: '맛있어요!',
+      reviewId: 1,
+    }
 
-    render(<ReviewItem rating={rating} content="평점 2 리뷰" />)
+    render(<ReviewItem review={review} />)
 
     const stars = document.querySelectorAll('svg')
 
@@ -17,7 +24,14 @@ describe('ReviewItem', () => {
   it('리뷰 평점이 3일 때, 별점이 3개만 색칠되어야 합니다', () => {
     const rating = 3
 
-    render(<ReviewItem rating={rating} content="평점 3 리뷰" />)
+    const review: Review = {
+      rating,
+      reviewImages: ['https://via.placeholder.com/500x240'],
+      contents: '맛있어요!',
+      reviewId: 1,
+    }
+
+    render(<ReviewItem review={review} />)
 
     const stars = document.querySelectorAll('svg')
 
@@ -33,7 +47,14 @@ describe('ReviewItem', () => {
   it('리뷰 평점이 5일 때, 별점이 5개 전부 색칠되어야 합니다', () => {
     const rating = 5
 
-    render(<ReviewItem rating={rating} content="평점 4 리뷰" />)
+    const review: Review = {
+      rating,
+      reviewImages: ['https://via.placeholder.com/500x240'],
+      contents: '맛있어요!',
+      reviewId: 1,
+    }
+
+    render(<ReviewItem review={review} />)
 
     const stars = document.querySelectorAll('svg')
 
@@ -42,15 +63,21 @@ describe('ReviewItem', () => {
     }
   })
 
-  it('리뷰 내용이 주어진다면, 해당 내용이 출력되어야 합니다', () => {
+  it('리뷰 내용과 이미지가 주어진다면, 해당 내용이 출력되어야 합니다', () => {
     const content = '리뷰 내용'
 
-    render(<ReviewItem rating={3} content={content} />)
+    const review: Review = {
+      rating: 3,
+      reviewImages: ['https://via.placeholder.com/500x240'],
+      contents: content,
+      reviewId: 1,
+    }
 
+    render(<ReviewItem review={review} />)
+
+    const images = screen.getAllByAltText('review picture 1')
+
+    expect(images).toHaveLength(review.reviewImages.length)
     expect(screen.getByText(content)).toBeInTheDocument()
-  })
-
-  it('리뷰 이미지가 주어진다면 이미지가 출력되어야 합니다', () => {
-    //TODO: 리뷰 이미지가 추가되면 테스트 코드를 작성하세요.
   })
 })

@@ -43,7 +43,7 @@ const Layout = ({ children }: LayoutProps) => {
   const isMainPage = Object.values(mainPages).includes(pathname)
 
   return (
-    <main className="relative m-auto h-screen min-h-screen min-w-[280px] max-w-[480px] overflow-y-auto border-l-2 border-r-2 border-gray-100">
+    <main className="relative m-auto h-screen min-h-screen min-w-[280px] max-w-[480px] border-l-2 border-r-2 border-gray-100">
       {children}
       {isMainPage && (
         <nav className="fixed bottom-0 z-50 h-14 w-full min-w-[280px] max-w-[480px] border-t-2 bg-white">
