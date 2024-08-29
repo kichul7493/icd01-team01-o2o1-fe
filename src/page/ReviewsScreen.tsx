@@ -14,9 +14,7 @@ const ReviewsScreen = () => {
 
   const router = useRouter()
 
-  const { id } = params
-
-  const { pages, storeName, isLoading } = useStoreReviewInfiniteQuery(id)
+  const { pages, storeName, isLoading } = useStoreReviewInfiniteQuery(params?.id || '')
 
   return (
     <div className="pb-20">
