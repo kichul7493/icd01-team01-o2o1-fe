@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import ReviewItem from './ReviewItem'
-import { Review } from '@/app/features/reviews/types'
+import { Review } from '@/features/reviews/types'
 
 describe('ReviewItem', () => {
   it('리뷰 평점이 0일 때, 별점이 색칠되지 않아야 합니다', () => {

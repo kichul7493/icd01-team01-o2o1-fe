@@ -1,5 +1,5 @@
 import React from 'react'
-import { Review } from '@/app/features/reviews/types'
+import { Review } from '@/features/reviews/types'
 import Image from 'next/image'
 import Slider from 'react-slick'
 

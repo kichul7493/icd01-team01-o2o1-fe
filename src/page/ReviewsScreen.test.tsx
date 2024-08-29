@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import ReviewsScreen from './ReviewsScreen'
-import { useStoreReviewInfiniteQuery } from '../app/features/reviews/hooks'
 import userEvent from '@testing-library/user-event'
 import { useRouter } from 'next/navigation'
+import { useStoreReviewInfiniteQuery } from '@/features/reviews/hooks'
 
-jest.mock('../app/features/reviews/hooks', () => ({
+jest.mock('../features/reviews/hooks/index.ts', () => ({
   useStoreReviewInfiniteQuery: jest.fn(),
 }))
 
@@ -14,9 +14,9 @@ jest.mock('next/navigation', () => ({
 }))
 
 describe('ReviewsScreen', () => {
-  const storeName = '후라이드 참 잘하는집 미아점';
+  const storeName = '후라이드 참 잘하는집 미아점'
 
-  (useStoreReviewInfiniteQuery as jest.Mock).mockReturnValue({
+  ;(useStoreReviewInfiniteQuery as jest.Mock).mockReturnValue({
     storeName,
     pages: [
       {

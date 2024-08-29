@@ -5,7 +5,7 @@ import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import ReviewItem from '@/components/reviews/ReviewItem'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { useStoreReviewInfiniteQuery } from '@/app/features/reviews/hooks'
+import { useStoreReviewInfiniteQuery } from '@/features/reviews/hooks'
 
 const ReviewsScreen = () => {
   const params = useParams<{
@@ -14,9 +14,7 @@ const ReviewsScreen = () => {
 
   const router = useRouter()
 
-  const { id } = params
-
-  const { pages, storeName, isLoading } = useStoreReviewInfiniteQuery(id)
+  const { pages, storeName, isLoading } = useStoreReviewInfiniteQuery(params?.id || '')
 
   return (
     <div className="pb-20">

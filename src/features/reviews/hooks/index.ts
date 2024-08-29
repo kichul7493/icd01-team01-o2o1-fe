@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { getReviews } from '../api'
 import { useEffect } from 'react'
+import { getReviews } from '../api'
 
 export const useStoreReviewInfiniteQuery = (storeId: string) => {
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
