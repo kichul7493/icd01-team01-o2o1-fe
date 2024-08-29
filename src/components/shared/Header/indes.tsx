@@ -14,9 +14,9 @@ const Header = ({ left, center, right, position = 'static', ...props }: HeaderPr
     <header
       className={`flex h-12 items-center justify-between px-4 ${position} w-full max-w-[480px] ${props.className} `}
     >
-      <div className="w-1/3">{left || <div />}???</div>
-      <div className="flex w-1/3 items-center justify-center">{center || <div />}!!</div>
-      <div className="flex w-1/3 items-center justify-end">{right || <div />}!!!</div>
+      <div className="w-1/3">{left || <div />}</div>
+      <div className="flex w-1/3 items-center justify-center">{center || <div />}</div>
+      <div className="flex w-1/3 items-center justify-end">{right || <div />}</div>
     </header>
   )
 }
