@@ -33,6 +33,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query-devtools": "^5.51.24",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.4.8",
