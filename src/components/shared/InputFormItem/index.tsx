@@ -21,14 +21,14 @@ const InputFormItem = ({ required = false, ...props }: InputFormItemProps) => {
         return (
           <FormItem>
             <FormLabel>
-              <div>
+              <div className="text-base">
                 {props.label}
                 {required && <span className="text-red-500"> *</span>}
               </div>
             </FormLabel>
             <FormControl>
               <Input
-                className="h-[50px] bg-gray-50 pl-[14px]"
+                className="h-12 border-black bg-gray-50 pl-2"
                 placeholder={props.placeholder}
                 {...field}
               />
