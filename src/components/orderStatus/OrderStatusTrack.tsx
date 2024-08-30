@@ -1,4 +1,4 @@
-import { OrderStatus } from '@/features/order-status/types'
+import { OrderStatus } from '@/features/orderStatus/types'
 import clsx from 'clsx'
 import { Dot } from 'lucide-react'
 import React from 'react'
@@ -13,7 +13,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { useStreamOrderStatus } from '@/features/order-status/hooks/useStreamOrderStatus'
+import { useStreamOrderStatus } from '@/features/orderStatus/hooks/useStreamOrderStatus'
 import { OrderStatusItemList } from '@/constants/order'
 
 interface OrderDetailProps {

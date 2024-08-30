@@ -1,4 +1,4 @@
-import { Menu } from '@/features/order-status/types'
+import { Menu } from '@/features/orderStatus/types'
 import React from 'react'
 
 interface OrderDetailProps {

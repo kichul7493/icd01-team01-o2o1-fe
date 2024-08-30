@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import OrderStatusTrack from './OrderStatusTrack'
 import userEvent from '@testing-library/user-event'
-import { useStreamOrderStatus } from '@/features/order-status/hooks/useStreamOrderStatus'
+import { useStreamOrderStatus } from '@/features/orderStatus/hooks/useStreamOrderStatus'
 
-jest.mock('../../features/order-status/hooks/useStreamOrderStatus.ts')
+jest.mock('../../features/orderStatus/hooks/useStreamOrderStatus.ts')
 
 describe('OrderStatusTrack', () => {
   const mockHandleCancelOrder = jest.fn()

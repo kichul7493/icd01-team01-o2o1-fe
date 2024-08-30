@@ -8,8 +8,8 @@ import OrderTrackMap from '@/components/orderStatus/OrderTrackMap'
 import OrderStatusTrack from '@/components/orderStatus/OrderStatusTrack'
 import { useParams, useRouter } from 'next/navigation'
 
-import { useOrderStatus } from '@/features/order-status/hooks/useOrderStatus'
-import { useCancelOrder } from '@/features/order-status/hooks/useCancelOrder'
+import { useOrderStatus } from '@/features/orderStatus/hooks/useOrderStatus'
+import { useCancelOrder } from '@/features/orderStatus/hooks/useCancelOrder'
 
 const OrderStatusScreen = () => {
   const params = useParams<{ orderId: string }>()
