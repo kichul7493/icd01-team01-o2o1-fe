@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import Icon from '../Icon'
+import { ArrowLeft } from 'lucide-react'
 
 const BackButton = () => {
   const router = useRouter()
@@ -16,7 +16,7 @@ const BackButton = () => {
       }}
       variant="ghost"
     >
-      <Icon name="arrow-left" size={24} />
+      <ArrowLeft size={24} />
     </Button>
   )
 }

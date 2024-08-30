@@ -1,36 +1,39 @@
 import React, { FunctionComponent, SVGProps, Suspense, lazy } from 'react'
 
-type SVGComponent = FunctionComponent<SVGProps<SVGSVGElement>>
+// image 최적화로 나중에 사용
+export {}
 
-export type IconName = 'arrow-left' | 'arrow-right' | 'plus' | 'minus'
-// Add all other icon names here
+// type SVGComponent = FunctionComponent<SVGProps<SVGSVGElement>>
 
-export interface IconProps {
-  className?: string
-  name: IconName
-  size: 24 | 16 | 40 | number
-}
+// export type IconName = 'arrow-left'
+// // Add all other icon names here
 
-const iconCache: Partial<Record<IconName, SVGComponent>> = {}
+// export interface IconProps {
+//   className?: string
+//   name: IconName
+//   size: 24 | 16 | 40 | number
+// }
 
-const IconSkeleton = ({ size }: { size: IconProps['size'] }) => {
-  const style = { width: `${size}px`, height: `${size}px` }
-  return <div className="inline-block rounded-full" style={style}></div>
-}
+// const iconCache: Partial<Record<IconName, SVGComponent>> = {}
 
-const loadDynamicIcon = (name: IconName) => {
-  if (!iconCache[name]) {
-    iconCache[name] = React.lazy(() => import(`./public/${name}.svg`))
-  }
-  console.log(iconCache[name])
-  return iconCache[name]
-}
+// const IconSkeleton = ({ size }: { size: IconProps['size'] }) => {
+//   const style = { width: `${size}px`, height: `${size}px` }
+//   return <div className="inline-block rounded-full" style={style}></div>
+// }
 
-export default function Icon({ className, name, size = 16 }: IconProps) {
-  const DynamicIcon = loadDynamicIcon(name)
-  return (
-    <Suspense fallback={<IconSkeleton size={size} />}>
-      <DynamicIcon width={size} height={size} className={className} />
-    </Suspense>
-  )
-}
+// const loadDynamicIcon = (name: IconName) => {
+//   if (!iconCache[name]) {
+//     iconCache[name] = React.lazy(() => import(`./public/${name}.svg`))
+//   }
+//   console.log(iconCache[name])
+//   return iconCache[name]
+// }
+
+// export default function Icon({ className, name, size = 16 }: IconProps) {
+//   const DynamicIcon = loadDynamicIcon(name)
+//   return (
+//     <Suspense fallback={<IconSkeleton size={size} />}>
+//       <DynamicIcon width={size} height={size} className={className} />
+//     </Suspense>
+//   )
+// }
