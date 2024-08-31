@@ -1,26 +1,23 @@
 import StarRatingIcon from '@/components/shared/StarRatingIcon'
 import React from 'react'
 
-const Rating = () => {
-  const [rating, setRating] = React.useState<number>(0)
+interface RatingProps {
+  value: number
+  handleChange: (rating: number) => void
+}
 
-  const handleChangeRating = (rating: number) => {
-    setRating(rating)
-  }
-
+const Rating = ({ value, handleChange }: RatingProps) => {
   return (
     <div className="mb-5 flex gap-1">
-      <input readOnly type="number" value={rating} name="rating" className="hidden" />
-
       {Array.from({ length: 5 }).map((_, i) => (
-        <button key={i} type="button" onClick={() => handleChangeRating(i + 1)}>
+        <button key={i} type="button" onClick={() => handleChange(i + 1)}>
           <StarRatingIcon
             className="cursor-pointer"
             testId={`starIcon-${i}`}
             width={20}
             height={20}
             key={i}
-            fill={rating > i}
+            fill={value > i}
           />
         </button>
       ))}
