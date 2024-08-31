@@ -1,5 +1,4 @@
 import { OrderStatus } from '@/features/orderStatus/types'
-import clsx from 'clsx'
 import { Dot } from 'lucide-react'
 import React from 'react'
 import {
@@ -15,6 +14,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { useStreamOrderStatus } from '@/features/orderStatus/hooks/useStreamOrderStatus'
 import { OrderStatusItemList } from '@/constants/order'
+import OrderStatusItem from './OrderStatusItem'
 
 interface OrderDetailProps {
   orderId: number
@@ -60,16 +60,11 @@ const OrderStatusTrack = ({ orderId, status, address, handleCancelOrder }: Order
       {orderStatus !== 'pending' && (
         <ul className="mb-6 ml-6 mt-6 flex flex-col gap-4">
           {OrderStatusItemList.map((item) => (
-            <li key={item.status} className="flex">
-              <Dot className={orderStatus === item.status ? 'text-main' : ''} />
-              <p
-                className={clsx('font-semibold', {
-                  'text-main': orderStatus === item.status,
-                })}
-              >
-                {item.name}
-              </p>
-            </li>
+            <OrderStatusItem
+              key={item.status}
+              name={item.name}
+              isActivated={orderStatus === item.status}
+            />
           ))}
         </ul>
       )}
