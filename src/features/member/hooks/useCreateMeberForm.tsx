@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-const signupFormSchema = z.object({
+export const createMemberFormSchema = z.object({
   nickName: z
     .string()
     .min(2, '닉네임을 2자 이상 입력해주세요')
@@ -12,12 +12,12 @@ const signupFormSchema = z.object({
   detailAddress: z.string().optional(),
 })
 
-type SignupFormDataType = z.infer<typeof signupFormSchema>
+export type CreateMemberFormDataType = z.infer<typeof createMemberFormSchema>
 
 // useSignupForm 훅 정의
-export const useSignupForm = () => {
-  const form = useForm<SignupFormDataType>({
-    resolver: zodResolver(signupFormSchema),
+export const useSignUpForm = () => {
+  const form = useForm<CreateMemberFormDataType>({
+    resolver: zodResolver(createMemberFormSchema),
     mode: 'onChange',
     defaultValues: {
       nickName: '',
@@ -27,7 +27,7 @@ export const useSignupForm = () => {
     },
   })
 
-  const handleSubmit = (data: SignupFormDataType) => {
+  const handleSubmit = (data: CreateMemberFormDataType) => {
     // TODO: 회원가입 로직 구현
     console.log('회원가입 데이터:', data)
   }

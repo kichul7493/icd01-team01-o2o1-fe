@@ -1,54 +1,23 @@
 'use client'
 
+import CreateMemberForm from '@/components/member/CreateMemberForm'
 import Footer from '@/components/shared/\bFooter'
 import BackButton from '@/components/shared/BackButton'
 import Header from '@/components/shared/Header/indes'
-import InputFormItem from '@/components/shared/InputFormItem'
-import { Form } from '@/components/ui/form'
-import { useSignupForm } from '@/features/member/hooks/useCreateMeberForm'
+import { useSignUpForm } from '@/features/member/hooks/useCreateMeberForm'
 import React from 'react'
 
-const SignupPage = () => {
-  const { form, handleSubmit } = useSignupForm()
+const SignUpPage = () => {
+  const { form, handleSubmit } = useSignUpForm()
   return (
     <div className="flex min-h-screen flex-col">
       <Header left={<BackButton />} />
       <main className="flex flex-grow justify-center p-14">
-        <Form {...form}>
-          <form className="flex w-full flex-col gap-4">
-            <InputFormItem
-              control={form.control}
-              name="nickName"
-              label="닉네임"
-              placeholder="닉네임을 입력해주세요"
-              required
-            />
-            <InputFormItem
-              name="contact"
-              control={form.control}
-              label="연락처"
-              placeholder="연락처를 입력해주세요"
-              required
-            />
-            <InputFormItem
-              name="address"
-              control={form.control}
-              label="주소"
-              placeholder="도로명, 지번 또는 건물명으로 검색"
-              required
-            />
-            <InputFormItem
-              name="detailAddress"
-              control={form.control}
-              label="상세 주소"
-              placeholder="상세 주소를 입력해주세요"
-            />
-          </form>
-        </Form>
+        <CreateMemberForm form={form} />
       </main>
       <Footer text="완료" onClick={handleSubmit} />
     </div>
   )
 }
 
-export default SignupPage
+export default SignUpPage
