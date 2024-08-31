@@ -1,29 +1,18 @@
 import { OrderStatus } from '@/features/orderStatus/types'
 import { Dot } from 'lucide-react'
 import React from 'react'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
 import { useStreamOrderStatus } from '@/features/orderStatus/hooks/useStreamOrderStatus'
 import { OrderStatusItemList } from '@/constants/order'
 import OrderStatusItem from './OrderStatusItem'
+import OrderCancelDialog from './OrderCancelDialog'
 
 interface OrderDetailProps {
   orderId: number
   status: OrderStatus
   address: string
-  handleCancelOrder: () => void
 }
 
-const OrderStatusTrack = ({ orderId, status, address, handleCancelOrder }: OrderDetailProps) => {
+const OrderStatusTrack = ({ orderId, status, address }: OrderDetailProps) => {
   const { orderStatus } = useStreamOrderStatus({ orderId, initStatus: status })
 
   return (
@@ -36,22 +25,7 @@ const OrderStatusTrack = ({ orderId, status, address, handleCancelOrder }: Order
             <p className="text-base font-semibold text-main">매장에서 주문을 확인하고 있습니다.</p>
           </div>
           <div className="mb-12 flex flex-col items-center gap-4">
-            <AlertDialog>
-              <AlertDialogTrigger className="h-8 w-24 rounded-sm border-2">
-                주문 취소
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>정말 주문을 취소하실건가요?</AlertDialogTitle>
-                </AlertDialogHeader>
-                <AlertDialogDescription>주문이 취소되면 복구할 수 없습니다.</AlertDialogDescription>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>돌아가기</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleCancelOrder}>취소하기</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-
+            <OrderCancelDialog />
             <p className="text-sm">매장에서 조리를 시작하면 취소 할 수 없습니다.</p>
           </div>
         </>

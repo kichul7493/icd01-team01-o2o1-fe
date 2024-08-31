@@ -6,25 +6,14 @@ import Link from 'next/link'
 import OrderDetail from '@/components/orderStatus/OrderDetail'
 import OrderTrackMap from '@/components/orderStatus/OrderTrackMap'
 import OrderStatusTrack from '@/components/orderStatus/OrderStatusTrack'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { useOrderStatus } from '@/features/orderStatus/hooks/useOrderStatus'
-import { useCancelOrder } from '@/features/orderStatus/hooks/useCancelOrder'
 
 const OrderStatusScreen = () => {
-  const params = useParams<{ orderId: string }>()
   const router = useRouter()
 
-  const { orderId } = params
-
-  const { data, isLoading } = useOrderStatus(orderId)
-
-  const { handleCancelOrder } = useCancelOrder({
-    orderId,
-    onSuccessCallback: () => {
-      router.push('/')
-    },
-  })
+  const { data, isLoading } = useOrderStatus()
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -57,7 +46,6 @@ const OrderStatusScreen = () => {
           orderId={response.orderId}
           status={response.orderStatus}
           address={`${response.address.address} ${response.address.addressDetail}`}
-          handleCancelOrder={handleCancelOrder}
         />
         <OrderDetail
           orderId={response.orderId}

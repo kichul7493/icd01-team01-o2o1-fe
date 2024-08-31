@@ -1,18 +1,19 @@
 import { useMutation } from '@tanstack/react-query'
 import axiosInst from '@/util/axiosInst'
+import { useParams, useRouter } from 'next/navigation'
 
-interface UseCancelOrderProps {
-  orderId: string
-  onSuccessCallback: () => void
-}
+export const useCancelOrder = () => {
+  const params = useParams<{ orderId: string }>()
+  const router = useRouter()
 
-export const useCancelOrder = ({ orderId, onSuccessCallback }: UseCancelOrderProps) => {
+  const { orderId } = params
+
   const mutation = useMutation({
     mutationKey: ['cancelOrder', orderId],
     mutationFn: (orderId: string) => {
       return axiosInst.delete(`/order/${orderId}`)
     },
-    onSuccess: onSuccessCallback,
+    onSuccess: () => router.back(),
   })
 
   const handleCancelOrder = () => {
