@@ -3,11 +3,24 @@
 import React from 'react'
 import ImageUploader from './ImageUploader'
 import Rating from './Rating'
+import usePostReview from '@/features/reviews/hooks/usePostReview'
 
 const ReviewForm = () => {
+  const { postReview, isPending } = usePostReview()
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('submit')
+
+    const formData = new FormData(e.currentTarget)
+
+    const rating = formData.get('rating')
+    const content = formData.get('content')
+
+    postReview({
+      rating: Number(rating),
+      contents: content as string,
+      reviewImages: [],
+    })
   }
 
   return (
@@ -15,7 +28,8 @@ const ReviewForm = () => {
       <p className="mb-4 font-semibold">삼청당 고대안암점</p>
       <Rating />
       <textarea
-        className="mb-4 h-40 w-full rounded border border-gray-300 p-4"
+        name="content"
+        className="mb-4 h-40 w-full resize-none rounded border border-gray-300 p-4"
         placeholder="리뷰를 작성해주세요."
       ></textarea>
       <ImageUploader />
