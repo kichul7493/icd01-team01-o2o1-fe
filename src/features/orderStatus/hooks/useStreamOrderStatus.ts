@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { OrderStatus } from '../types'
 import { useOrderStatusStore } from '@/store/orderStatus'
 import { BASE_URL } from '@/constants/api'

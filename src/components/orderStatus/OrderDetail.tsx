@@ -13,7 +13,7 @@ const OrderDetail = ({ orderId, storeName, menuList, totalPrice }: OrderDetailPr
     <div className="flex flex-col gap-6 pt-5">
       <p className="text-xl font-semibold">{orderId} 주문</p>
       <p>{storeName}</p>
-      {menuList.map((menu, index) => (
+      {menuList.map((menu) => (
         <div key={menu.menuId} className="mb-3 flex gap-3">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-300">
             {menu.menuCount}
