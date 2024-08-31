@@ -1,4 +1,4 @@
-import AddReviewScreen from '@/pages/AddReviewScreen'
+import AddReviewScreen from '@/page/AddReviewScreen'
 import React from 'react'
 
 const page = () => {
