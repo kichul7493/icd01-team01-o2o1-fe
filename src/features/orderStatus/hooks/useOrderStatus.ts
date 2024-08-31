@@ -5,11 +5,9 @@ import { useParams } from 'next/navigation'
 export const useOrderStatus = () => {
   const params = useParams<{ orderId: string }>()
 
-  const { orderId } = params
-
   const { data, isLoading } = useQuery({
-    queryKey: ['order', orderId],
-    queryFn: async () => getOrderStatus(orderId),
+    queryKey: ['order', params?.orderId],
+    queryFn: async () => getOrderStatus(params?.orderId || ''),
   })
 
   return { data, isLoading }

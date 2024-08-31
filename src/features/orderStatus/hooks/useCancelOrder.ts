@@ -6,10 +6,8 @@ export const useCancelOrder = () => {
   const params = useParams<{ orderId: string }>()
   const router = useRouter()
 
-  const { orderId } = params
-
   const mutation = useMutation({
-    mutationKey: ['cancelOrder', orderId],
+    mutationKey: ['cancelOrder', params?.orderId],
     mutationFn: (orderId: string) => {
       return axiosInst.delete(`/order/${orderId}`)
     },
@@ -17,7 +15,7 @@ export const useCancelOrder = () => {
   })
 
   const handleCancelOrder = () => {
-    mutation.mutate(orderId)
+    mutation.mutate(params?.orderId || '')
   }
 
   return { handleCancelOrder, isPending: mutation.isPending }
