@@ -20,6 +20,17 @@ export const reviewHandlers = [
       msg: '음식점 조회',
     })
   }),
+  http.post(`${BASE_URL}/order/1/review`, async ({ request }) => {
+    console.log(await request.json())
+
+    return HttpResponse.json({
+      response: {
+        reviewId: 11,
+      },
+      statusCode: 200,
+      msg: '리뷰 등록',
+    })
+  }),
 ]
 
 interface Review {
