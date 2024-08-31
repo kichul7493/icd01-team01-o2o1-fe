@@ -70,52 +70,6 @@ export const orderHandlers = [
       msg: 'success',
     })
   }),
-  http.get(`${BASE_URL}/order/accepted`, () => {
-    return HttpResponse.json({
-      response: {
-        orderId: 1,
-        orderTime: '2024-08-24 09:15',
-        orderStatus: 'accepted',
-        orderPrice: 35500,
-        storeId: 2,
-        storeName: '홍길동 한식당',
-        menus: [
-          {
-            menuId: 6,
-            menuName: '치킨',
-            menuCount: 1,
-            optionGroup: [
-              {
-                optionGroupId: 3,
-                optionGroupName: '야채',
-                option: [
-                  {
-                    optionId: 89,
-                    optionName: '파 추가',
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            menuId: 25,
-            menuName: '치킨무',
-            menuCount: 1,
-            optionGroup: [],
-          },
-        ],
-        address: {
-          latitude: 37.5665,
-          longitude: 126.978,
-          address: '서울시 블라',
-          addressDetail: '몇동 몇호',
-          zipCode: '12345',
-        },
-      },
-      statusCode: 200,
-      msg: 'success',
-    })
-  }),
   http.delete(`${BASE_URL}/order/pending`, () => {
     return HttpResponse.json({
       response: {
