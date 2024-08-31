@@ -12,7 +12,7 @@ interface StoreInfoProps {
 }
 
 const StoreInfo = ({ address, contact, star, reviewCount }: StoreInfoProps) => {
-  const { id } = useParams<{ id: string }>()
+  const params = useParams<{ id: string }>()
 
   return (
     <section>
@@ -22,7 +22,7 @@ const StoreInfo = ({ address, contact, star, reviewCount }: StoreInfoProps) => {
           <p className="pt-2 text-base/[18px]">{contact}</p>
         </div>
         <nav>
-          <Link href={`/store/${id}/detail`}>
+          <Link href={`/store/${params?.id}/detail`}>
             <div className="flex items-center gap-1">
               <span className="text-base/[18px]">매장 정보</span>
               <ChevronRight />
