@@ -1,5 +1,5 @@
 import axiosInst from '@/util/axiosInst'
-import { Review } from '../types'
+import { Review, ReviewRequest, ReviewResponse } from '../types'
 
 export const getReviews = async (storeId: string, pageParam: number) => {
   const res = await axiosInst.get<{
@@ -20,4 +20,10 @@ export const getReviews = async (storeId: string, pageParam: number) => {
     ...res.data,
     nextPage,
   }
+}
+
+export const postReview = async (storeId: string, review: ReviewRequest) => {
+  const res = await axiosInst.post<{ response: ReviewResponse }>(`/order/${storeId}/review`, review)
+
+  return res.data.response
 }
