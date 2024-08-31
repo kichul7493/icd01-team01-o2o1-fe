@@ -12,7 +12,7 @@ interface StoreInfoProps {
 }
 
 const StoreInfo = ({ address, contact, star, reviewCount }: StoreInfoProps) => {
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
 
   return (
     <section>
