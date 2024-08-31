@@ -3,6 +3,7 @@ import { Address } from '@/features/orderStatus/types'
 import { Car, CircleUser, Store as StoreIcon } from 'lucide-react'
 import React from 'react'
 import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk'
+import OrderTrackItem from './OrderTrackItem'
 
 interface OrderTrackMapProps {
   storeAdress: Address
@@ -20,40 +21,17 @@ const OrderTrackMap = ({ storeAdress, userAddress }: OrderTrackMapProps) => {
       }}
       className="h-full w-full"
       level={4}
-      zoomable={false}
+      // zoomable={false}
     >
-      <CustomOverlayMap
-        position={{
-          lat: storeAdress.latitude,
-          lng: storeAdress.longitude,
-        }}
-      >
-        <div className="rounded-full bg-main p-2">
-          <StoreIcon width={24} height={24} strokeWidth={1.25} color="white" />
-        </div>
-      </CustomOverlayMap>
-      <CustomOverlayMap
-        position={{
-          lat: userAddress.latitude,
-          lng: userAddress.longitude,
-        }}
-      >
-        <div className="rounded-full bg-main p-2">
-          <CircleUser width={24} height={24} strokeWidth={1.25} color="white" />
-        </div>
-      </CustomOverlayMap>
+      <OrderTrackItem lat={storeAdress.latitude} lng={storeAdress.longitude} type="store" />
+      <OrderTrackItem lat={userAddress.latitude} lng={userAddress.longitude} type="user" />
 
       {deliveryLocation && (
-        <CustomOverlayMap
-          position={{
-            lat: deliveryLocation.latitude,
-            lng: deliveryLocation.longitude,
-          }}
-        >
-          <div className="rounded-full bg-yellow-300 p-2">
-            <Car width={24} height={24} strokeWidth={1.25} color="white" />
-          </div>
-        </CustomOverlayMap>
+        <OrderTrackItem
+          lat={deliveryLocation.latitude}
+          lng={deliveryLocation.longitude}
+          type="delivery"
+        />
       )}
     </Map>
   )
