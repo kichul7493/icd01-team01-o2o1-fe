@@ -125,7 +125,7 @@ export const orderHandlers = [
       msg: 'success',
     })
   }),
-  http.get('http://example.com/stream', () => {
+  http.get(`${BASE_URL}/order/1/stream`, () => {
     const stream = new ReadableStream({
       start(controller) {
         let counter = 0
@@ -260,7 +260,7 @@ export const orderHandlers = [
             const data = JSON.stringify(orderStatus[counter])
             controller.enqueue(encoder.encode(`event:orderStatusUpdate\ndata:${data}\n\n`))
             counter++
-            setTimeout(push, 1000)
+            setTimeout(push, 100)
           } else {
             controller.close() // 모든 데이터 전송 후 스트림 닫기
           }
