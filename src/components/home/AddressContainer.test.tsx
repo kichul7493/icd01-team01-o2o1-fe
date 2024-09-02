@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { IoLocationOutline } from 'react-icons/io5'
 import AddressContainer from '@/components/home/AddressContainer'
 
 describe('AddressContainer 컴포넌트', () => {
