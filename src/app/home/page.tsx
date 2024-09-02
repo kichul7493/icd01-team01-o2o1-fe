@@ -1,6 +1,4 @@
-import Image from 'next/image'
 import NullImage from '@images/home/null_image.svg'
-import { IoLocationOutline } from 'react-icons/io5'
 import CategoryButton from '@/components/home/CategoryButton'
 import StoreCard from '@/components/home/StoreCard'
 import AddressContainer from '@/components/home/AddressContainer'
@@ -48,6 +46,5 @@ export default function Home() {
         ))}
       </div>
     </div>
-    // </div>
   )
 }
