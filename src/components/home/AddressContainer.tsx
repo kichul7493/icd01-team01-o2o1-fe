@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { IoLocationOutline } from 'react-icons/io5'
+import { MapPin } from 'lucide-react'
 
 interface AddressProps {
   address: string
@@ -9,7 +9,7 @@ interface AddressProps {
 export default function AddressContainer({ address }: AddressProps) {
   return (
     <div className="mb-4 flex items-center justify-start">
-      <IoLocationOutline size={20} />
+      <MapPin size={20} />
       <p>{address}</p>
     </div>
   )
