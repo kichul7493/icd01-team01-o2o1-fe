@@ -2,13 +2,21 @@ import { Cross1Icon } from '@radix-ui/react-icons'
 import { CameraIcon } from 'lucide-react'
 import React from 'react'
 import Image from 'next/image'
+import { convertImageToCompressedBlob, loadImage, readFileAsDataURL } from '@/util/convertImage'
 
 const ImageUploader = () => {
   const [images, setImages] = React.useState<string[]>([])
 
-  const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
+
+    const dataUrl = await readFileAsDataURL(file)
+    const image = await loadImage(dataUrl)
+    const blob = await convertImageToCompressedBlob(image)
+    const compressedFile = new File([blob], file.name, { type: blob.type })
+
+    console.log(compressedFile)
 
     //TODO: 이미지를 S3 버킷에 업로드하고 URL을 받아온다.
     setImages((prev) => [...prev, URL.createObjectURL(file)])
