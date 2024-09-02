@@ -1,4 +1,3 @@
-// components/CategoryButton.tsx
 import React from 'react'
 
 interface CategoryButtonProps {
