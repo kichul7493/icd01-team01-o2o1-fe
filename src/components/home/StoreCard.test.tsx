@@ -1,11 +1,9 @@
-// __tests__/StoreCard.test.tsx
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Star from '@images/home/star.svg'
 import StoreCard from './StoreCard'
 
-// Mocked Restaurant Data
 const mockRestaurant = {
   id: 1,
   name: '테스트 식당',
