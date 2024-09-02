@@ -18,7 +18,8 @@ export const useCancelOrder = () => {
   })
 
   const handleCancelOrder = () => {
-    mutation.mutate(params?.orderId || '')
+    if (!params) return
+    mutation.mutate(params.orderId)
   }
 
   return { handleCancelOrder, isPending: mutation.isPending }
