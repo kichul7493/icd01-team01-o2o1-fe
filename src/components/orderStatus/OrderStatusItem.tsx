@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 import { Dot } from 'lucide-react'
 import React from 'react'
 
@@ -12,7 +12,7 @@ const OrderStatusItem = ({ isActivated, name }: OrderStatusItemProps) => {
     <li className="flex">
       <Dot className={isActivated ? 'text-main' : ''} />
       <p
-        className={clsx('font-semibold', {
+        className={cn('font-semibold', {
           'text-main': isActivated,
         })}
       >

@@ -1,5 +1,8 @@
+'use client'
+
 import { ChevronRight, Star } from 'lucide-react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 interface StoreInfoProps {
   address: string
@@ -8,7 +11,9 @@ interface StoreInfoProps {
   reviewCount: number
 }
 
-const StoreInfo: React.FC<StoreInfoProps> = ({ address, contact, star, reviewCount }) => {
+const StoreInfo = ({ address, contact, star, reviewCount }: StoreInfoProps) => {
+  const params = useParams<{ id: string }>()
+
   return (
     <section>
       <header className="flex items-baseline justify-between">
@@ -17,7 +22,7 @@ const StoreInfo: React.FC<StoreInfoProps> = ({ address, contact, star, reviewCou
           <p className="pt-2 text-base/[18px]">{contact}</p>
         </div>
         <nav>
-          <Link href="/store/1/detail">
+          <Link href={`/store/${params?.id}/detail`}>
             <div className="flex items-center gap-1">
               <span className="text-base/[18px]">매장 정보</span>
               <ChevronRight />
