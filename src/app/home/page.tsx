@@ -30,11 +30,11 @@ const restaurants = [
   { id: 7, name: '우리집 밥상', imageSrc: NullImage, rating: 4.7, reviews: 159 },
 ]
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="flex flex-col p-4 pb-[4.5rem]">
       <AddressContainer address={address} />
-      <div className="scroll mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div className="scroll scrollbar-hide mb-4 overflow-x-auto whitespace-nowrap">
         {categories.map((category, index) => (
           <CategoryButton key={index} category={category} />
         ))}
