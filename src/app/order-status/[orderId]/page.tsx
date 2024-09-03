@@ -1,3 +1,5 @@
+'use client'
+
 import { useOrderStatus } from "@/features/orderStatus/hooks/useOrderStatus"
 import { X } from "lucide-react"
 import Link from "next/link"
