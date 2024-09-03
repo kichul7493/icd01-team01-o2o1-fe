@@ -26,6 +26,5 @@ export const kakaoLogin = async ({
       },
     },
   )
-
   return data
 }

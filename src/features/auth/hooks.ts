@@ -58,7 +58,6 @@ export const useSignUp = () => {
     mutationFn: kakaoLogin,
     onSuccess: async (data) => {
       const { isSignup } = data
-
       if (isSignup) {
         router.push('/home')
       } else {

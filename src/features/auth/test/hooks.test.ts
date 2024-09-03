@@ -20,30 +20,42 @@ describe('useSignUp hook', () => {
     jest.clearAllMocks()
   })
 
-  it('should call kakaoLogin and route to home page on successful signup', async () => {
+  it('isSignup true일때 home으로 이동', async () => {
     const mockPush = jest.fn()
     ;(useRouter as jest.Mock).mockReturnValue({ push: mockPush })
+    let onSuccessCallback: (data: any) => void
 
     const mockMutate = jest.fn().mockImplementation(async (data) => {
       const result = await mockKakaoLogin(data)
+      onSuccessCallback(result)
       return result
     })
 
-    ;(useMutation as jest.Mock).mockReturnValue({
-      mutate: mockMutate,
-      isSuccess: false,
-      isError: false,
+    ;(useMutation as jest.Mock).mockImplementation(({ onSuccess }) => {
+      onSuccessCallback = onSuccess
+      return {
+        mutate: mockMutate,
+        isSuccess: false,
+        isError: false,
+      }
     })
+
+    mockKakaoLogin.mockResolvedValue({ isSignup: true })
 
     const { result } = renderHook(() => useSignUp())
 
-    await result.current.mutate({ accessToken: 'aaaa', subId: 'bbbb', name: 'cccc' })
+    await act(async () => {
+      await result.current.mutate({ accessToken: 'mockToken', subId: 'mockId', name: 'mockName' })
+    })
 
-    await waitFor(() => result.current.isSuccess)
     expect(mockKakaoLogin).toHaveBeenCalledWith({
-      accessToken: 'aaaa',
-      subId: 'bbbb',
-      name: 'cccc',
+      accessToken: 'mockToken',
+      subId: 'mockId',
+      name: 'mockName',
+    })
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith('/home')
     })
   })
 })
