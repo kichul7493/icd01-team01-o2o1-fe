@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import StarRatingIcon from '../shared/StarRatingIcon'
+import StarRatingIcon from '../../../../../components/shared/StarRatingIcon'
 
 interface ReviewItemProps {
   review: Review
