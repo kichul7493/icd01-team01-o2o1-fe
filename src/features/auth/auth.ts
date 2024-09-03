@@ -4,7 +4,8 @@ import type { Session } from 'next-auth'
 
 export interface SessionType extends Session {
   accessToken: string
-  socialId?: string
+  subId?: string
+  name: string
 }
 
 type HandlerType = (...args: any) => any
@@ -25,10 +26,12 @@ const handler = NextAuth({
       return token
     },
     session({ session, token }) {
+      const user = session.user
       const newSession: SessionType = {
         ...session,
+        name: user!.name as string,
         accessToken: token.accessToken as string,
-        socialId: token.sub,
+        subId: token.sub,
       }
 
       return newSession

@@ -1,5 +1,3 @@
-// src/features/invitation/model/useInvitation.ts
-
 import { signIn, useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { SessionType } from './auth'
@@ -21,15 +19,20 @@ export const useSessionHook = () => {
   }
 }
 
-/**
- * 2가지 경우로 로그인할 수 있음
- *
- * 초대코드없이 로그인
- * 초대코드로 로그인
- */
 export const useSignIn = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { session, status } = useSessionHook()
+  const { mutate: signUp } = useSignUp()
+
+  useEffect(() => {
+    if (session?.accessToken) {
+      signUp({
+        accessToken: session.accessToken,
+        subId: session.subId as string,
+        name: session.name as string,
+      })
+    }
+  }, [session.accessToken])
 
   const signInKakao = async () => {
     try {
@@ -37,12 +40,10 @@ export const useSignIn = () => {
       await signIn('kakao', { redirect: false })
       setIsLoading(true)
     } catch (error) {
-      // 에러 처리
       console.error('Error during login process:', error)
       setIsLoading(true)
     }
   }
-  console.log(session, status)
   return {
     isSigning: status === 'authenticated' || status === 'loading',
     signInKakao,

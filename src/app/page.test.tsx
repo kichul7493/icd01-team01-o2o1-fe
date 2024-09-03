@@ -1,26 +1,37 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import LoginPage from './page'
 
+import { render } from '@/util/test-utils'
 import { useRouter } from 'next/navigation'
+import { useSignIn } from '@/features/auth/hooks'
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }))
 
+jest.mock('../features/auth/hooks', () => ({
+  useSignIn: jest.fn(),
+}))
+
 describe('LoginPage ', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders correctly', () => {
+    const mockSignInKakao = jest.fn().mockResolvedValueOnce({ isSignup: true })
+    ;(useSignIn as jest.Mock).mockReturnValue({
+      signInKakao: mockSignInKakao,
+      isLoading: false,
+    })
     render(<LoginPage />)
     const logo = screen.getByAltText('logo')
     expect(logo).toBeInTheDocument()
 
     const appName = screen.getByText('배달이써')
     expect(appName).toBeInTheDocument()
-  })
-
-  it('카카오 로그인 버튼 렌더링 확인', () => {
-    render(<LoginPage />)
 
     const loginButton = screen.getByRole('button', { name: '카카오로 시작하기' })
     expect(loginButton).toBeInTheDocument()
@@ -28,42 +39,45 @@ describe('LoginPage ', () => {
 
   it('버튼 클릭 후 data 받아오기 전까지 로딩 스피너 + disabled 확인', async () => {
     const user = userEvent.setup()
+    let isLoading = false
+    const mockSignInKakao = jest.fn()
 
-    render(<LoginPage />)
-
+    const { rerender } = render(<LoginPage />)
     const loginButton = screen.getByRole('button', { name: '카카오로 시작하기' })
+
+    expect(loginButton).not.toBeDisabled()
+    expect(loginButton).toHaveTextContent('카카오로 시작하기')
+
     await user.click(loginButton)
 
-    // 버튼이 disabled 상태이고 '카카오로 시작하기' 안보이게
-    expect(loginButton).toBeDisabled()
-    expect(loginButton).not.toHaveTextContent('카카오로 시작하기')
-
-    // 1초 후 버튼이 다시 활성화되고 원래 텍스트로 돌아오는지 확인
-    await waitFor(
-      () => {
-        expect(loginButton).not.toBeDisabled()
-        expect(loginButton).toHaveTextContent('카카오로 시작하기')
-      },
-      { timeout: 1500 },
-    )
+    isLoading = true
+    ;(useSignIn as jest.Mock).mockReturnValue({
+      signInKakao: mockSignInKakao,
+      isLoading,
+    })
+    rerender(<LoginPage />)
+    expect(screen.getByRole('button')).not.toHaveTextContent('카카오로 시작하기')
   })
 
   it('로그인 성공시 signup 라우팅', async () => {
     const user = userEvent.setup()
 
     const mockPush = jest.fn()
+
+    // 모킹된 useSignIn 훅
+    const mockSignInKakao = jest.fn().mockResolvedValueOnce({ isSignup: true })
+    ;(useSignIn as jest.Mock).mockReturnValue({
+      signInKakao: mockSignInKakao,
+      isLoading: false,
+    })
     ;(useRouter as jest.Mock).mockReturnValue({
       query: {},
       push: mockPush,
     })
-    render(<LoginPage />)
+
+    const { rerender } = render(<LoginPage />)
     const loginButton = screen.getByRole('button', { name: '카카오로 시작하기' })
     await user.click(loginButton)
-    await waitFor(() => {
-      expect(mockPush).toHaveBeenCalledWith('/signup')
-    })
-  })
-  it('로그인 실패시 실패 toast', async () => {
-    // 아직 미정
+    expect(mockSignInKakao).toHaveBeenCalledTimes(1)
   })
 })

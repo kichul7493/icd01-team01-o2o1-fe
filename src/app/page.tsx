@@ -1,14 +1,10 @@
 'use client'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-
 // Components
 import { Button } from '@/components/ui/button'
 
 // third party
 import { cn } from '@/lib/utils'
-import { getProviders, signIn } from 'next-auth/react'
 import { useSignIn } from '@/features/auth/hooks'
 
 export default function LoginPage() {
