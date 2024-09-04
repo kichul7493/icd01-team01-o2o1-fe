@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { SessionType } from './auth'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
-import { kakaoLogin } from './api'
+import { OAuthLogin } from './api'
 
 /**
  * 타입을 명시하기 위해,
@@ -36,12 +36,12 @@ export const useSignIn = () => {
 
   const signInKakao = async () => {
     try {
-      setIsLoading(false)
-      await signIn('kakao', { redirect: false })
       setIsLoading(true)
+      await signIn('kakao', { redirect: false })
     } catch (error) {
       console.error('Error during login process:', error)
-      setIsLoading(true)
+    } finally {
+      setIsLoading(false)
     }
   }
   return {
@@ -55,7 +55,7 @@ export const useSignUp = () => {
   const router = useRouter()
 
   return useMutation({
-    mutationFn: kakaoLogin,
+    mutationFn: OAuthLogin,
     onSuccess: async (data) => {
       const { isSignup } = data
       if (isSignup) {

@@ -55,8 +55,9 @@ describe('LoginPage ', () => {
       signInKakao: mockSignInKakao,
       isLoading,
     })
+    // 버튼 클릭 후 data 받아오기 전까지 disabled 상태인지 확인
     rerender(<LoginPage />)
-    expect(screen.getByRole('button')).not.toHaveTextContent('카카오로 시작하기')
+    expect(screen.getByRole('button')).toBeDisabled()
   })
 
   it('로그인 성공시 signup 라우팅', async () => {

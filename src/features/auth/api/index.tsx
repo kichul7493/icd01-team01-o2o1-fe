@@ -4,7 +4,7 @@ type SignUpResponseType = {
   isSignup: boolean
 }
 
-export const kakaoLogin = async ({
+export const OAuthLogin = async ({
   accessToken,
   subId,
   name,
