@@ -3,7 +3,7 @@ import OrderCancelDialog from './OrderCancelDialog'
 import userEvent from '@testing-library/user-event'
 import { useCancelOrder } from '@/features/orderStatus/hooks/useCancelOrder'
 
-jest.mock('../../features/orderStatus/hooks/useCancelOrder.ts')
+jest.mock('../../../../features/orderStatus/hooks/useCancelOrder.ts')
 
 describe('OrderCancelDialog', () => {
   const mockHandleCancelOrder = jest.fn()

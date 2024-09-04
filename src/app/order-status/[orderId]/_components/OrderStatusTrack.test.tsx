@@ -3,8 +3,8 @@ import OrderStatusTrack from './OrderStatusTrack'
 import { useStreamOrderStatus } from '@/features/orderStatus/hooks/useStreamOrderStatus'
 import { useCancelOrder } from '@/features/orderStatus/hooks/useCancelOrder'
 
-jest.mock('../../features/orderStatus/hooks/useStreamOrderStatus.ts')
-jest.mock('../../features/orderStatus/hooks/useCancelOrder.ts')
+jest.mock('../../../../features/orderStatus/hooks/useStreamOrderStatus.ts')
+jest.mock('../../../../features/orderStatus/hooks/useCancelOrder.ts')
 
 describe('OrderStatusTrack', () => {
   const mockHandleCancelOrder = jest.fn()
