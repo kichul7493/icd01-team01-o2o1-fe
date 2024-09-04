@@ -1,14 +1,14 @@
 'use client'
 
-import CreateMemberForm from '@/components/member/CreateMemberForm'
+import CreateMemberForm from '@/app/signup/_components/CreateMemberForm'
 import Footer from '@/components/shared/\bFooter'
 import BackButton from '@/components/shared/BackButton'
 import Header from '@/components/shared/Header/indes'
-import { useSignUpForm } from '@/features/member/hooks/useCreateMeberForm'
+import { useSignUpFormHook } from '@/features/member/hooks/useCreateMeberForm'
 import React from 'react'
 
 const SignUpPage = () => {
-  const { form, handleSubmit } = useSignUpForm()
+  const { form, handleSubmit } = useSignUpFormHook()
   return (
     <div className="flex min-h-screen flex-col">
       <Header left={<BackButton />} />

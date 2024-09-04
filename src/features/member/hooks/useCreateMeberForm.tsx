@@ -15,7 +15,7 @@ export const createMemberFormSchema = z.object({
 export type CreateMemberFormDataType = z.infer<typeof createMemberFormSchema>
 
 // useSignupForm 훅 정의
-export const useSignUpForm = () => {
+export const useSignUpFormHook = () => {
   const form = useForm<CreateMemberFormDataType>({
     resolver: zodResolver(createMemberFormSchema),
     mode: 'onChange',
