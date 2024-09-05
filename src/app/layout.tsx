@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import QueryProvider from '@/context/QueryProvider'
 import Layout from '@/components/Layout/Layout'
 import { MSWProvider } from '@/mocks/MSWProvider'
 
@@ -31,14 +30,10 @@ export default function RootLayout({
       <body className={inter.className}>
         {process.env.NODE_ENV === 'development' ? (
           <MSWProvider>
-            <QueryProvider>
-              <Layout>{children}</Layout>
-            </QueryProvider>
+            <Layout>{children}</Layout>
           </MSWProvider>
         ) : (
-          <QueryProvider>
-            <Layout>{children}</Layout>
-          </QueryProvider>
+          <Layout>{children}</Layout>
         )}
       </body>
     </html>
