@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react'
-import ReviewsScreen from './ReviewsScreen'
 import userEvent from '@testing-library/user-event'
 import { useRouter } from 'next/navigation'
 import { useStoreReviewInfiniteQuery } from '@/features/reviews/hooks'
+import StoreReviewPage from './page'
 
-jest.mock('../features/reviews/hooks/index.ts', () => ({
+jest.mock('../../../../features/reviews/hooks', () => ({
   useStoreReviewInfiniteQuery: jest.fn(),
 }))
 
@@ -48,7 +48,7 @@ describe('ReviewsScreen', () => {
   })
 
   it('상단 뒤로가기 버튼을 클릭하면 router.back 함수가 호출된다.', async () => {
-    render(<ReviewsScreen />)
+    render(<StoreReviewPage />)
 
     const backButton = screen.getByRole('link')
 
@@ -59,7 +59,7 @@ describe('ReviewsScreen', () => {
   })
 
   it('상단 가게 이름이 출력되어야 합니다', () => {
-    const { getByText } = render(<ReviewsScreen />)
+    const { getByText } = render(<StoreReviewPage />)
 
     expect(getByText(storeName)).toBeInTheDocument()
   })

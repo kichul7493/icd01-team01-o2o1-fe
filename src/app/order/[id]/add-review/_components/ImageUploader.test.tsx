@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import ImageUploader from './ImageUploader'
 import userEvent from '@testing-library/user-event'
+import ImageUploader from './ImageUploader'
 
 describe('ImageUploader', () => {
   // URL.createObjectURL을 모킹합니다.
