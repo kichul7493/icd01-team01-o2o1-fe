@@ -1,7 +1,8 @@
 import React from 'react'
+import StoreDetailInfoScreen from '@/page/StoreDetailInfoScreen'
 
 const page = () => {
-  return <>Detail</>
+  return <StoreDetailInfoScreen />
 }
 
 export default page
