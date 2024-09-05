@@ -1,3 +1,4 @@
+'use client'
 import ReviewItem from '@/app/store/[id]/reviews/_components/ReviewItem'
 import { useStoreReviewInfiniteQuery } from '@/features/reviews/hooks'
 import { ArrowLeftIcon } from 'lucide-react'
@@ -42,4 +43,3 @@ export default function StoreReviewPage() {
     </div>
   )
 }
-

@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <div className="flex flex-col p-4 pb-[4.5rem]">
       <AddressContainer address={address} />
-      <div className="scroll mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div className="scroll scrollbar-hide mb-4 overflow-x-auto whitespace-nowrap">
         {categories.map((category, index) => (
           <CategoryButton
             key={index}
@@ -81,7 +81,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="h-screen space-y-4 overflow-y-auto scrollbar-hide">
+      <div className="scrollbar-hide h-screen space-y-4 overflow-y-auto">
         {filteredRestaurants.map((restaurant) => (
           <StoreCard key={restaurant.id} restaurant={restaurant} />
         ))}
