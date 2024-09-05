@@ -30,6 +30,7 @@ export interface Menu {
 
 // 주소 타입 정의
 export interface Address {
+  addressId: number
   latitude: number
   longitude: number
   address: string
@@ -51,5 +52,5 @@ export interface Order {
   orderPrice: number
   store: Store
   menus: Menu[]
-  address: Address
+  orderAddress: Address
 }

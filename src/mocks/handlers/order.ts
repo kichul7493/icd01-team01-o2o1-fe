@@ -58,7 +58,8 @@ export const orderHandlers = [
             ],
           },
         ],
-        address: {
+        orderAddress: {
+          addressId: 2,
           latitude: 37.5667,
           longitude: 126.98,
           address: '서울시 블라',

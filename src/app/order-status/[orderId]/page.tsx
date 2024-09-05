@@ -1,12 +1,12 @@
 'use client'
 
-import { useOrderStatus } from "@/features/orderStatus/hooks/useOrderStatus"
-import { X } from "lucide-react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import OrderStatusTrack from "./_components/OrderStatusTrack"
-import OrderDetail from "./_components/OrderDetail"
-import OrderTrackMap from "./_components/OrderTrackMap"
+import { useOrderStatus } from '@/features/orderStatus/hooks/useOrderStatus'
+import { X } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import OrderStatusTrack from './_components/OrderStatusTrack'
+import OrderDetail from './_components/OrderDetail'
+import OrderTrackMap from './_components/OrderTrackMap'
 
 export default function OrderStatusPage() {
   const router = useRouter()
@@ -37,13 +37,16 @@ export default function OrderStatusPage() {
         </Link>
       </div>
       <div className="h-[240px] w-full">
-        <OrderTrackMap storeAdress={response.store.storeAddress} userAddress={response.address} />
+        <OrderTrackMap
+          storeAdress={response.store.storeAddress}
+          userAddress={response.orderAddress}
+        />
       </div>
       <div className="mx-6 py-5">
         <OrderStatusTrack
           orderId={response.orderId}
           status={response.orderStatus}
-          address={`${response.address.address} ${response.address.addressDetail}`}
+          address={`${response.orderAddress.address} ${response.orderAddress.addressDetail}`}
         />
         <OrderDetail
           orderId={response.orderId}
