@@ -1,11 +1,10 @@
-import BackBtn from '@/components/menuDetail/BackBtn'
-import Thumbnail from '@/components/menuDetail/Thumbnail'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Label } from '@/components/ui/label'
-import SelectQuantity from '@/components/menuDetail/SelectQuantity'
-import OptionSelectContainer from '@/components/menuDetail/OptionSelectContainer'
+import React from 'react'
+import BackBtn from '@/app/store/[id]/menu/[mid]/_components/BackBtn'
+import Thumbnail from './_components/Thumbnail'
+import SelectQuantity from './_components/SelectQuantity'
+import OptionSelectContainer from './_components/OptionSelectContainer'
 
-const MenuDetailScreen = () => {
+const page = () => {
   return (
     <>
       <div className="relative min-h-screen pb-[100px]">
@@ -28,4 +27,4 @@ const MenuDetailScreen = () => {
   )
 }
 
-export default MenuDetailScreen
+export default page
