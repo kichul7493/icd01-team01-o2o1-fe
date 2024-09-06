@@ -1,3 +1,5 @@
+'use client'
+import { Modal } from '@/components/shared/Modal'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 import React from 'react'
@@ -13,9 +15,26 @@ const MyPageMenu = () => {
         주문 내역
       </Link>
       <Separator className="my-6" />
-      <div className="my-6 text-xl">로그 아웃</div>
+      <Modal
+        onSubmit={() => {}}
+        submitText="확인"
+        submitType="alert"
+        subtitle="로그아웃 하시겠습니까?"
+        title="로그아웃"
+      >
+        <div className="my-6 text-xl">로그 아웃</div>
+      </Modal>
       <Separator className="my-6" />
-      <div className="my-6 text-xl">탈퇴</div>
+      <Modal
+        onSubmit={() => {}}
+        submitText="확인"
+        submitType="alert"
+        subtitle="탈퇴하시겠습니까?"
+        title="탈퇴"
+      >
+        <div className="my-6 text-xl">탈퇴</div>
+      </Modal>
+
       <Separator className="my-6" />
     </div>
   )
