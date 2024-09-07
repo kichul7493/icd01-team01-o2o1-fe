@@ -3,6 +3,75 @@ import { delay, http, HttpResponse } from 'msw'
 
 const encoder = new TextEncoder()
 
+export const orderStatus = [
+  {
+    courierId: 123,
+    latitude: 37.5665,
+    longitude: 126.978,
+    timestamp: '2024-08-22T10:00:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56652,
+    longitude: 126.9782,
+    timestamp: '2024-08-22T10:01:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56654,
+    longitude: 126.9784,
+    timestamp: '2024-08-22T10:02:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56656,
+    longitude: 126.9786,
+    timestamp: '2024-08-22T10:03:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56658,
+    longitude: 126.9788,
+    timestamp: '2024-08-22T10:04:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.5666,
+    longitude: 126.979,
+    timestamp: '2024-08-22T10:05:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56662,
+    longitude: 126.9792,
+    timestamp: '2024-08-22T10:06:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56664,
+    longitude: 126.9794,
+    timestamp: '2024-08-22T10:07:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56666,
+    longitude: 126.9796,
+    timestamp: '2024-08-22T10:08:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.56668,
+    longitude: 126.9798,
+    timestamp: '2024-08-22T10:09:00.000Z',
+  },
+  {
+    courierId: 123,
+    latitude: 37.5667,
+    longitude: 126.98,
+    timestamp: '2024-08-22T10:10:00.000Z',
+  },
+]
+
 export const mockOrderResponse = {
   response: {
     orderId: 1,
@@ -143,75 +212,6 @@ export const orderHandlers = [
     const stream = new ReadableStream({
       start(controller) {
         let counter = 0
-
-        const orderStatus = [
-          {
-            courierId: 123,
-            latitude: 37.5665,
-            longitude: 126.978,
-            timestamp: '2024-08-22T10:00:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56652,
-            longitude: 126.9782,
-            timestamp: '2024-08-22T10:01:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56654,
-            longitude: 126.9784,
-            timestamp: '2024-08-22T10:02:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56656,
-            longitude: 126.9786,
-            timestamp: '2024-08-22T10:03:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56658,
-            longitude: 126.9788,
-            timestamp: '2024-08-22T10:04:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.5666,
-            longitude: 126.979,
-            timestamp: '2024-08-22T10:05:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56662,
-            longitude: 126.9792,
-            timestamp: '2024-08-22T10:06:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56664,
-            longitude: 126.9794,
-            timestamp: '2024-08-22T10:07:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56666,
-            longitude: 126.9796,
-            timestamp: '2024-08-22T10:08:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.56668,
-            longitude: 126.9798,
-            timestamp: '2024-08-22T10:09:00.000Z',
-          },
-          {
-            courierId: 123,
-            latitude: 37.5667,
-            longitude: 126.98,
-            timestamp: '2024-08-22T10:10:00.000Z',
-          },
-        ]
 
         function push() {
           if (counter < 10) {
