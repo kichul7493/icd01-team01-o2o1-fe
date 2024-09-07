@@ -2,7 +2,7 @@ import React from 'react'
 import { Form } from '@/components/ui/form'
 import InputFormItem from '@/components/shared/InputFormItem'
 import { UseFormReturn } from 'react-hook-form'
-import { CreateMemberFormDataType } from '@/features/member/hooks/useCreateMeberForm'
+import { CreateMemberFormDataType } from '@/features/member/hooks/useCreateMemberForm'
 
 interface CreateMemberFormProps {
   form: UseFormReturn<CreateMemberFormDataType>
