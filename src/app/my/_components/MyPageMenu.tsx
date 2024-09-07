@@ -22,7 +22,7 @@ const MyPageMenu = () => {
         subtitle="로그아웃 하시겠습니까?"
         title="로그아웃"
       >
-        <div className="my-6 text-xl">로그 아웃</div>
+        <div className="my-6 text-xl">로그아웃</div>
       </Modal>
       <Separator className="my-6" />
       <Modal

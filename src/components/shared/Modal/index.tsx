@@ -26,17 +26,24 @@ export interface DialogProps {
   onSubmit: () => void
 }
 
-export function Modal({ title, subtitle, submitType, submitText, ...props }: DialogProps) {
+export function Modal({
+  title,
+  subtitle,
+  submitType,
+  submitText,
+  onSubmit,
+  children,
+}: DialogProps) {
   const [open, setOpen] = useState(false)
 
   const handleSubmit = () => {
-    props.onSubmit()
+    onSubmit()
     setOpen(false)
   }
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogTrigger asChild>{props.children}</DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="h-[300px] p-6 sm:max-w-[296px] md:max-w-[425px]">
         <DialogHeader className="flex flex-col items-center justify-center gap-12">
           <DialogTitle className="text-center text-2xl">{title}</DialogTitle>
