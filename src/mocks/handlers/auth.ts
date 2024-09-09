@@ -3,7 +3,6 @@ import { HttpResponse, http } from 'msw'
 
 export const authHandlers = [
   http.post(`${BASE_URL}/login`, ({ request }) => {
-    console.log(request)
     return HttpResponse.json({
       response: {
         isSignup: true,

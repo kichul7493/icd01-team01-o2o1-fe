@@ -1,10 +1,10 @@
 'use client'
 
 import CreateMemberForm from '@/app/signup/_components/CreateMemberForm'
-import Footer from '@/components/shared/\bFooter'
+import Footer from '@/components/shared/Footer'
 import BackButton from '@/components/shared/BackButton'
-import Header from '@/components/shared/Header/indes'
-import { useSignUpFormHook } from '@/features/member/hooks/useCreateMeberForm'
+import Header from '@/components/shared/Header'
+import { useSignUpFormHook } from '@/features/member/hooks/useCreateMemberForm'
 import React from 'react'
 
 const SignUpPage = () => {
