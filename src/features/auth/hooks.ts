@@ -25,6 +25,7 @@ export const useSignIn = () => {
   const { mutate: signUp } = useSignUp()
 
   useEffect(() => {
+    console.log(session)
     if (session?.accessToken) {
       signUp({
         accessToken: session.accessToken,
