@@ -2,6 +2,7 @@
 import Image, { StaticImageData } from 'next/image'
 import * as React from 'react'
 import Star from '@images/home/star.svg'
+import Link from 'next/link'
 
 interface RestaurantProps {
   restaurant: {
@@ -15,7 +16,12 @@ interface RestaurantProps {
 
 export default function StoreCard({ restaurant }: RestaurantProps) {
   return (
-    <div key={restaurant.id} className="overflow-hidden rounded-lg bg-white shadow">
+    <Link
+      key={restaurant.id}
+      className="w-full overflow-hidden rounded-lg bg-white text-start shadow"
+      href={`/store/${restaurant.id}/detail`}
+    >
+      {' '}
       <div className="relative h-48 w-full">
         <Image src={restaurant.imageSrc} alt={restaurant.name} layout="fill" objectFit="cover" />
       </div>
@@ -28,6 +34,6 @@ export default function StoreCard({ restaurant }: RestaurantProps) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
