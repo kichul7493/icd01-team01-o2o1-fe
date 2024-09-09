@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import {
   CreateMemberFormDataType,
   createMemberFormSchema,
-} from '@/features/member/hooks/useCreateMeberForm'
+} from '@/features/member/hooks/useCreateMemberForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 const TestWrapper = () => {
   const form = useForm<CreateMemberFormDataType>({
