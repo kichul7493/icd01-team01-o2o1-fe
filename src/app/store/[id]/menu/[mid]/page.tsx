@@ -1,14 +1,16 @@
 import React from 'react'
-import BackBtn from '@/app/store/[id]/menu/[mid]/_components/BackBtn'
 import Thumbnail from './_components/Thumbnail'
 import SelectQuantity from './_components/SelectQuantity'
 import OptionSelectContainer from './_components/OptionSelectContainer'
+import BackButton from '@/components/shared/BackButton'
 
 const page = () => {
   return (
     <>
       <div className="relative min-h-screen pb-[100px]">
-        <BackBtn />
+        <header className="absolute top-0 z-10 flex h-14 w-full items-center p-4">
+          <BackButton />
+        </header>
         <Thumbnail
           images={[
             'https://via.placeholder.com/375x220?text=Image+1',
