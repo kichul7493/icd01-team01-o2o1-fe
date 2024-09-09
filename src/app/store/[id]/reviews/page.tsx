@@ -5,6 +5,7 @@ import { ArrowLeftIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
+import ReviewSkeleton from './_components/ReviewSkeleton'
 
 export default function StoreReviewPage() {
   const params = useParams<{
@@ -13,13 +14,12 @@ export default function StoreReviewPage() {
 
   const router = useRouter()
 
-  const { pages, storeName, isLoading, fetchNextPage, hasNextPage } = useStoreReviewInfiniteQuery(
-    params?.id || '',
-  )
+  const { pages, storeName, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useStoreReviewInfiniteQuery(params?.id || '')
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight && hasNextPage) {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
         fetchNextPage()
       }
     }
@@ -45,11 +45,7 @@ export default function StoreReviewPage() {
         </Link>
         <p className="font-semibold">{storeName}</p>
       </div>
-      {isLoading && (
-        <div className="flex h-screen w-full items-center justify-center">
-          <p>로딩중...</p>
-        </div>
-      )}
+      {isLoading && <ReviewSkeleton />}
       {pages &&
         pages.map((page) => {
           return page.response.reviews.map((review) => (
