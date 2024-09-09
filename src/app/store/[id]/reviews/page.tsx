@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import ReviewSkeleton from './_components/ReviewSkeleton'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 
 export default function StoreReviewPage() {
   const params = useParams<{
@@ -52,6 +53,11 @@ export default function StoreReviewPage() {
             <ReviewItem key={review.reviewId} review={review} />
           ))
         })}
+      {isFetchingNextPage && (
+        <div className="fixed bottom-40 flex w-full justify-center">
+          <LoadingSpinner size="md" />
+        </div>
+      )}
     </div>
   )
 }
