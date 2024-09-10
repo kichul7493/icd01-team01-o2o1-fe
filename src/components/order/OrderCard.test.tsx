@@ -44,7 +44,10 @@ describe('OrderCard', () => {
     expect(screen.getByText('합계 금액: 30,000원')).toBeInTheDocument()
 
     // '리뷰쓰기' 버튼이 렌더링되는지 확인합니다.
-    expect(screen.getByText('리뷰쓰기')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /리뷰쓰기/i })).toHaveAttribute(
+      'href',
+      '/order/1/add-review',
+    )
   })
 
   test('배달 상태가 "배달 중"일 때 올바르게 표시되는지 확인한다', () => {
