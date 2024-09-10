@@ -1,7 +1,7 @@
 import { renderHook, act, waitFor } from '@testing-library/react'
 import { useRouter } from 'next/navigation'
-import { useSignUp } from '../hooks'
 import { useMutation } from '@tanstack/react-query'
+import { useSignUp } from '../useSignup'
 
 // Mocks
 jest.mock('next/navigation', () => ({
