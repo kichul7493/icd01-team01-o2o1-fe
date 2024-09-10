@@ -14,7 +14,7 @@ interface RestaurantProps {
   }
 }
 
-export default function StoreCard({ restaurant }: RestaurantProps) {
+export default function StoreCard({ restaurant }: Readonly<RestaurantProps>) {
   return (
     <Link
       key={restaurant.id}
