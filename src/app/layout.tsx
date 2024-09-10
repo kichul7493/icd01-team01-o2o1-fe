@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: '배달이써',
   description: '배달 서비스를 이용해보세요',
+  icons: {
+    icon: '/logo-icon-96.png',
+  },
 }
 
 if (process.env.NEXT_RUNTIME === 'nodejs') {
