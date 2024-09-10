@@ -18,7 +18,7 @@ const StoreInfo = () => {
           </address>
           <p className="pt-2 text-base/[18px]">{data?.contactNumber}</p>
         </div>
-        <nav>
+        <nav className="cursor-pointer">
           <Link href={`/store/${params?.id}/detail`}>
             <div className="flex items-center gap-1">
               <span className="text-base/[18px]">매장 정보</span>
@@ -27,13 +27,17 @@ const StoreInfo = () => {
           </Link>
         </nav>
       </header>
-      <div className="flex items-center pt-2">
-        <Star size={16} fill="#FFBD2E" color="#FFBD2E" aria-label="Star rating" />
-        <p className="flex items-center pl-1 text-xs font-semibold">
-          <span>{data?.reviewRate}</span>
-          <span>({data?.reviewCount})</span>
-        </p>
-        <ChevronRight size={16} />
+      <div className="pt-2">
+        <Link href={`/store/${params?.id}/reviews`}>
+          <div className="flex cursor-pointer items-center">
+            <Star size={16} fill="#FFBD2E" color="#FFBD2E" aria-label="Star rating" />
+            <p className="flex items-center pl-1 text-xs font-semibold">
+              <span>{data?.reviewRate}</span>
+              <span>({data?.reviewCount})</span>
+            </p>
+            <ChevronRight size={16} />
+          </div>
+        </Link>
       </div>
     </section>
   )

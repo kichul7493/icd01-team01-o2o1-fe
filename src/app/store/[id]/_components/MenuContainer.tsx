@@ -12,6 +12,7 @@ const MenuContainer = () => {
       {data?.menus.map((item) => (
         <Menu
           key={item.menuId}
+          id={item.menuId}
           name={item.menuName}
           price={item.menuPrice}
           image={item.menuImages[0]}
