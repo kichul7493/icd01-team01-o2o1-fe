@@ -1,23 +1,23 @@
-import { StarFilledIcon } from '@radix-ui/react-icons'
+import StarRatingIcon from '@/components/shared/StarRatingIcon'
 import React from 'react'
 
-const Rating = () => {
-  const [rating, setRating] = React.useState<number>(0)
+interface RatingProps {
+  value: number
+  handleChange: (rating: number) => void
+}
 
-  const handleChangeRating = (rating: number) => {
-    setRating(rating)
-  }
-
+const Rating = ({ value, handleChange }: RatingProps) => {
   return (
     <div className="mb-5 flex gap-1">
       {Array.from({ length: 5 }).map((_, i) => (
-        <button key={i} onClick={() => handleChangeRating(i + 1)}>
-          <StarFilledIcon
-            data-testid={`starIcon`}
+        <button key={i} type="button" onClick={() => handleChange(i + 1)}>
+          <StarRatingIcon
+            className="cursor-pointer"
+            testId={`starIcon-${i}`}
             width={20}
             height={20}
             key={i}
-            className={`cursor-pointer ${rating > i ? 'text-yellow-400' : 'text-gray-300'}`}
+            fill={value > i}
           />
         </button>
       ))}

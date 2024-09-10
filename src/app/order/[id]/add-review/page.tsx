@@ -1,7 +1,7 @@
-import ReviewForm from '@/app/order/[id]/add-review/_components/ReviewForm'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import React from 'react'
+import ReviewForm from './_components/ReviewForm'
 
 export default function AddReviewPage() {
   return (
