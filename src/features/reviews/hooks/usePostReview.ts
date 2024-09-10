@@ -14,7 +14,7 @@ const usePostReview = () => {
     mutationKey: ['postReview', params?.id],
     mutationFn: (review: ReviewRequest) => postReview(params?.id || '', review),
     onSuccess: () => {
-      // router.push('/')
+      router.back()
     },
   })
 
