@@ -24,6 +24,6 @@ type Member = {
 }
 
 export const createMember = async (formData: Member) => {
-  const { data } = await axiosInst.post<MemberResponse>('/member', { formData })
+  const { data } = await axiosInst.post<MemberResponse>('/member', { ...formData })
   return data.statusCode === 200
 }

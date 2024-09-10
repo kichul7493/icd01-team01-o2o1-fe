@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import '../../globals.d.ts'
 import Layout from '@/components/Layout/Layout'
 import { MSWProvider } from '@/mocks/MSWProvider'
 import Script from 'next/script'

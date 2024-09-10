@@ -80,7 +80,7 @@ const AddressInput = ({ required = false, ...props }: AddressInputProps) => {
 
   const handleClick = () => {
     // 위치가 left 안먹는 이유를 모르겠음...
-    new daum.Postcode({
+    new window.daum.Postcode({
       oncomplete: onComplete,
       width: 400,
       height: 500,
