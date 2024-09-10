@@ -16,8 +16,6 @@ const ImageUploader = () => {
     const blob = await convertImageToCompressedBlob(image)
     const compressedFile = new File([blob], file.name, { type: blob.type })
 
-    console.log(compressedFile)
-
     //TODO: 이미지를 S3 버킷에 업로드하고 URL을 받아온다.
     setImages((prev) => [...prev, URL.createObjectURL(file)])
   }
