@@ -43,7 +43,7 @@ const ReviewForm = () => {
         className="absolute bottom-0 left-0 z-[100] h-24 w-full bg-main text-xl font-semibold text-white"
         type="submit"
       >
-        {isPending ? '리뷰 작성 중...' : '리뷰 작성'}
+        {isPending ? '리뷰 작성 중...' : '등록하기'}
       </button>
     </form>
   )

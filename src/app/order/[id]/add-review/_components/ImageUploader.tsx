@@ -11,10 +11,10 @@ const ImageUploader = () => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    const dataUrl = await readFileAsDataURL(file)
-    const image = await loadImage(dataUrl)
-    const blob = await convertImageToCompressedBlob(image)
-    const compressedFile = new File([blob], file.name, { type: blob.type })
+    // const dataUrl = await readFileAsDataURL(file)
+    // const image = await loadImage(dataUrl)
+    // const blob = await convertImageToCompressedBlob(image)
+    // const compressedFile = new File([blob], file.name, { type: blob.type })
 
     //TODO: 이미지를 S3 버킷에 업로드하고 URL을 받아온다.
     setImages((prev) => [...prev, URL.createObjectURL(file)])

@@ -3,7 +3,7 @@ import ReviewForm from './ReviewForm'
 import userEvent from '@testing-library/user-event'
 import usePostReview from '@/features/reviews/hooks/usePostReview'
 
-jest.mock('../../features/reviews/hooks/usePostReview.ts')
+jest.mock('../../../../../features/reviews/hooks/usePostReview.ts')
 
 describe('ReviewForm', () => {
   const mockPostReview = jest.fn()
