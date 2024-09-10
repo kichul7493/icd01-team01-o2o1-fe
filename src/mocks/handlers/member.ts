@@ -14,4 +14,11 @@ export const memberHandlers = [
       msg: '회원 정보를 조회하였습니다',
     })
   }),
+  http.post(`${BASE_URL}/member`, ({ request }) => {
+    return HttpResponse.json({
+      response: {},
+      statusCode: 200,
+      msg: '회원 가입 성공',
+    })
+  }),
 ]

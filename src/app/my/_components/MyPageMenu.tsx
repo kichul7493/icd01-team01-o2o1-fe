@@ -19,7 +19,7 @@ const MyPageMenu = () => {
         onSubmit={() => {}}
         submitText="확인"
         submitType="alert"
-        subtitle="로그아웃 하시겠습니까?"
+        content="로그아웃 하시겠습니까?"
         title="로그아웃"
       >
         <div className="my-6 text-xl">로그아웃</div>
@@ -29,7 +29,7 @@ const MyPageMenu = () => {
         onSubmit={() => {}}
         submitText="확인"
         submitType="alert"
-        subtitle="탈퇴하시겠습니까?"
+        content="탈퇴하시겠습니까?"
         title="탈퇴"
       >
         <div className="my-6 text-xl">탈퇴</div>
