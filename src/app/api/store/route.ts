@@ -1,6 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextResponse, NextRequest } from 'next/server'
 import NullImage from '@images/home/null_image.svg'
-import { Restaurant } from '@/types/store'
 
 const restaurants = [
   { id: 1, name: '우리집 밥상', imageSrc: NullImage, rating: 4.7, reviews: 159, category: '한식' },
@@ -40,6 +39,6 @@ const restaurants = [
   { id: 7, name: '양식당', imageSrc: NullImage, rating: 4.7, reviews: 102, category: '양식' },
 ]
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Restaurant[]>) {
-  return res.status(200).json(restaurants)
+export async function GET(req: NextRequest, res: NextResponse) {
+  return NextResponse.json(restaurants)
 }

@@ -45,7 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
   const isMainPage = Object.values(mainPages).includes(pathname)
 
   return (
-    <main className="relative m-auto h-screen min-h-screen min-w-[280px] max-w-[480px] border-l-2 border-r-2 border-gray-100">
+    <main className="relative m-auto h-screen min-h-screen min-w-[280px] max-w-[480px] overflow-hidden border-l-2 border-r-2 border-gray-100">
       <SessionProvider>
         <QueryProvider>{children}</QueryProvider>
       </SessionProvider>
