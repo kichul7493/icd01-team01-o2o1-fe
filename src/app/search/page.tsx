@@ -10,9 +10,13 @@ export default function Search() {
   const { useStoreQuery } = useStoreData()
   const { data: stores, error: storeError, isLoading: storeLoading } = useStoreQuery()
   const [searchTerm, setSearchTerm] = useState('')
-  const filteredRestaurants = stores.filter((restaurant: Restaurant) =>
-    restaurant.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+
+  // Add a null check to avoid the undefined issue
+  const filteredRestaurants =
+    stores?.filter((store: Restaurant) =>
+      store.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    ) || []
+
   if (storeLoading) return <LoadingSpinner />
   if (storeError instanceof Error) return <div>에러 발생</div>
 
