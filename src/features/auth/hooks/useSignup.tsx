@@ -8,7 +8,7 @@ export const useSignUp = () => {
   return useMutation({
     mutationFn: OAuthLogin,
     onSuccess: async (data) => {
-      const { isSignup } = data
+      const { isSignup } = data.response
       if (isSignup) {
         router.push('/home')
       } else {

@@ -7,7 +7,6 @@ export const useSignIn = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { session, status } = useSessionHook()
   const { mutate: signUp } = useSignUp()
-
   useEffect(() => {
     if (session?.accessToken) {
       signUp({
