@@ -9,17 +9,7 @@ export default function useStoreData() {
           method: 'GET',
         }).then((res) => res.json()),
     })
-
-  const useCategoryQuery = () =>
-    useQuery({
-      queryKey: ['categories'],
-      queryFn: async () =>
-        await fetch(`/api/category`, {
-          method: 'GET',
-        }).then((res) => res.json()),
-    })
   return {
     useStoreQuery,
-    useCategoryQuery,
   }
 }

@@ -6,11 +6,7 @@ interface CategoryButtonProps {
   onClick: () => void
 }
 
-export default function CategoryButton({
-  category,
-  isSelected,
-  onClick,
-}: Readonly<CategoryButtonProps>) {
+const CategoryButton: React.FC<CategoryButtonProps> = ({ category, isSelected, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -22,3 +18,5 @@ export default function CategoryButton({
     </button>
   )
 }
+
+export default CategoryButton
