@@ -19,20 +19,22 @@ import { cn } from '@/lib/utils'
  */
 export interface DialogProps {
   title: string
-  subtitle: string
+  content: string | React.ReactNode
   children: React.ReactNode
-  submitText: string
+  submitText: string | React.ReactNode
   submitType?: 'alert'
   onSubmit: () => void
+  contentClassName?: string
 }
 
 export function Modal({
   title,
-  subtitle,
+  content,
   submitType,
   submitText,
   onSubmit,
   children,
+  contentClassName,
 }: DialogProps) {
   const [open, setOpen] = useState(false)
 
@@ -44,10 +46,12 @@ export function Modal({
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="h-[300px] p-6 sm:max-w-[296px] md:max-w-[425px]">
+      <DialogContent
+        className={cn('h-[300px] p-6 sm:max-w-[296px] md:max-w-[445px]', contentClassName)}
+      >
         <DialogHeader className="flex flex-col items-center justify-center gap-12">
           <DialogTitle className="text-center text-2xl">{title}</DialogTitle>
-          <DialogDescription className="text-gray-500">{subtitle}</DialogDescription>
+          <DialogDescription className="text-gray-500">{content}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex items-center !justify-center gap-12">
           <Button
