@@ -3,9 +3,8 @@ import Image from 'next/image'
 // Components
 import { Button } from '@/components/ui/button'
 
-import { useSignIn } from '@/features/auth/hooks'
+import { useSignIn } from '@/features/auth/hooks/useSignIn'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
-
 
 export default function LoginPage() {
   const { signInKakao, isLoading } = useSignIn()
