@@ -4,10 +4,8 @@ import Image from 'next/image'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
-interface ThumbnailProps {
-  images: string[]
-}
+import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
+import { useParams } from 'next/navigation'
 
 const settings = {
   infinite: true,
@@ -16,7 +14,21 @@ const settings = {
   slidesToScroll: 1,
 }
 
-const Thumbnail = ({ images }: ThumbnailProps) => {
+const Thumbnail = () => {
+  const params = useParams<{
+    mid: string
+  }>()
+  const { data, isLoading } = useGetStoreDetailInfo()
+
+  const images =
+    data?.menus
+      ?.filter((menu) => menu.menuId === Number(params.mid))
+      .flatMap((menu) => menu.menuImages) || []
+
+  if (isLoading) {
+    return <figure className="relative h-[220px] w-full bg-gray-200"></figure>
+  }
+
   if (images.length === 0) {
     return <figure className="relative h-[220px] w-full bg-gray-200"></figure>
   }
@@ -29,6 +41,7 @@ const Thumbnail = ({ images }: ThumbnailProps) => {
     )
   }
 
+  // 이미지가 여러 개 있을 경우 슬라이더로 표시
   return (
     <div className="relative h-[220px] w-full overflow-hidden">
       <Slider {...settings}>

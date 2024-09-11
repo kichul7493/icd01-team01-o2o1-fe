@@ -81,6 +81,23 @@ export const storeDetailHandlers = [
                   },
                 ],
               },
+              {
+                optionGroupId: 202,
+                optionGroupName: '추가 토핑',
+                isRequired: false,
+                options: [
+                  {
+                    optionId: 401,
+                    optionName: '계란 추가',
+                    optionPrice: 1000,
+                  },
+                  {
+                    optionId: 402,
+                    optionName: '고기 추가',
+                    optionPrice: 2000,
+                  },
+                ],
+              },
             ],
           },
           {
