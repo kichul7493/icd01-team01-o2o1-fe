@@ -1,7 +1,7 @@
 import { BASE_URL } from '@/constants/api'
 import { HttpResponse, http } from 'msw'
 
-export const storeHandlers = [
+export const storeDetailHandlers = [
   http.get(`${BASE_URL}/store/1`, ({ request }) => {
     return HttpResponse.json({
       response: {
