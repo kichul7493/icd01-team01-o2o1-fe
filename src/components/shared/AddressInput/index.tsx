@@ -2,7 +2,7 @@
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Address } from '@/features/member/types'
+import { Address, DaumAddress } from '@/features/member/types'
 import { getAddressCoords } from '@/lib/utils'
 import React, { useState } from 'react'
 import { Control } from 'react-hook-form'
@@ -13,44 +13,6 @@ interface AddressInputProps {
   label?: string | React.ReactNode
   required?: boolean
   setAddress: (address: Address) => void
-}
-
-type DaumAddress = {
-  zonecode: string
-  address: string
-  addressEnglish: string
-  addressType: 'R' | 'J'
-  userSelectedType: 'R' | 'J'
-  noSelected: 'Y' | 'N'
-  userLanguageType: 'K' | 'E'
-  roadAddress: string
-  roadAddressEnglish: string
-  jibunAddress: string
-  jibunAddressEnglish: string
-  autoRoadAddress: string
-  autoRoadAddressEnglish: string
-  autoJibunAddress: string
-  autoJibunAddressEnglish: string
-  buildingCode: string
-  buildingName: string
-  apartment: 'Y' | 'N'
-  sido: string
-  sidoEnglish: string
-  sigungu: string
-  sigunguEnglish: string
-  sigunguCode: string
-  roadnameCode: string
-  bcode: string
-  roadname: string
-  roadnameEnglish: string
-  bname: string
-  bnameEnglish: string
-  bname1: string
-  bname1English: string
-  bname2: string
-  bname2English: string
-  hname: string
-  query: string
 }
 
 const AddressInput = ({ required = false, ...props }: AddressInputProps) => {
