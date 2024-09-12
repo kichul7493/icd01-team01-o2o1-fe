@@ -8,6 +8,7 @@ import BackButton from '@/components/shared/BackButton'
 import { useOptionStore } from '@/features/menu/hooks/useSelectMenuHook'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
+import { useToast } from '@/hooks/use-toast'
 
 const Page = () => {
   const { selectedOptions, menuStock, price } = useOptionStore()
@@ -15,6 +16,7 @@ const Page = () => {
   const params = useParams<{
     mid: string
   }>()
+  const { toast } = useToast()
 
   const optionGroups =
     data?.menus?.find((menu) => menu.menuId === Number(params.mid))?.optionGroups || []
@@ -44,7 +46,11 @@ const Page = () => {
     )
 
     if (missingOptions.length > 0) {
-      console.log('필수 옵션 미선택')
+      toast({
+        variant: 'destructive',
+        title: '필수 옵션을 선택해주세요',
+        duration: 1500,
+      })
     } else {
       console.log({
         mid: params.mid,

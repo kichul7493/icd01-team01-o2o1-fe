@@ -41,7 +41,6 @@ const Thumbnail = () => {
     )
   }
 
-  // 이미지가 여러 개 있을 경우 슬라이더로 표시
   return (
     <div className="relative h-[220px] w-full overflow-hidden">
       <Slider {...settings}>
