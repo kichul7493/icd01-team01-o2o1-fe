@@ -12,7 +12,7 @@ const OptionSelectContainer = () => {
   const { data, isLoading } = useGetStoreDetailInfo()
 
   const optionGroups =
-    data?.menus?.find((menu) => menu.menuId === Number(params.mid))?.optionGroups || []
+    data?.menus?.find((menu) => menu.menuId === Number(params.menuId))?.optionGroups || []
 
   return (
     <>
