@@ -1,7 +1,5 @@
 import React from 'react'
 // import { Star, X } from 'lucide-react'
-import Star from '@images/home/star.svg'
-import Image from 'next/image'
 import { X } from 'lucide-react'
 import { StarFilledIcon } from '@radix-ui/react-icons'
 import { Separator } from '@/components/ui/separator'
