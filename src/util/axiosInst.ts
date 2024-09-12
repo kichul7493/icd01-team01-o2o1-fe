@@ -13,10 +13,6 @@ const redirectToLogin = () => {
   void signOut({ redirect: true, callbackUrl: '/' })
 }
 
-/**
- * 응답 인터셉터 Reject 핸들러
- */
-
 // Request Interceptor 설정
 axiosInst.interceptors.request.use(
   (config) => {
@@ -56,6 +52,7 @@ axiosInst.interceptors.response.use(
     return response // 원래 응답을 그대로 반환
   },
   (error) => {
+    redirectToLogin()
     return Promise.reject(error)
   },
 )
