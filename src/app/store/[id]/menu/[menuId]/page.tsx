@@ -8,7 +8,7 @@ import BackButton from '@/components/shared/BackButton'
 import { useOptionStore } from '@/features/menu/hooks/useSelectMenuHook'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
-import { useToast } from '@/hooks/use-toast'
+import { useToast } from '@/hooks/useToast'
 
 const Page = () => {
   const { selectedOptions, menuStock, price } = useOptionStore()
