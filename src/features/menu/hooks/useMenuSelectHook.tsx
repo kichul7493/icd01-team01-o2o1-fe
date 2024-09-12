@@ -1,16 +1,10 @@
 import { create } from 'zustand'
 
 interface MenuSelectState {
-  storeId: number | null
-  setStoreId: (storeId: number) => void
-  storeName: string | null
-  setStoreName: (storeName: string) => void
-  menuId: number | null
-  setMenuId: (menuId: number) => void
-  menuName: string | null
-  setMenuName: (menuName: string) => void
+  menuPrice: number | null
+  setMenuPrice: (menuPrice: number) => void
   menuCount: number
-  setMenuCount: (n: number) => void
+  setMenuCount: (n: number, menuPrice: number) => void
   optionGroups: OptionGroup[]
   setOptionGroups: (optionGroups: OptionGroup[]) => void
 }
@@ -28,22 +22,21 @@ interface Option {
 }
 
 export const useMenuSelectStore = create<MenuSelectState>((set) => ({
-  storeId: null,
-  setStoreId: (storeId: number) => set({ storeId }),
-  storeName: null,
-  setStoreName: (storeName: string) => set({ storeName }),
-  menuId: null,
-  setMenuId: (menuId: number) => set({ menuId }),
-  menuName: null,
-  setMenuName: (menuName: string) => set({ menuName }),
+  menuPrice: null,
+  setMenuPrice: (menuPrice: number) => set({ menuPrice }),
   menuCount: 1,
-  setMenuCount: (n: number) =>
-    set({
-      menuCount: n,
+  setMenuCount: (n: number, menuPrice: number) =>
+    set((state) => {
+      if (n === -1 && state.menuCount === 1) return state
+
+      const newMenuCount = Math.max(1, state.menuCount + n)
+      const newMenuPrice = state.menuPrice !== null ? newMenuCount * menuPrice : null
+
+      return {
+        menuCount: newMenuCount,
+        menuPrice: newMenuPrice,
+      }
     }),
   optionGroups: [],
-  setOptionGroups: (optionGroups: OptionGroup[]) =>
-    set({
-      optionGroups,
-    }),
+  setOptionGroups: (optionGroups: OptionGroup[]) => set({ optionGroups }),
 }))

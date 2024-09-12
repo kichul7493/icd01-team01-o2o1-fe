@@ -39,6 +39,7 @@ export const storeDetailHandlers = [
                 optionGroupId: 201,
                 optionGroupName: '추가 토핑',
                 isRequired: true,
+                isMultiple: true,
                 options: [
                   {
                     optionId: 301,
@@ -68,6 +69,7 @@ export const storeDetailHandlers = [
                 optionGroupId: 201,
                 optionGroupName: '추가 토핑',
                 isRequired: true,
+                isMultiple: false,
                 options: [
                   {
                     optionId: 301,
@@ -85,6 +87,7 @@ export const storeDetailHandlers = [
                 optionGroupId: 202,
                 optionGroupName: '추가 토핑',
                 isRequired: false,
+                isMultiple: true,
                 options: [
                   {
                     optionId: 401,
@@ -114,6 +117,7 @@ export const storeDetailHandlers = [
                 optionGroupId: 201,
                 optionGroupName: '추가 토핑',
                 isRequired: true,
+                isMultiple: true,
                 options: [
                   {
                     optionId: 301,
@@ -143,6 +147,7 @@ export const storeDetailHandlers = [
                 optionGroupId: 201,
                 optionGroupName: '추가 토핑',
                 isRequired: true,
+                isMultiple: false,
                 options: [
                   {
                     optionId: 301,
@@ -172,6 +177,7 @@ export const storeDetailHandlers = [
                 optionGroupId: 201,
                 optionGroupName: '추가 토핑',
                 isRequired: true,
+                isMultiple: true,
                 options: [
                   {
                     optionId: 301,

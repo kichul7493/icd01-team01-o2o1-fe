@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-interface Menu {
+export interface MenuType {
   menuId: number
   menuName: string
   menuCount: number
-  menuPrice: number
+  menuPrice: number | null
   optionGroups: OptionGroup[]
 }
 
@@ -26,8 +26,8 @@ interface CartState {
   setStoreId: (storeId: number) => void
   storeName: string | null
   setStoreName: (storeName: string) => void
-  menus: Menu[]
-  setMenus: (menus: Menu[]) => void
+  menus: MenuType[]
+  setMenus: (menus: MenuType[]) => void
 }
 
 export const useManageCart = create<CartState>()(
@@ -42,6 +42,7 @@ export const useManageCart = create<CartState>()(
     }),
     {
       name: 'cart',
+      // 세션 저장소에 저장
       storage: createJSONStorage(() => sessionStorage),
     },
   ),

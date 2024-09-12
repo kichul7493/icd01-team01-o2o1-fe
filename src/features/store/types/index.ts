@@ -26,6 +26,7 @@ export interface StoreResponse {
         optionGroupId: number
         optionGroupName: string
         isRequired: boolean
+        isMultiple: boolean
         options: {
           optionId: number
           optionName: string

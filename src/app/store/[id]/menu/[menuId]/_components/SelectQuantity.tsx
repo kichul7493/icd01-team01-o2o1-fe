@@ -4,24 +4,27 @@ import { Plus, Minus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
-import { useOptionStore } from '@/features/menu/hooks/useSelectMenuHook'
+import { useMenuSelectStore } from '@/features/menu/hooks/useMenuSelectHook'
 
 const SelectQuantity = () => {
-  const params = useParams<{
-    menuId: string
-  }>()
-  const { data, isLoading } = useGetStoreDetailInfo()
-  const { menuStock, setMenuStock, setMenuPrice, setPrice } = useOptionStore()
+  const params = useParams<{ id: string; menuId: string }>()
+  const { data } = useGetStoreDetailInfo()
+  const { setMenuPrice, setMenuCount, menuCount, menuPrice } = useMenuSelectStore()
 
-  // 해당 메뉴 ID에 맞는 메뉴 정보를 가져오기
   const info = data?.menus?.find((menu) => menu.menuId === Number(params.menuId))
 
   useEffect(() => {
-    if (info?.menuPrice) {
+    if (info?.menuPrice !== undefined) {
       setMenuPrice(info.menuPrice)
-      setPrice(info.menuPrice)
     }
   }, [info, setMenuPrice])
+
+  useEffect(() => {
+    // Update the menuPrice whenever menuCount changes
+    if (menuPrice !== null) {
+      setMenuPrice((menuPrice / menuCount) * (menuCount || 1))
+    }
+  }, [menuCount, menuPrice, setMenuPrice])
 
   return (
     <section>
@@ -34,7 +37,7 @@ const SelectQuantity = () => {
 
       <div className="flex justify-between px-3 py-[18px] text-base font-semibold">
         <span>가격</span>
-        <span>{info?.menuPrice}원</span>
+        <span>{menuPrice !== null ? menuPrice : ''}원</span>
       </div>
 
       <div className="flex justify-between px-3 py-[18px] text-base font-semibold">
@@ -43,15 +46,15 @@ const SelectQuantity = () => {
           <Button
             className="flex h-8 w-8 items-center justify-center rounded-full border border-[#DAE3EA] bg-white p-2"
             aria-label="Decrease quantity"
-            onClick={() => setMenuStock(-1)}
+            onClick={() => setMenuCount(-1, Number(info?.menuPrice))}
           >
             <Minus size={11} color="#DAE3EA" />
           </Button>
-          <span className="w-4 text-center">{menuStock}</span>
+          <span className="w-4 text-center">{menuCount}</span>
           <Button
             className="flex h-8 w-8 items-center justify-center rounded-full border border-[#DAE3EA] bg-white p-2"
             aria-label="Increase quantity"
-            onClick={() => setMenuStock(1)}
+            onClick={() => setMenuCount(1, Number(info?.menuPrice))}
           >
             <Plus size={11} color="#DAE3EA" />
           </Button>

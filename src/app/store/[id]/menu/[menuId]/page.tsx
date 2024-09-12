@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Thumbnail from './_components/Thumbnail'
 import SelectQuantity from './_components/SelectQuantity'
 import OptionSelectContainer from './_components/OptionSelectContainer'
@@ -9,56 +9,103 @@ import { useOptionStore } from '@/features/menu/hooks/useSelectMenuHook'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
 import { useToast } from '@/hooks/useToast'
+import { useMenuSelectStore } from '@/features/menu/hooks/useMenuSelectHook'
+import { useManageCart } from '@/features/cart/hooks/useManageCart'
+import { MenuType } from '@/features/cart/hooks/useManageCart'
 
 const Page = () => {
-  const { selectedOptions, menuStock, price } = useOptionStore()
-  const { data } = useGetStoreDetailInfo()
+  const { optionGroups, menuCount, menuPrice } = useMenuSelectStore()
+  const { data, isLoading } = useGetStoreDetailInfo()
   const params = useParams<{
     menuId: string
   }>()
   const { toast } = useToast()
 
-  const optionGroups =
-    data?.menus?.find((menu) => menu.menuId === Number(params.menuId))?.optionGroups || []
-
-  const calculateTotalPrice = () => {
-    let totalPrice = 0
-
-    optionGroups.forEach((group) => {
-      const selectedOptionIds = selectedOptions[group.optionGroupId]
-      if (selectedOptionIds) {
-        group.options.forEach((option) => {
-          if (selectedOptionIds.includes(option.optionId)) {
-            totalPrice += option.optionPrice
-          }
-        })
-      }
-    })
-
-    return totalPrice
-  }
-
   const clickBtn = () => {
-    const requiredOptionGroups = optionGroups.filter((group) => group.isRequired)
+    const menuInfo = data?.menus.find((menu) => menu.menuId === Number(params.menuId))
 
-    const missingOptions = requiredOptionGroups.filter(
-      (group) => !selectedOptions[group.optionGroupId],
+    // 필수 옵션 선택 여부 확인
+    const requiredOptionGroups = menuInfo?.optionGroups.filter((group) => group.isRequired)
+
+    const isAllRequiredOptionsSelected = requiredOptionGroups?.every((requiredGroup) =>
+      optionGroups.some(
+        (selectedGroup) =>
+          selectedGroup.optionGroupId === requiredGroup.optionGroupId &&
+          selectedGroup.options.length > 0,
+      ),
     )
 
-    if (missingOptions.length > 0) {
+    if (!isAllRequiredOptionsSelected) {
       toast({
         variant: 'destructive',
         title: '필수 옵션을 선택해주세요',
         duration: 1500,
       })
-    } else {
-      console.log({
-        mid: params.menuId,
-        stock: menuStock,
-        selectedOptions,
-        price: price + calculateTotalPrice(),
-      })
+      return
     }
+
+    // 카트 상태 가져오기
+    const { storeId, storeName, setStoreId, setStoreName, setMenus, menus } =
+      useManageCart.getState()
+
+    // 카트가 비어 있을 때: 메뉴 추가
+    const newMenu: MenuType = {
+      menuId: menuInfo?.menuId!,
+      menuName: menuInfo?.menuName!,
+      menuCount: menuCount,
+      menuPrice: menuPrice,
+      optionGroups: optionGroups,
+    }
+
+    if (storeId === null || storeName === null) {
+      setStoreId(data?.storeId!)
+      setStoreName(data?.storeName!)
+      setMenus([...menus, newMenu])
+
+      toast({
+        title: '메뉴가 카트에 추가되었습니다',
+        duration: 1500,
+      })
+
+      return
+    }
+
+    // 이미 같은 menuId가 카트에 있는지 확인
+    const isMenuInCart = menus?.some((menu) => menu.menuId === newMenu.menuId)
+
+    if (isMenuInCart) {
+      toast({
+        variant: 'destructive',
+        title: '이미 같은 메뉴가 카트에 있습니다',
+        duration: 1500,
+      })
+      return
+    }
+
+    // 카트에 저장된 storeId와 현재 메뉴의 storeId 비교
+    if (storeId !== data?.storeId) {
+      toast({
+        variant: 'destructive',
+        title: '다른 음식점의 메뉴가 카트에 포함되어 있습니다',
+        duration: 1500,
+      })
+      return
+    }
+
+    // 같은 음식점일 경우에만 메뉴 추가
+    setMenus([...menus, newMenu])
+
+    toast({
+      title: '메뉴가 카트에 추가되었습니다',
+      duration: 1500,
+    })
+  }
+
+  const test = () => {
+    const { storeId, storeName, setStoreId, setStoreName, setMenus, menus } =
+      useManageCart.getState()
+
+    console.log(storeId, storeName, menus)
   }
 
   return (
@@ -73,7 +120,7 @@ const Page = () => {
         <div className="fixed bottom-0 left-0 right-0 flex justify-center">
           <button
             className="w-full max-w-[480px] rounded bg-blue-500 pb-[52px] pt-[24px] text-white"
-            onClick={clickBtn}
+            onClick={test}
           >
             배달 카트에 담기
           </button>
