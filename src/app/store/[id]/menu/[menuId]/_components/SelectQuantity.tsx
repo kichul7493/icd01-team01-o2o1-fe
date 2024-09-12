@@ -8,13 +8,13 @@ import { useOptionStore } from '@/features/menu/hooks/useSelectMenuHook'
 
 const SelectQuantity = () => {
   const params = useParams<{
-    mid: string
+    menuId: string
   }>()
   const { data, isLoading } = useGetStoreDetailInfo()
   const { menuStock, setMenuStock, setMenuPrice, setPrice } = useOptionStore()
 
   // 해당 메뉴 ID에 맞는 메뉴 정보를 가져오기
-  const info = data?.menus?.find((menu) => menu.menuId === Number(params.mid))
+  const info = data?.menus?.find((menu) => menu.menuId === Number(params.menuId))
 
   useEffect(() => {
     if (info?.menuPrice) {

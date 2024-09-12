@@ -16,13 +16,13 @@ const settings = {
 
 const Thumbnail = () => {
   const params = useParams<{
-    mid: string
+    menuId: string
   }>()
   const { data, isLoading } = useGetStoreDetailInfo()
 
   const images =
     data?.menus
-      ?.filter((menu) => menu.menuId === Number(params.mid))
+      ?.filter((menu) => menu.menuId === Number(params.menuId))
       .flatMap((menu) => menu.menuImages) || []
 
   if (isLoading) {

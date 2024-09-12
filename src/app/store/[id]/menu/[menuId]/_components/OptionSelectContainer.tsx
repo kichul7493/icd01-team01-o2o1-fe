@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation'
 
 const OptionSelectContainer = () => {
   const params = useParams<{
-    mid: string
+    menuId: string
   }>()
   const { data, isLoading } = useGetStoreDetailInfo()
 

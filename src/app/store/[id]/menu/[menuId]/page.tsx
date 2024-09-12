@@ -14,12 +14,12 @@ const Page = () => {
   const { selectedOptions, menuStock, price } = useOptionStore()
   const { data } = useGetStoreDetailInfo()
   const params = useParams<{
-    mid: string
+    menuId: string
   }>()
   const { toast } = useToast()
 
   const optionGroups =
-    data?.menus?.find((menu) => menu.menuId === Number(params.mid))?.optionGroups || []
+    data?.menus?.find((menu) => menu.menuId === Number(params.menuId))?.optionGroups || []
 
   const calculateTotalPrice = () => {
     let totalPrice = 0
@@ -53,7 +53,7 @@ const Page = () => {
       })
     } else {
       console.log({
-        mid: params.mid,
+        mid: params.menuId,
         stock: menuStock,
         selectedOptions,
         price: price + calculateTotalPrice(),
