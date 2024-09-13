@@ -19,6 +19,7 @@ const CartPage = () => {
     isHydrated: state.isHydrated,
   }))
   const totalOrderPrice = useGetTotalOrderPrice()
+  const formattedAddress = useGetAddressForOrder(address as Address)
 
   if (!isHydrated) {
     // Avoid rendering until the state is hydrated to prevent hydration mismatch
@@ -43,7 +44,7 @@ const CartPage = () => {
       menus,
       orderPrice: totalOrderPrice,
       payment: 'card',
-      address: useGetAddressForOrder(address as Address),
+      address: formattedAddress,
     }
 
     order(formData)
