@@ -10,7 +10,7 @@ import { useToast } from '@/hooks/useToast'
 import useGetAddressForOrder from '@/features/address/hooks/useGetAddressForOrder'
 import { Address } from '@/features/address/types'
 
-const page = () => {
+const CartPage = () => {
   const router = useRouter()
   const { toast } = useToast()
   const { mutate: order } = useOrderMenu()
@@ -18,6 +18,7 @@ const page = () => {
   const { isHydrated } = useManageCart((state) => ({
     isHydrated: state.isHydrated,
   }))
+  const totalOrderPrice = useGetTotalOrderPrice()
 
   if (!isHydrated) {
     // Avoid rendering until the state is hydrated to prevent hydration mismatch
@@ -40,7 +41,7 @@ const page = () => {
       storeId,
       storeName,
       menus,
-      orderPrice: useGetTotalOrderPrice(),
+      orderPrice: totalOrderPrice,
       payment: 'card',
       address: useGetAddressForOrder(address as Address),
     }
@@ -73,8 +74,8 @@ const page = () => {
           className="w-full max-w-[480px] rounded bg-[#0FA5FA] pb-[52px] pt-[24px] text-white"
           onClick={handleOrder}
         >
-          {useGetTotalOrderPrice() > 0
-            ? `배달 주문 ${useGetTotalOrderPrice().toLocaleString()}원 결제하기`
+          {totalOrderPrice > 0
+            ? `배달 주문 ${totalOrderPrice.toLocaleString()}원 결제하기`
             : '메뉴를 선택해주세요.'}
         </button>
       </div>
@@ -82,4 +83,4 @@ const page = () => {
   )
 }
 
-export default page
+export default CartPage
