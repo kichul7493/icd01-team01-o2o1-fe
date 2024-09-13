@@ -34,6 +34,7 @@ const OptionSelect = ({ optionGroups }: OptionSelectProps) => {
                   optionId={option.optionId}
                   optionPrice={option.optionPrice}
                   optionName={option.optionName}
+                  optionGroupName={group.optionGroupName}
                   optionGroupId={group.optionGroupId}
                   isMultiple={group.isMultiple}
                 />

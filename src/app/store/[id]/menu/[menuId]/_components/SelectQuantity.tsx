@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
 import { useMenuSelectStore } from '@/features/menu/hooks/useMenuSelectHook'
+import { MinusButton, PlusButton } from '@/components/shared/StockChangeButton'
 
 const SelectQuantity = () => {
   const params = useParams<{ id: string; menuId: string }>()
@@ -37,27 +38,15 @@ const SelectQuantity = () => {
 
       <div className="flex justify-between px-3 py-[18px] text-base font-semibold">
         <span>가격</span>
-        <span>{menuPrice !== null ? menuPrice : ''}원</span>
+        <span>{menuPrice !== null ? menuPrice.toLocaleString() : ''}원</span>
       </div>
 
       <div className="flex justify-between px-3 py-[18px] text-base font-semibold">
         <span>수량</span>
         <div className="flex items-center gap-3">
-          <Button
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#DAE3EA] bg-white p-2"
-            aria-label="Decrease quantity"
-            onClick={() => setMenuCount(-1, Number(info?.menuPrice))}
-          >
-            <Minus size={11} color="#DAE3EA" />
-          </Button>
+          <MinusButton onClick={() => setMenuCount(-1, Number(info?.menuPrice))} />
           <span className="w-4 text-center">{menuCount}</span>
-          <Button
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#DAE3EA] bg-white p-2"
-            aria-label="Increase quantity"
-            onClick={() => setMenuCount(1, Number(info?.menuPrice))}
-          >
-            <Plus size={11} color="#DAE3EA" />
-          </Button>
+          <PlusButton onClick={() => setMenuCount(1, Number(info?.menuPrice))} />
         </div>
       </div>
     </section>
