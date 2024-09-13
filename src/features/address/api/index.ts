@@ -24,3 +24,8 @@ export const updateMainAddress = async (addressId: number) => {
   const { data } = await axiosInst.put<Promise<AddressResponseType>>(`/address/${addressId}`)
   return data
 }
+
+export const deleteAddress = async (addressId: number) => {
+  const { data } = await axiosInst.delete<Promise<AddressResponseType>>(`/address/${addressId}`)
+  return data
+}
