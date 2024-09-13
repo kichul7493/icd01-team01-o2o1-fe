@@ -52,7 +52,9 @@ axiosInst.interceptors.response.use(
     return response // 원래 응답을 그대로 반환
   },
   (error) => {
-    redirectToLogin()
+    if (error.response?.status === 401 || error.response?.status === 400) {
+      redirectToLogin()
+    }
     return Promise.reject(error)
   },
 )
