@@ -2,20 +2,18 @@
 
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 
-interface BackBtnProps {
-  storeTitle: string
-}
-
-const BackBtn = ({ storeTitle }: BackBtnProps) => {
+const BackBtn = () => {
   const router = useRouter()
+  const { data, isLoading } = useGetStoreDetailInfo()
 
   return (
     <header className="absolute top-0 z-10 flex w-full items-center bg-white p-4">
       <button onClick={() => router.back()} aria-label="Go back" className="flex items-center">
         <ArrowLeft />
       </button>
-      <h1 className="pl-3 text-lg font-semibold">{storeTitle}</h1>
+      <h1 className="pl-3 text-lg font-semibold">{data?.storeName}</h1>
     </header>
   )
 }

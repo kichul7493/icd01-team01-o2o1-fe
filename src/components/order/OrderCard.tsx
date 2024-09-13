@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import * as React from 'react'
 interface Order {
   id: number
@@ -24,7 +25,12 @@ export default function OrderCard({ order }: { order: Order }) {
         ))}
       </div>
       <span className="font-semibold">합계 금액: {order.totalAmount.toLocaleString()}원</span>
-      <button className="my-4 bg-[#0FA5FA] p-2 text-white hover:underline">리뷰쓰기</button>
+      <Link
+        href={`/order/${order.id}/add-review`}
+        className="my-4 bg-[#0FA5FA] p-2 text-center text-white hover:underline"
+      >
+        리뷰쓰기
+      </Link>
     </div>
   )
 }
