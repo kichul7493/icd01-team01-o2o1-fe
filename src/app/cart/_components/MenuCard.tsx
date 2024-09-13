@@ -18,9 +18,9 @@ const MenuCard = ({ menuName, menuPrice, menuCount, optionGroups, menuId }: Menu
     0,
   )
 
-  const deleteMenu = () => useDeleteMenuFromCart(menuId)
-  const increaseStock = () => useChangeMenuStock(menuId, 1)
-  const decreaseStock = () => useChangeMenuStock(menuId, -1)
+  const useDeleteMenu = () => useDeleteMenuFromCart(menuId)
+  const useIncreaseStock = () => useChangeMenuStock(menuId, 1)
+  const useDecreaseStock = () => useChangeMenuStock(menuId, -1)
 
   return (
     <article aria-label="Menu Card">
@@ -48,13 +48,17 @@ const MenuCard = ({ menuName, menuPrice, menuCount, optionGroups, menuId }: Menu
           </p>
         </header>
         <footer className="flex flex-col justify-between">
-          <button aria-label="Remove Menu Item" className="flex justify-end" onClick={deleteMenu}>
+          <button
+            aria-label="Remove Menu Item"
+            className="flex justify-end"
+            onClick={useDeleteMenu}
+          >
             <X />
           </button>
           <div className="flex items-center gap-3">
-            <CartMinusButton menuStock={menuCount} onClick={decreaseStock} />
+            <CartMinusButton menuStock={menuCount} onClick={useDecreaseStock} />
             <span className="w-4 text-center">{menuCount}</span>
-            <PlusButton onClick={increaseStock} />
+            <PlusButton onClick={useIncreaseStock} />
           </div>
         </footer>
       </section>
