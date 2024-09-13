@@ -25,7 +25,7 @@ const CartPage = () => {
     return null
   }
 
-  const handleOrder = () => {
+  const usehandleOrder = () => {
     const { storeId, storeName, menus } = useManageCart.getState()
 
     if (storeId === null || storeName === null) {
@@ -72,7 +72,7 @@ const CartPage = () => {
       <div className="fixed bottom-0 left-0 right-0 flex justify-center">
         <button
           className="w-full max-w-[480px] rounded bg-[#0FA5FA] pb-[52px] pt-[24px] text-white"
-          onClick={handleOrder}
+          onClick={usehandleOrder}
         >
           {totalOrderPrice > 0
             ? `배달 주문 ${totalOrderPrice.toLocaleString()}원 결제하기`
