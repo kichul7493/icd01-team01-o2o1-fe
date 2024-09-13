@@ -1,5 +1,6 @@
 import { Address } from '@/features/member/types'
 import axiosInst from '@/util/axiosInst'
+import { AddressData } from '../types'
 
 type AddressResponseType = {
   response: {
@@ -10,7 +11,7 @@ type AddressResponseType = {
 }
 
 export const getAddressList = async () => {
-  const { data } = await axiosInst.get<Promise<{ addresses: Address[] }>>('/address')
+  const { data } = await axiosInst.get<Promise<{ addresses: AddressData[] }>>('/address')
   return data
 }
 
