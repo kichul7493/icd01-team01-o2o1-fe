@@ -8,10 +8,11 @@ import { Address, DaumAddress } from '@/features/member/types'
 import { getAddressCoords } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import Footer from '@/components/shared/Footer'
+import { usePostAddress } from '@/features/address/query'
 
 const AddressSearchPage = () => {
   const [address, setAddress] = useState<Address | null>()
-
+  const { mutate: postAddress } = usePostAddress()
   const onComplete = async (data: DaumAddress) => {
     let fullAddress = data.address
     let extraAddress = ''
@@ -66,7 +67,7 @@ const AddressSearchPage = () => {
               onChange={(e) => setAddress({ ...address, addressDetail: e.target.value })}
             />
           </div>
-          <Footer text="완료" onClick={() => console.log(address)} />
+          <Footer text="완료" onClick={() => postAddress(address)} />
         </>
       )}
     </div>
