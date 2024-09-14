@@ -20,7 +20,7 @@ const Menu: React.FC<MenuProps> = ({ id, name, price, image }) => {
         <article className="flex justify-between border-b border-[#EEEEEE] py-3.5">
           <div>
             <h3 className="text-base/[18px] font-semibold">{name}</h3>
-            <p className="pt-2 text-base/[18px] font-normal">{price}원</p>
+            <p className="pt-2 text-base/[18px] font-normal">{price.toLocaleString()}원</p>
           </div>
           <figure className="relative h-[100px] w-[100px] bg-gray-200">
             <Image

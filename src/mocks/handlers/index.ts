@@ -12,4 +12,5 @@ export const handlers = [
   ...memberHandlers,
   ...addressHandlers,
   ...storeDetailHandlers,
+  ...addressHandlers,
 ]

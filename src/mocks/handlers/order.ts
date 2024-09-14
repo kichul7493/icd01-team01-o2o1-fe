@@ -139,6 +139,15 @@ export const mockOrderResponse = {
   msg: 'success',
 }
 
+export const mockPostOrderResponse = {
+  response: {
+    orderId: 1,
+    storeId: 2,
+  },
+  statusCode: 200,
+  msg: 'success',
+}
+
 export const orderHandlers = [
   http.get(`${BASE_URL}/order/pending`, async () => {
     await delay(1000)
@@ -236,6 +245,10 @@ export const orderHandlers = [
       },
     })
   }),
+  http.post(`${BASE_URL}/order`, async () => {
+    await delay(1000)
+    return HttpResponse.json(mockPostOrderResponse)
+  }),
 ]
 
 export default function useOrderData() {
@@ -252,3 +265,5 @@ export default function useOrderData() {
     useOrderQuery,
   }
 }
+
+// order api 작성

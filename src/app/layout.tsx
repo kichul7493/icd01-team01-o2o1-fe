@@ -5,6 +5,7 @@ import '../../globals.d.ts'
 import Layout from '@/components/Layout/Layout'
 import { MSWProvider } from '@/mocks/MSWProvider'
 import Script from 'next/script'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -52,6 +53,7 @@ export default function RootLayout({
         {/* next14 문제인지는 모르겠으나 원래라면 위 스크립트로 아래 스크립트들을 가져와야햇는데 못가져와서 직접 박아넣음 (현재 문의 넣어놈...) */}
         <Script src="http://t1.daumcdn.net/mapjsapi/js/main/4.4.19/kakao.js"></Script>
         <Script src="http://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></Script>
+        <Toaster />
       </body>
     </html>
   )

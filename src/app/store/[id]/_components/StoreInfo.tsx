@@ -33,7 +33,7 @@ const StoreInfo = () => {
             <Star size={16} fill="#FFBD2E" color="#FFBD2E" aria-label="Star rating" />
             <p className="flex items-center pl-1 text-xs font-semibold">
               <span>{data?.reviewRate}</span>
-              <span>({data?.reviewCount})</span>
+              <span>({data?.reviewCount?.toLocaleString()})</span>
             </p>
             <ChevronRight size={16} />
           </div>

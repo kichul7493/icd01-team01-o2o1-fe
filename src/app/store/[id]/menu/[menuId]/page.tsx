@@ -5,15 +5,16 @@ import Thumbnail from './_components/Thumbnail'
 import SelectQuantity from './_components/SelectQuantity'
 import OptionSelectContainer from './_components/OptionSelectContainer'
 import BackButton from '@/components/shared/BackButton'
-import { useOptionStore } from '@/features/menu/hooks/useSelectMenuHook'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
 import { useToast } from '@/hooks/useToast'
 import { useMenuSelectStore } from '@/features/menu/hooks/useMenuSelectHook'
 import { useManageCart } from '@/features/cart/hooks/useManageCart'
-import { MenuType } from '@/features/cart/hooks/useManageCart'
+import { MenuType } from '@/features/cart/types'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
+  const router = useRouter()
   const { optionGroups, menuCount, menuPrice } = useMenuSelectStore()
   const { data, isLoading } = useGetStoreDetailInfo()
   const params = useParams<{
@@ -21,7 +22,7 @@ const Page = () => {
   }>()
   const { toast } = useToast()
 
-  const clickBtn = () => {
+  const handleAddCart = () => {
     const menuInfo = data?.menus.find((menu) => menu.menuId === Number(params.menuId))
 
     // 필수 옵션 선택 여부 확인
@@ -66,7 +67,7 @@ const Page = () => {
         title: '메뉴가 카트에 추가되었습니다',
         duration: 1500,
       })
-
+      router.push('/cart')
       return
     }
 
@@ -99,13 +100,8 @@ const Page = () => {
       title: '메뉴가 카트에 추가되었습니다',
       duration: 1500,
     })
-  }
 
-  const test = () => {
-    const { storeId, storeName, setStoreId, setStoreName, setMenus, menus } =
-      useManageCart.getState()
-
-    console.log(storeId, storeName, menus)
+    router.push('/cart')
   }
 
   return (
@@ -120,7 +116,7 @@ const Page = () => {
         <div className="fixed bottom-0 left-0 right-0 flex justify-center">
           <button
             className="w-full max-w-[480px] rounded bg-blue-500 pb-[52px] pt-[24px] text-white"
-            onClick={test}
+            onClick={handleAddCart}
           >
             배달 카트에 담기
           </button>

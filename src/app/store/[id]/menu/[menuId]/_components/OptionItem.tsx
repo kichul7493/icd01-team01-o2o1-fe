@@ -9,6 +9,7 @@ export interface OptionItemProps {
   optionName: string
   optionPrice: number
   optionGroupId: number
+  optionGroupName: string
   isMultiple: boolean
 }
 
@@ -17,6 +18,7 @@ const OptionItem = ({
   optionName,
   optionPrice,
   optionGroupId,
+  optionGroupName,
   isMultiple,
 }: OptionItemProps) => {
   const { optionGroups, setOptionGroups } = useMenuSelectStore()
@@ -104,7 +106,7 @@ const OptionItem = ({
       // 그룹이 없으면 새 그룹 생성
       const newGroup = {
         optionGroupId,
-        optionGroupName: optionName, // 예시로 optionName을 그룹 이름으로 설정
+        optionGroupName,
         options: [{ optionId, optionName, optionPrice }],
       }
       setOptionGroups([...optionGroups, newGroup])
@@ -121,7 +123,7 @@ const OptionItem = ({
         className={`h-7 w-7 rounded-full border ${isSelected ? 'border-[#000000]' : 'border-[#CCCCCC]'} text-[#000000]`}
       />
       <Label htmlFor={String(optionId)} className="text-base font-normal">
-        {optionName} {optionPrice > 0 ? `(+${optionPrice}원)` : ''}
+        {optionName} {optionPrice > 0 ? `(+${optionPrice.toLocaleString()}원)` : ''}
       </Label>
     </div>
   )
