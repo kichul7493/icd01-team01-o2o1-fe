@@ -1,7 +1,5 @@
 'use client'
 import { useEffect } from 'react'
-import { Plus, Minus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
 import { useMenuSelectStore } from '@/features/menu/hooks/useMenuSelectHook'

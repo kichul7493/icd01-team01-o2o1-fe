@@ -1,4 +1,4 @@
-import { Address } from '../types'
+import { AddressData } from '../types'
 
 interface FormattedAddress {
   addressId: number
@@ -9,7 +9,7 @@ interface FormattedAddress {
   zipCode: string
 }
 
-const useGetAddressForOrder = (rawAddress: Address): FormattedAddress => {
+const useGetAddressForOrder = (rawAddress: AddressData): FormattedAddress => {
   return {
     addressId: rawAddress?.addressId,
     latitude: rawAddress?.latitude.toFixed(4),

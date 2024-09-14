@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import useOrderMenu from '@/features/cart/hooks/useOrderMenu'
 import { useToast } from '@/hooks/useToast'
 import useGetAddressForOrder from '@/features/address/hooks/useGetAddressForOrder'
-import { Address } from '@/features/address/types'
+import { AddressData } from '@/features/address/types'
 
 const CartPage = () => {
   const router = useRouter()
@@ -19,7 +19,7 @@ const CartPage = () => {
     isHydrated: state.isHydrated,
   }))
   const totalOrderPrice = useGetTotalOrderPrice()
-  const formattedAddress = useGetAddressForOrder(address as Address)
+  const formattedAddress = useGetAddressForOrder(address as AddressData)
 
   if (!isHydrated) {
     // Avoid rendering until the state is hydrated to prevent hydration mismatch

@@ -1,12 +1,7 @@
-import {
-  deleteAddress,
-  getAddressList,
-  postAddress,
-  updateMainAddress,
-} from '@/features/address/api'
 import { AddressData } from '../types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+import { getAddressList, postAddress, updateMainAddress, deleteAddress } from '../api'
 
 // 주소 목록 가져오기 (GET 요청)
 export const useAddressList = () => {
@@ -63,4 +58,16 @@ export const useDeleteAddress = () => {
       console.error('Error updating main address:', error)
     },
   })
+}
+
+export const useGetMainAddress = () => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['main-address'],
+    queryFn: async () => {
+      const res = await getAddressList()
+      return res.addresses.find((address: AddressData) => address.addressStatus === 'main')
+    },
+  })
+
+  return { data, isLoading }
 }

@@ -10,7 +10,7 @@ export type AddressData = {
 
 export interface AddressesResponseData {
   response: {
-    addresses: Address[]
+    addresses: AddressData[]
   }
   statusCode: number
   msg: string
