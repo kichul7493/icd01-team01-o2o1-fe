@@ -51,8 +51,8 @@ export default function RootLayout({
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c0c8ad489cd94f5d723e45543526e40&libraries=services"
         ></Script>
         {/* next14 문제인지는 모르겠으나 원래라면 위 스크립트로 아래 스크립트들을 가져와야햇는데 못가져와서 직접 박아넣음 (현재 문의 넣어놈...) */}
-        <Script src="http://t1.daumcdn.net/mapjsapi/js/main/4.4.19/kakao.js"></Script>
-        <Script src="http://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></Script>
+        <Script src="https://t1.daumcdn.net/mapjsapi/js/main/4.4.19/kakao.js"></Script>
+        <Script src="https://t1.daumcdn.net/mapjsapi/js/libs/services/1.0.2/services.js"></Script>
         <Toaster />
       </body>
     </html>
