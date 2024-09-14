@@ -31,6 +31,9 @@ export const oAuthLogin = async ({
     },
   )
 
+  console.log('authorization :', headers['authorization'])
+  console.log('refreshauth :', headers['refreshauth'])
+
   headers['Authorization'] && localStorage.setItem('accessToken', headers['Authorization'])
   headers['RefreshAuth'] && localStorage.setItem('refreshToken', headers['RefreshAuth'])
   return data
