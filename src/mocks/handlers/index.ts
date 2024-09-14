@@ -1,3 +1,4 @@
+import { addressHandlers } from './address'
 import { authHandlers } from './auth'
 import { memberHandlers } from './member'
 import { orderHandlers } from './order'
@@ -10,6 +11,7 @@ export const handlers = [
   ...orderHandlers,
   ...authHandlers,
   ...memberHandlers,
+  ...addressHandlers,
   ...storeDetailHandlers,
   ...addressHandlers,
 ]

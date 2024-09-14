@@ -1,4 +1,4 @@
-export interface Address {
+export type AddressData = {
   addressId: number
   latitude: number
   longitude: number
@@ -14,4 +14,5 @@ export interface AddressesResponseData {
   }
   statusCode: number
   msg: string
+  addressStatus: string
 }

@@ -8,7 +8,7 @@ type SignUpResponseType = {
   msg: string
 }
 
-export const OAuthLogin = async ({
+export const oAuthLogin = async ({
   accessToken,
   subId,
   name,
