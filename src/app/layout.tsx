@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import '../../globals.d.ts'
 import Layout from '@/components/Layout/Layout'
-import { MSWProvider } from '@/mocks/MSWProvider'
 import Script from 'next/script'
 import { Toaster } from '@/components/ui/toaster'
 
@@ -17,15 +16,6 @@ export const metadata: Metadata = {
   },
 }
 
-if (process.env.NEXT_RUNTIME === 'nodejs') {
-  console.log('SERVER LISTEN')
-
-  const { server } = require('../mocks/node')
-  server.listen()
-
-  Reflect.set(fetch, '__FOO', 'YES')
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,13 +24,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        {process.env.NODE_ENV === 'development' ? (
-          <MSWProvider>
-            <Layout>{children}</Layout>
-          </MSWProvider>
-        ) : (
-          <Layout>{children}</Layout>
-        )}
+        <Layout>{children}</Layout>
+
         {/* 우편번호 검색 API는 페이지가 상호작용 가능해진 후 로드 */}
         <Script
           strategy="afterInteractive"
