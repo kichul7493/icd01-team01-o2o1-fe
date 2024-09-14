@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        {process.env.NODE_ENV === 'development' ? (
+        {process.env.NODE_ENV !== 'production' ? (
           <MSWProvider>
             <Layout>{children}</Layout>
           </MSWProvider>
