@@ -17,7 +17,7 @@ export const oAuthLogin = async ({
   subId: string
   name: string
 }) => {
-  const { data } = await axiosInst.post<Promise<SignUpResponseType>>(
+  const { data, headers } = await axiosInst.post<Promise<SignUpResponseType>>(
     '/login',
     {
       snsType: 'kakao',
@@ -30,5 +30,8 @@ export const oAuthLogin = async ({
       },
     },
   )
+
+  headers['Authorization'] && localStorage.setItem('accessToken', headers['Authorization'])
+  headers['RefreshAuth'] && localStorage.setItem('refreshToken', headers['RefreshAuth'])
   return data
 }
