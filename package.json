@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "dev:prod": "NODE_ENV=production next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch"
