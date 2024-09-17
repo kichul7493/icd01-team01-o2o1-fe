@@ -18,6 +18,8 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
       queryKey: ['storeList', category, keyword],
       queryFn: ({ pageParam }) =>
         getStoreList({
+          // address: mainAddress!!,
+          // api 에러 수정 후 사용자 주소로 변경 예정
           address: {
             latitude: 37.5662952,
             longitude: 126.9779451,
@@ -25,7 +27,6 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
             addressDetail: '지하 1층',
             zipCode: '04536',
           },
-          // address: mainAddress!!,
           page: pageParam,
           category,
           keyword,
