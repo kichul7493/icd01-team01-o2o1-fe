@@ -2,6 +2,14 @@ import { Address } from '@/features/member/types'
 import axiosInst from '@/util/axiosInst'
 import { AddressData } from '../types'
 
+type AddressListResponseType = {
+  response: {
+    addresses: AddressData[]
+  }
+  statusCode: number
+  msg: string
+}
+
 type AddressResponseType = {
   response: {
     addressId: number
@@ -11,21 +19,21 @@ type AddressResponseType = {
 }
 
 export const getAddressList = async () => {
-  const { data } = await axiosInst.get<Promise<{ addresses: AddressData[] }>>('/address')
-  return data
+  const { data } = await axiosInst.get<AddressListResponseType>('/address')
+  return data.response
 }
 
 export const postAddress = async (addressData: Address) => {
-  const { data } = await axiosInst.post<Promise<AddressResponseType>>('/address', addressData)
-  return data
+  const { data } = await axiosInst.post<AddressResponseType>('/address', addressData)
+  return data.response
 }
 
 export const updateMainAddress = async (addressId: number) => {
-  const { data } = await axiosInst.put<Promise<AddressResponseType>>(`/address/${addressId}`)
-  return data
+  const { data } = await axiosInst.put<AddressResponseType>(`/address/${addressId}`)
+  return data.response
 }
 
 export const deleteAddress = async (addressId: number) => {
-  const { data } = await axiosInst.delete<Promise<AddressResponseType>>(`/address/${addressId}`)
-  return data
+  const { data } = await axiosInst.delete<AddressResponseType>(`/address/${addressId}`)
+  return data.response
 }

@@ -17,7 +17,7 @@ type AddressData = {
 
 const AddressList = () => {
   const { data } = useAddressList()
-
+  console.log(data)
   return (
     <ul className="p-2">
       {data &&
