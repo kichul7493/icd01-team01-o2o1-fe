@@ -1,24 +1,44 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CategoryButton from '@/components/home/CategoryButton'
 import StoreCard from '@/components/home/StoreCard'
 import AddressContainer from '@/components/home/AddressContainer'
 import useStoreData from '@/mocks/handlers/store'
-import { Restaurant } from '@/types/store'
+import { Store } from '@/types/store'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
+import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const { useStoreQuery, useCategoryQuery } = useStoreData()
-  const { data: stores, error: storeError, isLoading: storeLoading } = useStoreQuery()
+  const { useCategoryQuery } = useStoreData()
   const { data: categories, error: categoryError, isLoading: categoryLoading } = useCategoryQuery()
+  const {
+    pages,
+    isLoading: storeLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isError: storeError,
+  } = useGetStoreList({
+    category: selectedCategory || '',
+  })
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
+        fetchNextPage()
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [fetchNextPage, hasNextPage])
 
   if (storeLoading && categoryLoading) return <LoadingSpinner />
-  if (storeError instanceof Error || categoryError instanceof Error) return <div>에러 발생</div>
-
-  const filteredRestaurants = selectedCategory
-    ? stores.filter((restaurant: Restaurant) => restaurant.category === selectedCategory)
-    : stores
+  if (storeError || categoryError) return <div>에러 발생</div>
 
   return (
     <div className="flex flex-col p-4 pb-[4.5rem]">
@@ -34,10 +54,13 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="custom-scrollbar h-screen space-y-4 overflow-y-auto">
-        {filteredRestaurants?.map((restaurant: Restaurant) => (
-          <StoreCard key={restaurant.id} restaurant={restaurant} />
-        ))}
+      <div>
+        {pages &&
+          pages.map((page) => {
+            return page.data?.map((store: Store) => (
+              <StoreCard key={store.storeName} store={store} />
+            ))
+          })}
       </div>
     </div>
   )
