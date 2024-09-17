@@ -11,10 +11,14 @@ export default function AddressContainer() {
 
   const mainAddress = data?.addresses.find((address) => address.addressStatus === 'main')
 
+  console.log(mainAddress?.addressDetail)
+
   return (
     <Link href={'/my/address/search'} className="mb-4 flex items-center justify-start">
       <MapPin size={20} />
-      <p>{mainAddress?.address || '' + mainAddress?.addressDetail}</p>
+      <p>
+        {mainAddress?.address} {mainAddress?.addressDetail}
+      </p>
     </Link>
   )
 }
