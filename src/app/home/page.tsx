@@ -7,8 +7,6 @@ import useStoreData from '@/mocks/handlers/store'
 import { Restaurant } from '@/types/store'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 
-const address = '서울 강남구 강남대로 396'
-
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const { useStoreQuery, useCategoryQuery } = useStoreData()
@@ -24,7 +22,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col p-4 pb-[4.5rem]">
-      <AddressContainer address={address} />
+      <AddressContainer />
       <div className="custom-scrollbar mb-4 overflow-x-auto whitespace-nowrap">
         {categories?.map((category: string) => (
           <CategoryButton

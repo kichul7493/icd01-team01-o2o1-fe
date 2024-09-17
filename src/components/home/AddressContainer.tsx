@@ -2,16 +2,19 @@
 import * as React from 'react'
 import { MapPin } from 'lucide-react'
 import Link from 'next/link'
+import useGetMemberAddress from '@/features/member/hooks/useGetMemberAddress'
 
-interface AddressProps {
-  address: string
-}
+export default function AddressContainer() {
+  const { data } = useGetMemberAddress()
 
-export default function AddressContainer({ address }: Readonly<AddressProps>) {
+  if (!data) return null
+
+  const mainAddress = data?.addresses.find((address) => address.addressStatus === 'main')
+
   return (
     <Link href={'/my/address/search'} className="mb-4 flex items-center justify-start">
       <MapPin size={20} />
-      <p>{address}</p>
+      <p>{mainAddress?.address || '' + mainAddress?.addressDetail}</p>
     </Link>
   )
 }
