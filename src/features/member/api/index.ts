@@ -27,3 +27,8 @@ export const createMember = async (formData: Member) => {
   const { data } = await axiosInst.post<MemberResponse>('/member', { ...formData })
   return data.statusCode === 200
 }
+
+export const deleteMember = async () => {
+  const { data } = await axiosInst.delete<MemberResponse>('/member')
+  return data.statusCode === 200
+}
