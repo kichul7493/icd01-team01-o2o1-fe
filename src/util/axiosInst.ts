@@ -21,7 +21,7 @@ axiosInst.interceptors.request.use(
 
     // Authorization과 RefreshAuth 헤더에 토큰을 추가
     if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`
+      config.headers['Authorization'] = `${accessToken}`
     }
     if (refreshToken) {
       config.headers['RefreshAuth'] = refreshToken
