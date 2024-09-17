@@ -17,7 +17,6 @@ type AddressData = {
 
 const AddressList = () => {
   const { data } = useAddressList()
-  console.log(data)
   return (
     <ul className="p-2">
       {data &&
@@ -47,12 +46,14 @@ const AddressListItem = ({ ...props }: AddressData) => {
           />
           <span className="text-gray-700">{props.address}</span>
         </button>
-        <button
-          className="text-gray-400 hover:text-gray-600"
-          onClick={() => deleteAddress(props.addressId)}
-        >
-          <X className="h-5 w-5" />
-        </button>
+        {props.addressStatus !== 'main' && (
+          <button
+            className="text-gray-400 hover:text-gray-600"
+            onClick={() => deleteAddress(props.addressId)}
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
       </li>
       <Separator />
     </>
