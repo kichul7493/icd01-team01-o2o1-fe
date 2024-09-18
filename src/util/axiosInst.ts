@@ -21,10 +21,10 @@ axiosInst.interceptors.request.use(
 
     // Authorization과 RefreshAuth 헤더에 토큰을 추가
     if (accessToken) {
-      config.headers['Authorization'] = `${accessToken}`
+      config.headers['authorization'] = `${accessToken}`
     }
     if (refreshToken) {
-      config.headers['RefreshAuth'] = refreshToken
+      config.headers['refreshauth'] = refreshToken
     }
 
     return config
@@ -40,13 +40,13 @@ axiosInst.interceptors.request.use(
 axiosInst.interceptors.response.use(
   (response) => {
     // 응답 헤더에서 새로운 accessToken을 가져옴
-    const accessToken = response.headers['Authorization']
+    const accessToken = response.headers['authorization']
     const storedAccessToken = localStorage.getItem('accessToken')
 
     // 새로운 토큰이 있고, 기존 토큰과 다르면 로컬 스토리지 갱신
     if (accessToken && accessToken !== storedAccessToken) {
       localStorage.setItem('accessToken', accessToken)
-      localStorage.setItem('refreshToken', response.headers['RefreshAuth'])
+      localStorage.setItem('refreshToken', response.headers['refreshauth'])
     }
 
     return response // 원래 응답을 그대로 반환
