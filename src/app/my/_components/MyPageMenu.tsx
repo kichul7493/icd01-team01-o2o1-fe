@@ -24,7 +24,7 @@ const MyPageMenu = () => {
         주소 관리
       </Link>
       <Separator className="my-6" />
-      <Link href="/my/order" className="my-6 text-xl">
+      <Link href="/order" className="my-6 text-xl">
         주문 내역
       </Link>
       <Separator className="my-6" />
