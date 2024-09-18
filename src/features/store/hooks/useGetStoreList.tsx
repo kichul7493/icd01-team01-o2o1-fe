@@ -18,11 +18,9 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
       queryKey: ['storeList', category, keyword],
       queryFn: ({ pageParam }) =>
         getStoreList({
-          // 주소 저장 시 위경도가 반대로 저장되어 있어 수정
-          //
           address: {
-            latitude: mainAddress!!.longitude,
-            longitude: mainAddress!!.latitude,
+            latitude: mainAddress!!.latitude,
+            longitude: mainAddress!!.longitude,
             address: mainAddress!!.address,
             addressDetail: '지하 1층',
             zipCode: '04536',
