@@ -13,7 +13,7 @@ const page = () => {
         <StoreInfo />
       </main>
       <main className="mb-[153px] mt-[34px]">
-        <Thumbnail image={'https://via.placeholder.com/375x220?text=Image+2'} />
+        <Thumbnail />
       </main>
     </>
   )
