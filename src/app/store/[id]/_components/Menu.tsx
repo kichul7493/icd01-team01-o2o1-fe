@@ -38,9 +38,7 @@ const Menu: React.FC<MenuProps> = ({ id, name, price, image, isLoading = false }
             {isLoading ? (
               <Skeleton className="h-full w-full" />
             ) : imageError ? (
-              <div className="flex h-full w-full items-center justify-center bg-gray-400 text-white">
-                이미지 로드 실패
-              </div>
+              <div className="flex h-full w-full items-center justify-center bg-gray-400 text-white"></div>
             ) : (
               <Image
                 src={image}
