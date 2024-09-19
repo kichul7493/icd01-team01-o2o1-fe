@@ -4,6 +4,7 @@ export type Address = {
   address: string
   addressDetail: string
   zipCode: string
+  addressStatus?: 'main' | 'sub'
 }
 
 export type DaumAddress = {
@@ -42,4 +43,12 @@ export type DaumAddress = {
   bname2English: string
   hname: string
   query: string
+}
+
+export type Member = {
+  memberId: number
+  nickname: string
+  contact: string
+  name: string
+  address: Address
 }

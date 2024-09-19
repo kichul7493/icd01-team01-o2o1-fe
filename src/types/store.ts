@@ -1,10 +1,9 @@
-import { StaticImageData } from 'next/image'
-
-export type Restaurant = {
-  id: number
-  name: string
-  imageSrc: StaticImageData
-  rating: number
-  reviews: number
+export type Store = {
+  storeId: number
+  storeName: string
+  thumbnails: string[]
+  reviewRate: number
+  reviewCount: number
+  deliveryPrice: number
   category: string
 }
