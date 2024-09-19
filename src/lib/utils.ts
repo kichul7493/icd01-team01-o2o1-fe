@@ -10,7 +10,7 @@ export const getAddressCoords = (address: string) => {
   return new Promise((resolve, reject) => {
     geoCoder.addressSearch(address, (result: any, status: any) => {
       if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].x, result[0].y)
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x)
         const latitude = coords.getLat()
         const longitude = coords.getLng()
         resolve({ latitude, longitude })

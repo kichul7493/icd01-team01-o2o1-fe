@@ -40,3 +40,8 @@ export const getMemberAddress = async () => {
   const { data } = await axiosInst.get<MemberAddressResponse>('/address')
   return data.response
 }
+
+export const deleteMember = async () => {
+  const { data } = await axiosInst.delete<MemberResponse>('/member')
+  return data.statusCode === 200
+}
