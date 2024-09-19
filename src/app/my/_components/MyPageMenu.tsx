@@ -10,7 +10,8 @@ const MyPageMenu = () => {
   const { deleteMember, isError, isPending } = useDeleteMember()
 
   const handleSignOut = async () => {
-    await signOut()
+    await signOut({ redirect: true, callbackUrl: '/' })
+    localStorage.clear()
   }
 
   const handleDeleteAccount = async () => {
