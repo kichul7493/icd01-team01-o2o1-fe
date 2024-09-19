@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { House, Search, FileCheck, Heart, CircleUserRound } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { SessionProvider } from 'next-auth/react'
@@ -45,14 +45,6 @@ const notPrivatePage = ['/']
 const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname() || ''
   const isMainPage = Object.values(mainPages).includes(pathname)
-  const router = useRouter()
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken')
-    if (!notPrivatePage.includes(pathname) && !accessToken) {
-      router.push('/')
-    }
-  }, [])
 
   return (
     <main className="relative m-auto h-screen min-h-screen min-w-[280px] max-w-[480px] border-l-2 border-r-2 border-gray-100">
