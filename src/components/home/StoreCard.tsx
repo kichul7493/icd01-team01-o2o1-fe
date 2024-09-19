@@ -13,7 +13,7 @@ export default function StoreCard({ store }: Readonly<StoreCardProps>) {
   return (
     <Link
       className="w-full overflow-hidden rounded-lg bg-white text-start shadow"
-      href={`/store/${store.storeId}/detail`}
+      href={`/store/${store.storeId}`}
     >
       {' '}
       <div className="relative h-48 w-full">
