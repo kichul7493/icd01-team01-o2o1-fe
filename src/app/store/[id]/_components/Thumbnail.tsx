@@ -35,7 +35,7 @@ const Thumbnail = () => {
   if (!data?.thumbnails || data.thumbnails.length === 0) {
     return (
       <figure className="relative h-[220px] w-full bg-gray-200">
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-400 text-white">
+        <div className="absolute inset-0 flex items-center justify-center text-white">
           이미지가 없어요
         </div>
       </figure>
@@ -56,7 +56,7 @@ const Thumbnail = () => {
           onError={() => handleImageError(0)} // 이미지 로드 실패 시 호출
         />
         {singleImageError && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-400 text-white">
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-white">
             이미지 로드 실패
           </div>
         )}
