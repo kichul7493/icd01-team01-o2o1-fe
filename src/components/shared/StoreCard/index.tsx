@@ -1,5 +1,5 @@
 'use client'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import * as React from 'react'
 import Star from '@images/home/star.svg'
 import Link from 'next/link'
