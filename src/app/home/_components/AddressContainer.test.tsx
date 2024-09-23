@@ -1,8 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import AddressContainer from '@/components/home/AddressContainer'
-import useGetMemberAddress from '@/features/member/hooks/useGetMemberAddress'
+import AddressContainer from '@/app/home/_components/AddressContainer'
 import { Address } from '@/features/member/types'
 
 const mockAddress: Address = {
@@ -14,7 +13,7 @@ const mockAddress: Address = {
   longitude: 126.9779451,
 }
 
-jest.mock('../../features/member/hooks/useGetMemberAddress.tsx', () => {
+jest.mock('../../../features/member/hooks/useGetMemberAddress.tsx', () => {
   return () => {
     return {
       data: {

@@ -1,5 +1,5 @@
 'use client'
-import StoreCard from '@/components/home/StoreCard'
+import StoreCard from '@/app/home/_components/StoreCard'
 import { useEffect, useState } from 'react'
 import SearchInput from '@/components/search/SearchInput'
 import { Store } from '@/types/store'

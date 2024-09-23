@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import CategoryButton from '@/components/home/CategoryButton'
+import CategoryButton from '@/app/home/_components/CategoryButton'
 
 describe('CategoryButton', () => {
   const category = '한식'
