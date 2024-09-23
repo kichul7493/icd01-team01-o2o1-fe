@@ -25,7 +25,7 @@ export const useStreamOrderStatus = ({ orderId, initStatus }: UseStreamOrderStat
     }
 
     // TODO: 주문 상태 SSE URL이 정해지면 수정
-    const eventSource = new EventSourcePolyfill(`${BASE_URL}/order/${orderId}/stream`, {
+    const eventSource = new EventSourcePolyfill(`${BASE_URL}/order/status/1`, {
       headers: {
         Authorization: accessToken,
         refreshAuth: refreshToken,

@@ -21,7 +21,7 @@ export const useStreamDeliveryLocation = (orderId: number) => {
       return
     }
 
-    const eventSource = new EventSourcePolyfill(`${BASE_URL}/delivery/${orderId}/location`, {
+    const eventSource = new EventSourcePolyfill(`${BASE_URL}/order/${orderId}/delivery/location`, {
       headers: {
         Authorization: accessToken,
         refreshAuth: refreshToken,
