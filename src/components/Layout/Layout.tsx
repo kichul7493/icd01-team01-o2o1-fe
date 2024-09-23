@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React from 'react'
-import { House, Search, FileCheck, Heart, CircleUserRound } from 'lucide-react'
+import { House, Search, FileCheck, CircleUserRound } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { SessionProvider } from 'next-auth/react'
 import QueryProvider from '@/context/QueryProvider'
