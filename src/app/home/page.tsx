@@ -1,12 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import CategoryButton from '@/app/home/_components/CategoryButton'
-import StoreCard from '@/app/home/_components/StoreCard'
 import AddressContainer from '@/app/home/_components/AddressContainer'
 import useStoreData from '@/mocks/handlers/store'
 import { Store } from '@/types/store'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
+import StoreCard from '@/components/shared/StoreCard'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)

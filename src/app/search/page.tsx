@@ -1,10 +1,9 @@
 'use client'
-import StoreCard from '@/app/home/_components/StoreCard'
 import { useEffect, useState } from 'react'
-import SearchInput from '@/components/search/SearchInput'
 import { Store } from '@/types/store'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
+import StoreCard from '@/components/shared/StoreCard'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')

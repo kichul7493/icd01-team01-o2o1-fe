@@ -1,8 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Star from '@images/home/star.svg'
-import StoreCard from './StoreCard'
+import StoreCard from '.'
 import { Store } from '@/types/store'
 
 const mockRestaurant: Store = {
