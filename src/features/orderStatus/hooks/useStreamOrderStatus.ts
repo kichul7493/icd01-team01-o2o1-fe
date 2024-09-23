@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { OrderStatus } from '../types'
 import { useOrderStatusStore } from '@/store/orderStatus'
 import { BASE_URL } from '@/constants/api'
+import { EventSourcePolyfill } from 'event-source-polyfill'
 
 interface UseStreamOrderStatusProps {
   orderId: number
@@ -16,19 +17,35 @@ export const useStreamOrderStatus = ({ orderId, initStatus }: UseStreamOrderStat
   }, [changeOrderStatus, initStatus])
 
   useEffect(() => {
-    // TODO: 주문 상태 SSE URL이 정해지면 수정
-    const source = new EventSource(`${BASE_URL}/order/${orderId}/stream`)
+    const accessToken = localStorage.getItem('accessToken')
+    const refreshToken = localStorage.getItem('refreshToken')
 
-    source.addEventListener('orderStatusUpdate', (event) => {
-      console.log(JSON.parse(event.data).orderStatus)
+    if (!accessToken || !refreshToken) {
+      return
+    }
+
+    // TODO: 주문 상태 SSE URL이 정해지면 수정
+    const eventSource = new EventSourcePolyfill(`${BASE_URL}/order/${orderId}/stream`, {
+      headers: {
+        Authorization: accessToken,
+        refreshAuth: refreshToken,
+      },
+    })
+
+    eventSource.onmessage = (event) => {
+      console.log('Received message:', event.data)
 
       const { orderStatus } = JSON.parse(event.data)
 
       changeOrderStatus(orderStatus)
-    })
+    }
+
+    eventSource.onerror = (error) => {
+      console.error('EventSource failed:', error)
+    }
 
     return () => {
-      source.close()
+      eventSource.close()
     }
   }, [changeOrderStatus, orderId])
 
