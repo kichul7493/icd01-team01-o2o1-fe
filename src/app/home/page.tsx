@@ -8,6 +8,10 @@ import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 
+const CardHeight = 276
+const TopBarHeight = 117
+const NodePadding = 2
+
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const { useCategoryQuery } = useStoreData()
@@ -22,11 +26,27 @@ export default function Home() {
   } = useGetStoreList({
     category: selectedCategory || '',
   })
+  const [scrollPos, setScrollPos] = useState(0)
+
+  const startCardIndexRef = React.useRef<number>(0)
+  const endCardIndexRef = React.useRef<number>(10)
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
         fetchNextPage()
+      }
+
+      setScrollPos(window.scrollY)
+
+      const startCardIndex = Number(((window.scrollY - 117) / 260).toFixed(0))
+
+      if (startCardIndex < 0) {
+        startCardIndexRef.current = 0
+        endCardIndexRef.current = 10
+      } else {
+        startCardIndexRef.current = startCardIndex
+        endCardIndexRef.current = startCardIndex + 10
       }
     }
 
@@ -56,10 +76,17 @@ export default function Home() {
 
       <div>
         {pages &&
-          pages.map((page) => {
-            return page.data?.map((store: Store) => (
-              <StoreCard key={store.storeName} store={store} />
-            ))
+          pages.map((page, i: number) => {
+            return page.data?.map((store: Store, index: number) => {
+              const storeIndex = index + i * 10
+
+              return scrollPos < CardHeight * (storeIndex + 1 + NodePadding) + TopBarHeight &&
+                scrollPos + window.innerHeight > CardHeight * (storeIndex - 1 - NodePadding) ? (
+                <StoreCard key={store.storeName} store={store} />
+              ) : (
+                <div className="h-[276px] w-full bg-gray-300"></div>
+              )
+            })
           })}
       </div>
     </div>
