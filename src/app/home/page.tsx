@@ -7,6 +7,7 @@ import { Store } from '@/types/store'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
+import throttle from 'lodash.throttle'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -24,11 +25,11 @@ export default function Home() {
   })
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
+    const handleScroll = throttle(() => {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 400 && hasNextPage) {
         fetchNextPage()
       }
-    }
+    }, 300)
 
     window.addEventListener('scroll', handleScroll)
 
