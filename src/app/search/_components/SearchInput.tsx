@@ -11,6 +11,11 @@ let timeoutId: NodeJS.Timeout
 
 const SearchInput: React.FC<SearchInputProps> = ({ searchTerm, onSearchChange }) => {
   const [value, setValue] = useState(searchTerm)
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
 
   useEffect(() => {
     clearTimeout(timeoutId)
@@ -27,6 +32,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchTerm, onSearchChange })
   return (
     <div className="mb-4">
       <input
+        ref={inputRef}
         type="text"
         className="w-full rounded-md border p-2"
         placeholder="레스토랑 이름을 검색하세요"
