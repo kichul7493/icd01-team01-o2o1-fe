@@ -1,7 +1,7 @@
 // components/search/SearchInput.test.tsx
 
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import SearchInput from './SearchInput'
 
@@ -19,14 +19,20 @@ describe('SearchInput Component', () => {
     expect(inputElement).toBeInTheDocument()
   })
 
-  it('calls onSearchChange when input value changes', () => {
+  it('calls onSearchChange when input value changes', async () => {
     const handleSearchChange = jest.fn()
     render(<SearchInput searchTerm="" onSearchChange={handleSearchChange} />)
 
     const inputElement = screen.getByPlaceholderText('레스토랑 이름을 검색하세요')
     fireEvent.change(inputElement, { target: { value: '고기' } })
 
-    expect(handleSearchChange).toHaveBeenCalledTimes(1)
+    await waitFor(
+      () => {
+        expect(handleSearchChange).toHaveBeenCalledTimes(1)
+      },
+      { timeout: 1000 },
+    )
+
     expect(handleSearchChange).toHaveBeenCalledWith('고기')
   })
 })

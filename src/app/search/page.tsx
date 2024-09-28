@@ -35,6 +35,10 @@ export default function Search() {
     <div className="flex h-screen flex-col p-4 pb-[4.5rem]">
       <SearchInput searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <div>
+        {!pages ||
+          (pages[0].data.length === 0 && (
+            <div className="flex items-center justify-center">검색된 음식점이 없습니다.</div>
+          ))}
         {pages &&
           pages.map((page) => {
             return page.data?.map((store: Store) => (
