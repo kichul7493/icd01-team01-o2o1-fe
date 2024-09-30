@@ -5,6 +5,7 @@ import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 import SearchInput from './_components/SearchInput'
+import throttle from 'lodash.throttle'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -14,11 +15,11 @@ export default function Search() {
     })
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
+    const handleScroll = throttle(() => {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 400 && hasNextPage) {
         fetchNextPage()
       }
-    }
+    }, 300)
 
     window.addEventListener('scroll', handleScroll)
 
@@ -34,6 +35,10 @@ export default function Search() {
     <div className="flex h-screen flex-col p-4 pb-[4.5rem]">
       <SearchInput searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <div>
+        {!pages ||
+          (pages[0].data.length === 0 && (
+            <div className="flex items-center justify-center">검색된 음식점이 없습니다.</div>
+          ))}
         {pages &&
           pages.map((page) => {
             return page.data?.map((store: Store) => (
