@@ -4,6 +4,7 @@ import { X } from 'lucide-react'
 import { StarFilledIcon } from '@radix-ui/react-icons'
 import { Separator } from '@/components/ui/separator'
 import { useAddressList, useDeleteAddress, useUpdateMainAddress } from '@/features/address/query'
+import { useQueryClient } from '@tanstack/react-query'
 
 type AddressData = {
   addressId: number
@@ -32,13 +33,25 @@ export default AddressList
 const AddressListItem = ({ ...props }: AddressData) => {
   const { mutate: deleteAddress } = useDeleteAddress()
   const { mutate: updateMainAddress } = useUpdateMainAddress()
+  const queryClient = useQueryClient()
+
+  const handleChangeMainAddress = () => {
+    if (props.addressStatus === 'main') return
+
+    queryClient.invalidateQueries({
+      queryKey: ['address'],
+    })
+
+    queryClient.invalidateQueries({
+      queryKey: ['storeList', '', null],
+    })
+    updateMainAddress(props.addressId)
+  }
+
   return (
     <>
       <li key={props.addressId} className="flex h-12 items-center justify-between bg-white p-3">
-        <button
-          className="flex items-center space-x-3"
-          onClick={() => props.addressStatus !== 'main' && updateMainAddress(props.addressId)}
-        >
+        <button className="flex items-center space-x-3" onClick={handleChangeMainAddress}>
           <StarFilledIcon
             className={`h-5 w-5 ${
               props.addressStatus == 'main' ? 'text-yellow-400' : 'text-gray-400'
