@@ -10,7 +10,9 @@ import StoreCard from '@/components/shared/StoreCard'
 
 const CardHeight = 276
 const TopBarHeight = 117
+const ScrollPreloadOffset = 300
 const NodePadding = 2
+const CardCount = 10
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -29,24 +31,27 @@ export default function Home() {
   const [scrollPos, setScrollPos] = useState(0)
 
   const startCardIndexRef = React.useRef<number>(0)
-  const endCardIndexRef = React.useRef<number>(10)
+  const endCardIndexRef = React.useRef<number>(CardCount)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
+      if (
+        window.scrollY + window.innerHeight >= document.body.scrollHeight - ScrollPreloadOffset &&
+        hasNextPage
+      ) {
         fetchNextPage()
       }
 
       setScrollPos(window.scrollY)
 
-      const startCardIndex = Number(((window.scrollY - 117) / 260).toFixed(0))
+      const startCardIndex = Number(((window.scrollY - TopBarHeight) / CardHeight).toFixed(0))
 
       if (startCardIndex < 0) {
         startCardIndexRef.current = 0
-        endCardIndexRef.current = 10
+        endCardIndexRef.current = CardCount
       } else {
         startCardIndexRef.current = startCardIndex
-        endCardIndexRef.current = startCardIndex + 10
+        endCardIndexRef.current = startCardIndex + CardCount
       }
     }
 
