@@ -14,7 +14,7 @@ export default function AddressContainer() {
   console.log(mainAddress?.addressDetail)
 
   return (
-    <Link href={'/my/address/search'} className="mb-4 flex items-center justify-start">
+    <Link href={'/my/address'} className="mb-4 flex items-center justify-start">
       <MapPin size={20} />
       <p>
         {mainAddress?.address} {mainAddress?.addressDetail}

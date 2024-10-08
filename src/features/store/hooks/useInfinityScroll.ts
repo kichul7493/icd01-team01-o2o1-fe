@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { CardCount, CardHeight, ScrollPreloadOffset, TopBarHeight } from '../constants'
+import { CardCount, ScrollPreloadOffset } from '../constants'
+import throttle from 'lodash.throttle'
 
 interface UseInfinityScroll {
   fetchNextPage: () => void
@@ -13,7 +14,7 @@ const useInfinityScroll = ({ fetchNextPage, hasNextPage }: UseInfinityScroll) =>
   const endCardIndexRef = useRef<number>(CardCount)
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       if (
         window.scrollY + window.innerHeight >= document.body.scrollHeight - ScrollPreloadOffset &&
         hasNextPage
@@ -22,7 +23,7 @@ const useInfinityScroll = ({ fetchNextPage, hasNextPage }: UseInfinityScroll) =>
       }
 
       setScrollPos(window.scrollY)
-    }
+    }, 300)
 
     window.addEventListener('scroll', handleScroll)
 

@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import ReviewSkeleton from './_components/ReviewSkeleton'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
+import throttle from 'lodash.throttle'
 
 export default function StoreReviewPage() {
   const params = useParams<{
@@ -19,11 +20,11 @@ export default function StoreReviewPage() {
     useStoreReviewInfiniteQuery(params?.id || '')
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
+    const handleScroll = throttle(() => {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 400 && hasNextPage) {
         fetchNextPage()
       }
-    }
+    }, 300)
 
     window.addEventListener('scroll', handleScroll)
 
