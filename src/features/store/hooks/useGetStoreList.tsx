@@ -31,7 +31,7 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
           keyword,
         }),
       enabled: !!mainAddress,
-      initialPageParam: 1,
+      initialPageParam: 0,
       getNextPageParam: (lastPage) => lastPage.nextPage,
       staleTime: 0,
     })
