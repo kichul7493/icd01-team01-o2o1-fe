@@ -7,12 +7,7 @@ import { Store } from '@/types/store'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
-
-const CardHeight = 276
-const TopBarHeight = 117
-const ScrollPreloadOffset = 300
-const NodePadding = 2
-const CardCount = 10
+import { CardHeight, NodePadding, TopBarHeight } from '@/features/store/constants'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -21,46 +16,11 @@ export default function Home() {
   const {
     pages,
     isLoading: storeLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
     isError: storeError,
+    scrollPos,
   } = useGetStoreList({
     category: selectedCategory || '',
   })
-  const [scrollPos, setScrollPos] = useState(0)
-
-  const startCardIndexRef = React.useRef<number>(0)
-  const endCardIndexRef = React.useRef<number>(CardCount)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.scrollY + window.innerHeight >= document.body.scrollHeight - ScrollPreloadOffset &&
-        hasNextPage
-      ) {
-        fetchNextPage()
-      }
-
-      setScrollPos(window.scrollY)
-
-      const startCardIndex = Number(((window.scrollY - TopBarHeight) / CardHeight).toFixed(0))
-
-      if (startCardIndex < 0) {
-        startCardIndexRef.current = 0
-        endCardIndexRef.current = CardCount
-      } else {
-        startCardIndexRef.current = startCardIndex
-        endCardIndexRef.current = startCardIndex + CardCount
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [fetchNextPage, hasNextPage])
 
   if (storeLoading && categoryLoading) return <LoadingSpinner />
   if (storeError || categoryError) return <div>에러 발생</div>

@@ -2,6 +2,7 @@ import useGetMemberAddress from '@/features/member/hooks/useGetMemberAddress'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import React from 'react'
 import { getStoreList } from '../api'
+import useInfinityScroll from './useInfinityScroll'
 
 interface useGetStoreList {
   category?: string
@@ -35,6 +36,11 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
       staleTime: 0,
     })
 
+  const { scrollPos } = useInfinityScroll({
+    fetchNextPage,
+    hasNextPage,
+  })
+
   return {
     pages: data?.pages,
     isFetchingNextPage,
@@ -42,6 +48,7 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
     fetchNextPage,
     hasNextPage,
     isError,
+    scrollPos,
   }
 }
 

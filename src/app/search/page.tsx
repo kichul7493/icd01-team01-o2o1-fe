@@ -5,27 +5,13 @@ import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 import SearchInput from './_components/SearchInput'
+import { CardHeight, NodePadding, TopBarHeight } from '@/features/store/constants'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
-  const { pages, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, isError } =
-    useGetStoreList({
-      keyword: searchTerm,
-    })
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 300 && hasNextPage) {
-        fetchNextPage()
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [fetchNextPage, hasNextPage])
+  const { pages, isLoading, scrollPos, isError } = useGetStoreList({
+    keyword: searchTerm,
+  })
 
   if (isLoading) return <LoadingSpinner />
   if (isError) return <div>에러 발생</div>
@@ -34,11 +20,19 @@ export default function Search() {
     <div className="flex h-screen flex-col p-4 pb-[4.5rem]">
       <SearchInput searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <div>
-        {pages &&
-          pages.map((page) => {
-            return page.data?.map((store: Store) => (
-              <StoreCard key={store.storeName} store={store} />
-            ))
+        {searchTerm &&
+          pages &&
+          pages.map((page, i: number) => {
+            return page.data?.map((store: Store, index: number) => {
+              const storeIndex = index + i * 10
+
+              return scrollPos < CardHeight * (storeIndex + 1 + NodePadding) + TopBarHeight &&
+                scrollPos + window.innerHeight > CardHeight * (storeIndex - 1 - NodePadding) ? (
+                <StoreCard key={store.storeName} store={store} />
+              ) : (
+                <div className="h-[276px] w-full bg-gray-300"></div>
+              )
+            })
           })}
       </div>
     </div>
