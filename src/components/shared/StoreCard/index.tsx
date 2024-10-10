@@ -10,6 +10,8 @@ interface StoreCardProps {
 }
 
 export default function StoreCard({ store }: Readonly<StoreCardProps>) {
+  console.log('렌더링된 음식점 카드의 음식점 이름은: ' + store.storeName)
+
   return (
     <Link
       className="w-full overflow-hidden rounded-lg bg-white text-start shadow"
