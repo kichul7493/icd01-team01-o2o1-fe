@@ -1,3 +1,15 @@
+import { MenuType } from '@/features/cart/types'
+
+export interface Order {
+  orderId: number
+  orderTime: string
+  orderStatus: OrderStatus
+  storeId: number
+  storeName: string
+  menus: MenuType[]
+  orderPrice: number
+}
+
 // 주문 상태 타입 정의
 export type OrderStatus =
   | 'pending'
@@ -45,7 +57,7 @@ export interface Store {
 }
 
 // 주문 타입 정의
-export interface Order {
+export interface OrderDetail {
   orderId: number
   orderTime: string
   orderStatus: OrderStatus
