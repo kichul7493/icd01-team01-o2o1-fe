@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CategoryButton from '@/app/home/_components/CategoryButton'
 import AddressContainer from '@/app/home/_components/AddressContainer'
 import useStoreData from '@/mocks/handlers/store'
