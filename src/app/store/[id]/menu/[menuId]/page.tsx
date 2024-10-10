@@ -15,12 +15,18 @@ import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const router = useRouter()
-  const { optionGroups, menuCount, menuPrice } = useMenuSelectStore()
+  const { optionGroups, menuCount, menuPrice, reset } = useMenuSelectStore()
   const { data, isLoading } = useGetStoreDetailInfo()
   const params = useParams<{
     menuId: string
   }>()
   const { toast } = useToast()
+
+  useEffect(() => {
+    return () => {
+      reset()
+    }
+  }, [])
 
   const handleAddCart = () => {
     const menuInfo = data?.menus.find((menu) => menu.menuId === Number(params.menuId))
