@@ -18,7 +18,7 @@ const SelectQuantity = () => {
       setPerMenuPrice(info.menuPrice)
       setMenuPrice(info.menuPrice)
     }
-  }, [info, setMenuPrice])
+  }, [info, setMenuPrice, setPerMenuPrice])
 
   return (
     <section>

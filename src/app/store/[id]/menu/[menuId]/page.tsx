@@ -26,7 +26,7 @@ const Page = () => {
     return () => {
       reset()
     }
-  }, [])
+  }, [reset])
 
   const handleAddCart = () => {
     const menuInfo = data?.menus.find((menu) => menu.menuId === Number(params.menuId))

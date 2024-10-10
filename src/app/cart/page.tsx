@@ -20,6 +20,8 @@ const CartPage = () => {
     getTotalOrderPrice: state.getTotalOrderPrice,
   }))
 
+  const addressForOrder = useGetAddressForOrder(address as AddressData) // 훅을 컴포넌트 최상단에서 호출
+
   if (!isHydrated) {
     // Avoid rendering until the state is hydrated to prevent hydration mismatch
     return null
@@ -43,7 +45,7 @@ const CartPage = () => {
       menus,
       orderPrice: getTotalOrderPrice(),
       payment: 'card',
-      address: useGetAddressForOrder(address as AddressData),
+      address: addressForOrder, // 여기에서 바로 사용
     }
 
     order(formData)

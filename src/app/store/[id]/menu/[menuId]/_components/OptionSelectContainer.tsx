@@ -1,6 +1,5 @@
 'use client'
 
-// OptionSelectContainer.tsx
 import OptionSelect from './OptionSelect'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { useParams } from 'next/navigation'
@@ -32,7 +31,7 @@ const OptionSelectContainer = () => {
     }, 0)
 
     setPerMenuPrice((Number(menuPrice) + selectedOptionsPrice) * menuCount)
-  }, [selectedOptionGroups, menuCount])
+  }, [selectedOptionGroups, menuCount, menuPrice, setPerMenuPrice])
 
   return (
     <>
