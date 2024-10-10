@@ -4,10 +4,10 @@ import CategoryButton from '@/app/home/_components/CategoryButton'
 import AddressContainer from '@/app/home/_components/AddressContainer'
 import useStoreData from '@/mocks/handlers/store'
 import { Store } from '@/types/store'
-import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 import { CardHeight, NodePadding, TopBarHeight } from '@/features/store/constants'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -22,7 +22,7 @@ export default function Home() {
     category: selectedCategory || '',
   })
 
-  if (storeLoading && categoryLoading) return <LoadingSpinner />
+  if (storeLoading && categoryLoading) return <LoadingSpinner isFullScreen size="lg" />
   if (storeError || categoryError) return <div>에러 발생</div>
 
   return (

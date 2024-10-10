@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Store } from '@/types/store'
-import LoadingSpinner from '@/components/common/LoadingSpinner'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 import SearchInput from './_components/SearchInput'
 import { CardHeight, NodePadding, TopBarHeight } from '@/features/store/constants'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -13,7 +13,7 @@ export default function Search() {
     keyword: searchTerm,
   })
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner isFullScreen size="lg" />
   if (isError) return <div>에러 발생</div>
 
   return (

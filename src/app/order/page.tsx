@@ -1,7 +1,7 @@
 'use client'
-import LoadingSpinner from '@/components/common/LoadingSpinner'
 import OrderCard from '@/app/order/_components/OrderCard'
 import Tabs from '@/app/order/_components/Tabs'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 import useOrderData from '@/mocks/handlers/order'
 import { useState } from 'react'
 
@@ -21,7 +21,7 @@ const OrderPage: React.FC = () => {
   const handleTabClick = (tab: 'past' | 'preparing') => {
     setActiveTab(tab)
   }
-  if (orderLoading) return <LoadingSpinner />
+  if (orderLoading) return <LoadingSpinner isFullScreen size="lg" />
   if (orderError instanceof Error) return <div>에러 발생</div>
 
   return (
