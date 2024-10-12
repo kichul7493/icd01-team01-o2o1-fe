@@ -1,7 +1,8 @@
 import { ShoppingCart } from 'lucide-react'
-import { useManageCart } from '@/features/cart/hooks/useManageCart'
+import { useManageCartStore } from '@/features/cart/hooks/useManageCartStore'
+
 const CartIcon = () => {
-  const { menus } = useManageCart()
+  const { menus } = useManageCartStore()
 
   return (
     <div className="relative">
