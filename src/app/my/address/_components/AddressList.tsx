@@ -5,6 +5,7 @@ import { StarFilledIcon } from '@radix-ui/react-icons'
 import { Separator } from '@/components/ui/separator'
 import { useAddressList, useDeleteAddress, useUpdateMainAddress } from '@/features/address/query'
 import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 
 type AddressData = {
   addressId: number
@@ -34,6 +35,7 @@ const AddressListItem = ({ ...props }: AddressData) => {
   const { mutate: deleteAddress } = useDeleteAddress()
   const { mutate: updateMainAddress } = useUpdateMainAddress()
   const queryClient = useQueryClient()
+  const router = useRouter()
 
   const handleChangeMainAddress = () => {
     if (props.addressStatus === 'main') return
@@ -46,6 +48,7 @@ const AddressListItem = ({ ...props }: AddressData) => {
       queryKey: ['storeList', '', null],
     })
     updateMainAddress(props.addressId)
+    router.push('/cart')
   }
 
   return (
