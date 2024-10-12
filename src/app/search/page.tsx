@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Store } from '@/types/store'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 import SearchInput from './_components/SearchInput'
 import { CARD_HEIGHT, NODE_PADDING, TOP_BAR_HEIGHT } from '@/features/store/constants'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
+import { Store } from '@/features/store/types'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')

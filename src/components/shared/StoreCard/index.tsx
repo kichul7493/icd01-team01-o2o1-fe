@@ -3,7 +3,7 @@ import Image from 'next/image'
 import * as React from 'react'
 import Star from '@images/home/star.svg'
 import Link from 'next/link'
-import { Store } from '@/types/store'
+import { Store } from '@/features/store/types'
 
 interface StoreCardProps {
   store: Store

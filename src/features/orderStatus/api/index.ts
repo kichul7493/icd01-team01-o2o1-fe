@@ -1,4 +1,4 @@
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { Order } from '../types'
 
 export const getOrderStatus = async (orderId: string) => {

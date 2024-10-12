@@ -38,3 +38,13 @@ export interface StoreResponse {
   statusCode: number
   msg: string
 }
+
+export type Store = {
+  storeId: number
+  storeName: string
+  thumbnails: string[]
+  reviewRate: number
+  reviewCount: number
+  deliveryPrice: number
+  category: string
+}

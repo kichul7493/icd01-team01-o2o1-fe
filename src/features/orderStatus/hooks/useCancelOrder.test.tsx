@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { useCancelOrder } from './useCancelOrder'
-import { wrapper } from '@/util/test-utils'
+import { wrapper } from '@/lib/test-utils'
 
 const mockBack = jest.fn()
 

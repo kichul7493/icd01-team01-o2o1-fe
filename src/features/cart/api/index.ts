@@ -1,4 +1,4 @@
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { OrderType, OrderResponse } from '../types'
 
 export const order = async (formData: OrderType) => {

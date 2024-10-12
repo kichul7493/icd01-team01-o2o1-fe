@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { useParams, useRouter } from 'next/navigation'
 
 export const useCancelOrder = () => {

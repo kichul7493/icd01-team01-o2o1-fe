@@ -1,4 +1,4 @@
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { CreateMemberRequest, MemberAddressResponse, MemberResponse } from '../types'
 
 export const getMemberInfo = async () => {

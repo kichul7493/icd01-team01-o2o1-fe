@@ -1,4 +1,4 @@
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { ReviewListResponse, ReviewRequest, ReviewResponse } from '../types'
 
 export const getReviews = async (storeId: string, pageParam: number) => {

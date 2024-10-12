@@ -1,4 +1,4 @@
-import { renderHook, waitFor, wrapper } from '@/util/test-utils'
+import { renderHook, waitFor, wrapper } from '@/lib/test-utils'
 import { useOrderStatus } from './useOrderStatus'
 import { mockOrderResponse } from '@/mocks/handlers/order'
 

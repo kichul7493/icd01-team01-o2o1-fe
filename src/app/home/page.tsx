@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import CategoryButton from '@/app/home/_components/CategoryButton'
 import AddressContainer from '@/app/home/_components/AddressContainer'
 import useStoreData from '@/mocks/handlers/store'
-import { Store } from '@/types/store'
 import useGetStoreList from '@/features/store/hooks/useGetStoreList'
 import StoreCard from '@/components/shared/StoreCard'
 import { CARD_HEIGHT, NODE_PADDING, TOP_BAR_HEIGHT } from '@/features/store/constants'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
+import { Store } from '@/features/store/types'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
