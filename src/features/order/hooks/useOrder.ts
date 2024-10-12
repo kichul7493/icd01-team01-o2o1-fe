@@ -8,8 +8,6 @@ const useOrder = () => {
     queryFn: getOrderList,
   })
 
-  console.log(data)
-
   return {
     orders: data?.response.orders,
     isLoading,
