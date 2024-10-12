@@ -38,6 +38,7 @@ export const useUpdateMainAddress = () => {
     onSuccess: () => {
       // 성공하면 주소 목록을 다시 가져옴
       queryClient.invalidateQueries({ queryKey: ['addresses'] })
+      queryClient.invalidateQueries({ queryKey: ['main-address'] })
     },
     onError: (error: Error) => {
       console.error('Error updating main address:', error)
