@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 interface MenuSelectState {
-  menuPrice: number | null
+  menuPrice: number
   setMenuPrice: (menuPrice: number) => void
   menuCount: number
   setMenuCount: (n: number) => void
   optionGroups: OptionGroup[]
   setOptionGroups: (optionGroups: OptionGroup[]) => void
-  perMenuPrice: number | null
+  perMenuPrice: number
   setPerMenuPrice: (perMenuPrice: number) => void
   reset: () => void
 }
@@ -25,7 +25,7 @@ interface Option {
 }
 
 export const useMenuSelectStore = create<MenuSelectState>((set) => ({
-  menuPrice: null,
+  menuPrice: 0,
   setMenuPrice: (menuPrice: number) => set({ menuPrice }),
   menuCount: 1,
   setMenuCount: (n: number) =>
@@ -42,7 +42,7 @@ export const useMenuSelectStore = create<MenuSelectState>((set) => ({
     }),
   optionGroups: [],
   setOptionGroups: (optionGroups: OptionGroup[]) => set({ optionGroups }),
-  perMenuPrice: null,
+  perMenuPrice: 0,
   setPerMenuPrice: (perMenuPrice: number) => set({ perMenuPrice }),
-  reset: () => set({ menuPrice: null, menuCount: 1, optionGroups: [] }),
+  reset: () => set({ menuPrice: 0, menuCount: 1, optionGroups: [], perMenuPrice: 0 }),
 }))
