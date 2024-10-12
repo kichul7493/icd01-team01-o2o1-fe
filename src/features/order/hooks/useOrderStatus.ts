@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { getOrderStatus } from '../api'
 import { useParams } from 'next/navigation'
+import { getOrderStatus } from '../api'
 
 export const useOrderStatus = () => {
   const params = useParams<{ orderId: string }>()

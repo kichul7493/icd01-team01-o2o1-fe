@@ -1,4 +1,4 @@
-import { OrderStatus } from '@/features/orderStatus/types'
+import { OrderStatus } from '@/features/order/types'
 import { create } from 'zustand'
 
 interface OrderStatusStore {

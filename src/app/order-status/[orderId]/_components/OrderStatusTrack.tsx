@@ -1,10 +1,10 @@
-import { OrderStatus } from '@/features/orderStatus/types'
 import { Dot } from 'lucide-react'
 import React from 'react'
-import { useStreamOrderStatus } from '@/features/orderStatus/hooks/useStreamOrderStatus'
+import { useStreamOrderStatus } from '@/features/order/hooks/useStreamOrderStatus'
 import { OrderStatusItemList } from '@/constants/order'
 import OrderStatusItem from './OrderStatusItem'
 import OrderCancelDialog from './OrderCancelDialog'
+import { OrderStatus } from '@/features/order/types'
 
 interface OrderDetailProps {
   orderId: number

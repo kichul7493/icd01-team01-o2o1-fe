@@ -1,6 +1,6 @@
 'use client'
 
-import { useOrderStatus } from '@/features/orderStatus/hooks/useOrderStatus'
+import { useOrderStatus } from '@/features/order/hooks/useOrderStatus'
 import { X } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'

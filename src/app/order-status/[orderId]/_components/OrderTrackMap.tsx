@@ -1,9 +1,8 @@
-import { useStreamDeliveryLocation } from '@/features/orderStatus/hooks/useStreamDeliveryLocation'
-import { Address } from '@/features/orderStatus/types'
-import { Car, CircleUser, Store as StoreIcon } from 'lucide-react'
+import { useStreamDeliveryLocation } from '@/features/order/hooks/useStreamDeliveryLocation'
 import React from 'react'
-import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk'
+import { Map } from 'react-kakao-maps-sdk'
 import OrderTrackItem from './OrderTrackItem'
+import { Address } from '@/features/order/types'
 
 interface OrderTrackMapProps {
   storeAdress: Address

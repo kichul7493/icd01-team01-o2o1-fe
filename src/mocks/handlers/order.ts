@@ -1,6 +1,5 @@
 import { BASE_URL } from '@/constants/api'
 import { delay, http, HttpResponse } from 'msw'
-import { useQuery } from '@tanstack/react-query'
 
 const encoder = new TextEncoder()
 
@@ -250,20 +249,3 @@ export const orderHandlers = [
     return HttpResponse.json(mockPostOrderResponse)
   }),
 ]
-
-export default function useOrderData() {
-  const useOrderQuery = () =>
-    useQuery({
-      queryKey: ['orders'],
-      queryFn: async () =>
-        await fetch(`/api/order`, {
-          method: 'GET',
-        }).then((res) => res.json()),
-    })
-
-  return {
-    useOrderQuery,
-  }
-}
-
-// order api 작성

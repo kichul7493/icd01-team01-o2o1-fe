@@ -1,6 +1,6 @@
-import { Menu } from '@/features/orderStatus/types'
 import React from 'react'
 import OrderMenuItem from './OrderMenuItem'
+import { Menu } from '@/features/order/types'
 
 interface OrderDetailProps {
   orderId: number

@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { useCancelOrder } from '@/features/orderStatus/hooks/useCancelOrder'
+import { useCancelOrder } from '@/features/order/hooks/useCancelOrder'
 
 const OrderCancelDialog = () => {
   const { handleCancelOrder } = useCancelOrder()
