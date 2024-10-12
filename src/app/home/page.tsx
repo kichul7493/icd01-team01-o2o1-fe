@@ -10,6 +10,7 @@ import StoreCard from '@/components/shared/StoreCard'
 import throttle from 'lodash.throttle'
 import PullToRefresh from '@/components/shared/PullToRefresh'
 import { useQueryClient } from '@tanstack/react-query'
+import { CardHeight, NodePadding, TopBarHeight } from '@/features/store/constants'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -19,10 +20,8 @@ export default function Home() {
   const {
     pages,
     isLoading: storeLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
     isError: storeError,
+    scrollPos,
   } = useGetStoreList({
     category: selectedCategory || '',
   })
@@ -33,20 +32,6 @@ export default function Home() {
       predicate: (query) => query.queryKey[0] === 'storeList',
     })
   }, 1000)
-
-  useEffect(() => {
-    const handleScroll = throttle(() => {
-      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 400 && hasNextPage) {
-        fetchNextPage()
-      }
-    }, 300)
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [fetchNextPage, hasNextPage])
 
   if (storeLoading && categoryLoading) return <LoadingSpinner />
   if (storeError || categoryError) return <div>에러 발생</div>
@@ -66,14 +51,20 @@ export default function Home() {
           ))}
         </div>
 
-        <div>
-          {pages &&
-            pages.map((page) => {
-              return page.data?.map((store: Store) => (
+      <div>
+        {pages &&
+          pages.map((page, i: number) => {
+            return page.data?.map((store: Store, index: number) => {
+              const storeIndex = index + i * 10
+
+              return scrollPos < CardHeight * (storeIndex + 1 + NodePadding) + TopBarHeight &&
+                scrollPos + window.innerHeight > CardHeight * (storeIndex - 1 - NodePadding) ? (
                 <StoreCard key={store.storeName} store={store} />
-              ))
-            })}
-        </div>
+              ) : (
+                <div className="h-[276px] w-full bg-gray-300"></div>
+              )
+            })
+          })}
       </div>
     </PullToRefresh>
   )
