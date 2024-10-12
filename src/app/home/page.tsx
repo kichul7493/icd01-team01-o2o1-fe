@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import CategoryButton from '@/app/home/_components/CategoryButton'
 import AddressContainer from '@/app/home/_components/AddressContainer'
 import useStoreData from '@/mocks/handlers/store'
@@ -51,20 +51,21 @@ export default function Home() {
           ))}
         </div>
 
-      <div>
-        {pages &&
-          pages.map((page, i: number) => {
-            return page.data?.map((store: Store, index: number) => {
-              const storeIndex = index + i * 10
+        <div>
+          {pages &&
+            pages.map((page, i: number) => {
+              return page.data?.map((store: Store, index: number) => {
+                const storeIndex = index + i * 10
 
-              return scrollPos < CardHeight * (storeIndex + 1 + NodePadding) + TopBarHeight &&
-                scrollPos + window.innerHeight > CardHeight * (storeIndex - 1 - NodePadding) ? (
-                <StoreCard key={store.storeName} store={store} />
-              ) : (
-                <div className="h-[276px] w-full bg-gray-300"></div>
-              )
-            })
-          })}
+                return scrollPos < CardHeight * (storeIndex + 1 + NodePadding) + TopBarHeight &&
+                  scrollPos + window.innerHeight > CardHeight * (storeIndex - 1 - NodePadding) ? (
+                  <StoreCard key={store.storeName} store={store} />
+                ) : (
+                  <div className="h-[276px] w-full bg-gray-300"></div>
+                )
+              })
+            })}
+        </div>
       </div>
     </PullToRefresh>
   )
