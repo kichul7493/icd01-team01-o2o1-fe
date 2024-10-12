@@ -1,27 +1,19 @@
 import { render, screen } from '@testing-library/react'
 import OrderCard from './OrderCard'
-
-// Order 타입을 가져옵니다.
-interface Order {
-  id: number
-  storeName: string
-  date: string
-  deliveryStatus: 'Delivered' | 'Pending'
-  menuItems: { name: string; quantity: number }[]
-  totalAmount: number
-}
+import { Order } from '@/features/order/types'
 
 describe('OrderCard', () => {
   const mockOrder: Order = {
-    id: 1,
+    storeId: 1,
+    orderId: 1,
     storeName: 'Test Store',
-    date: '2024-09-03',
-    deliveryStatus: 'Delivered', // 'Delivered'로 정확히 지정합니다.
-    menuItems: [
-      { name: 'Item 1', quantity: 2 },
-      { name: 'Item 2', quantity: 1 },
+    orderTime: '2024-09-03',
+    orderStatus: 'delivered',
+    menus: [
+      { menuName: 'Item 1', menuCount: 2, menuPrice: 10000, optionGroups: [], menuId: 1 },
+      { menuName: 'Item 2', menuCount: 1, menuPrice: 10000, optionGroups: [], menuId: 2 },
     ],
-    totalAmount: 30000,
+    orderPrice: 30000,
   }
 
   test('주문 정보가 올바르게 렌더링된다', () => {
@@ -31,7 +23,7 @@ describe('OrderCard', () => {
     expect(screen.getByText('Test Store')).toBeInTheDocument()
 
     // 주문 날짜가 올바르게 표시되는지 확인합니다.
-    expect(screen.getByText('2024-09-03')).toBeInTheDocument()
+    expect(screen.getByText(/2024\. 9\. 3\./i)).toBeInTheDocument()
 
     // 배달 상태가 올바르게 표시되는지 확인합니다.
     expect(screen.getByText('배달 완료')).toBeInTheDocument()
@@ -51,7 +43,7 @@ describe('OrderCard', () => {
   })
 
   test('배달 상태가 "배달 중"일 때 올바르게 표시되는지 확인한다', () => {
-    const pendingOrder: Order = { ...mockOrder, deliveryStatus: 'Pending' }
+    const pendingOrder: Order = { ...mockOrder, orderStatus: 'pending' }
     render(<OrderCard order={pendingOrder} />)
 
     expect(screen.getByText('배달 중')).toBeInTheDocument()

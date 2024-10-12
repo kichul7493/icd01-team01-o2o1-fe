@@ -1,32 +1,29 @@
 'use client'
+import { Order } from '@/features/order/types'
+import { formatDate } from '@/util/formatDate'
 import Link from 'next/link'
 import * as React from 'react'
-interface Order {
-  id: number
-  storeName: string
-  date: string
-  deliveryStatus: 'Delivered' | 'Pending'
-  menuItems: { name: string; quantity: number }[]
-  totalAmount: number
-}
+
 export default function OrderCard({ order }: { order: Order }) {
+  const orderDate = new Date(order.orderTime)
+
   return (
     <div className="flex flex-col rounded-lg border p-4">
       <h3 className="text-2xl font-bold">{order.storeName}</h3>
-      <span className="text-xs text-gray-500">{order.date}</span>
+      <span className="text-xs text-gray-500">{formatDate(orderDate)}</span>
       <div className="mb-2 text-gray-600">
-        {order.deliveryStatus === 'Delivered' ? '배달 완료' : '배달 중'}
+        {order.orderStatus === 'delivered' ? '배달 완료' : '배달 중'}
       </div>
       <div className="mb-2 text-sm">
-        {order.menuItems.map((item, index) => (
+        {order.menus.map((item, index) => (
           <div key={index}>
-            {item.name} x {item.quantity}
+            {item.menuName} x {item.menuCount}
           </div>
         ))}
       </div>
-      <span className="font-semibold">합계 금액: {order.totalAmount.toLocaleString()}원</span>
+      <span className="font-semibold">합계 금액: {order.orderPrice.toLocaleString()}원</span>
       <Link
-        href={`/order/${order.id}/add-review`}
+        href={`/order/${order.orderId}/add-review`}
         className="my-4 bg-[#0FA5FA] p-2 text-center text-white hover:underline"
       >
         리뷰쓰기
