@@ -2,15 +2,13 @@ import { render, screen } from '@testing-library/react'
 import OrderCard from './OrderCard'
 import { Order } from '@/features/order/types'
 
-// Order 타입을 가져옵니다.
-
 describe('OrderCard', () => {
   const mockOrder: Order = {
     storeId: 1,
     orderId: 1,
     storeName: 'Test Store',
     orderTime: '2024-09-03',
-    orderStatus: 'delivered', // 'Delivered'로 정확히 지정합니다.
+    orderStatus: 'delivered',
     menus: [
       { menuName: 'Item 1', menuCount: 2, menuPrice: 10000, optionGroups: [], menuId: 1 },
       { menuName: 'Item 2', menuCount: 1, menuPrice: 10000, optionGroups: [], menuId: 2 },
@@ -25,7 +23,7 @@ describe('OrderCard', () => {
     expect(screen.getByText('Test Store')).toBeInTheDocument()
 
     // 주문 날짜가 올바르게 표시되는지 확인합니다.
-    expect(screen.getByText('2024. 9. 3.')).toBeInTheDocument()
+    expect(screen.getByText(/2024\. 9\. 3\./i)).toBeInTheDocument()
 
     // 배달 상태가 올바르게 표시되는지 확인합니다.
     expect(screen.getByText('배달 완료')).toBeInTheDocument()

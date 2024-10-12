@@ -1,15 +1,16 @@
 'use client'
 import { Order } from '@/features/order/types'
+import { formatDate } from '@/util/formatDate'
 import Link from 'next/link'
 import * as React from 'react'
 
 export default function OrderCard({ order }: { order: Order }) {
+  const orderDate = new Date(order.orderTime)
+
   return (
     <div className="flex flex-col rounded-lg border p-4">
       <h3 className="text-2xl font-bold">{order.storeName}</h3>
-      <span className="text-xs text-gray-500">
-        {new Date(order.orderTime).toLocaleDateString()}
-      </span>
+      <span className="text-xs text-gray-500">{formatDate(orderDate)}</span>
       <div className="mb-2 text-gray-600">
         {order.orderStatus === 'delivered' ? '배달 완료' : '배달 중'}
       </div>
