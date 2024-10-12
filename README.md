@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
-
-First, run the development server:
-
+# 프로젝트 실행 방법
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+브라우저 : http://localhost:3000  
+
+# 테스트 실행 방법
+```bash
+npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# 폴더 구조
+```md
+.
+├── app   * nextjs 앱 라우터 
+│ ├── home    * 페이지 라우팅
+│ │ └── _components    * 페이지 전용 컴포넌트 컴포넌트
+├── components
+│ ├── Layout    * 레이아웃 컴포넌트
+│ ├── shared    * 공용 컴포넌트
+│ └── ui    * shadcn/ui 컴포넌트
+├── constants   * 공용 상수
+├── context   * 외부 모듈 관련 
+├── features    * 기능 코드
+│ ├── address   * 도메인
+│ │ ├── api   * api 호출 함수
+│ │ ├── hooks   * 커스텀 hook
+│ │ └── types   * 타입 정의
+├── hooks   * 공용 커스텀 hook
+├── lib   * 라이브러리
+├── mocks   * msw mock api
+└── store   * 전역 상태 관리
+```
