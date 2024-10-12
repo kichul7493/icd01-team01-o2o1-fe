@@ -11,8 +11,6 @@ export default function AddressContainer() {
 
   const mainAddress = data?.addresses.find((address) => address.addressStatus === 'main')
 
-  console.log(mainAddress?.addressDetail)
-
   return (
     <Link href={'/my/address'} className="mb-4 flex items-center justify-start">
       <MapPin size={20} />
