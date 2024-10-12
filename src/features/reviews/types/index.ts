@@ -11,6 +11,18 @@ export type ReviewRequest = {
   reviewImages: string[]
 }
 
+export interface ReviewListResponse {
+  response: {
+    storeName: string
+    reviews: Review[]
+    page: number
+    size: number
+    totalCount: number
+  }
+}
+
 export type ReviewResponse = {
-  reviewId: number
+  response: {
+    reviewId: number
+  }
 }

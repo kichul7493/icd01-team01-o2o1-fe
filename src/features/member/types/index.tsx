@@ -52,3 +52,28 @@ export type Member = {
   name: string
   address: Address
 }
+
+export type CreateMemberRequest = {
+  nickName: string
+  contact: string
+  address: Address
+}
+
+export interface MemberAddressResponse {
+  response: {
+    addresses: Address[]
+  }
+  statusCode: number
+  msg: string
+}
+
+export interface MemberResponse {
+  response: {
+    memberId: number
+    nickName: string
+    contact: string
+    name: string
+  }
+  statusCode: number
+  msg: string
+}

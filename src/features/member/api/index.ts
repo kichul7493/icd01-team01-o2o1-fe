@@ -1,39 +1,14 @@
 import axiosInst from '@/util/axiosInst'
-import { Address } from '../types'
-
-export interface MemberResponse {
-  response: {
-    memberId: number
-    nickName: string
-    contact: string
-    name: string
-  }
-  statusCode: number
-  msg: string
-}
+import { CreateMemberRequest, MemberAddressResponse, MemberResponse } from '../types'
 
 export const getMemberInfo = async () => {
   const { data } = await axiosInst.get<MemberResponse>('/member')
   return data.response
 }
 
-type Member = {
-  nickName: string
-  contact: string
-  address: Address
-}
-
-export const createMember = async (formData: Member) => {
+export const createMember = async (formData: CreateMemberRequest) => {
   const { data } = await axiosInst.post<MemberResponse>('/member', { ...formData })
   return data.statusCode === 200
-}
-
-interface MemberAddressResponse {
-  response: {
-    addresses: Address[]
-  }
-  statusCode: number
-  msg: string
 }
 
 export const getMemberAddress = async () => {
