@@ -48,7 +48,6 @@ const AddressListItem = ({ ...props }: AddressData) => {
       queryKey: ['storeList', '', null],
     })
     updateMainAddress(props.addressId)
-    router.push('/cart')
   }
 
   return (
