@@ -12,12 +12,15 @@ export interface OptionState {
 }
 
 export interface MenuSelectState {
-  menuPrice: number | null
+  menuPrice: number
   setMenuPrice: (menuPrice: number) => void
   menuCount: number
-  setMenuCount: (n: number, menuPrice: number) => void
+  setMenuCount: (n: number) => void
   optionGroups: OptionGroup[]
   setOptionGroups: (optionGroups: OptionGroup[]) => void
+  perMenuPrice: number
+  setPerMenuPrice: (perMenuPrice: number) => void
+  reset: () => void
 }
 
 export interface OptionGroup {
