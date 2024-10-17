@@ -23,6 +23,9 @@ const PullToRefresh = ({ children, elementRef, handleRefresh }: PullToRefreshPro
     function handleTouchMove(event: TouchEvent) {
       if (!elementRef.current) return
 
+      // 스크롤이 상단에 있지 않으면 함수 종료
+      if (window.scrollY > 0) return
+
       const moveY = event.touches[0].clientY
       const pullDistance = moveY - startY
 
