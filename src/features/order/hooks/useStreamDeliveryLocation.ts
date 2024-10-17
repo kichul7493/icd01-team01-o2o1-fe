@@ -29,8 +29,6 @@ export const useStreamDeliveryLocation = (orderId: number) => {
     })
 
     eventSource.onmessage = (event) => {
-      console.log('Received message:', event.data)
-
       const { latitude, longitude } = JSON.parse(event.data)
 
       setDeliveryLocation({ latitude, longitude })

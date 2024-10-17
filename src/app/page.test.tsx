@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import LoginPage from './page'
 
-import { render } from '@/util/test-utils'
+import { render } from '@/lib/test-utils'
 import { useRouter } from 'next/navigation'
 import { useSignIn } from '@/features/auth/hooks/useSignIn'
 

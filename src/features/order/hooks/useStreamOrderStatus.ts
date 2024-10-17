@@ -33,8 +33,6 @@ export const useStreamOrderStatus = ({ orderId, initStatus }: UseStreamOrderStat
     })
 
     eventSource.onmessage = (event) => {
-      console.log('Received message:', event.data)
-
       const { orderStatus } = JSON.parse(event.data)
 
       changeOrderStatus(orderStatus)

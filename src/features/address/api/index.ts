@@ -1,5 +1,5 @@
 import { Address } from '@/features/member/types'
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { AddressData } from '../types'
 
 type AddressListResponseType = {

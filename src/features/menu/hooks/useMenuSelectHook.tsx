@@ -1,28 +1,5 @@
 import { create } from 'zustand'
-
-interface MenuSelectState {
-  menuPrice: number
-  setMenuPrice: (menuPrice: number) => void
-  menuCount: number
-  setMenuCount: (n: number) => void
-  optionGroups: OptionGroup[]
-  setOptionGroups: (optionGroups: OptionGroup[]) => void
-  perMenuPrice: number
-  setPerMenuPrice: (perMenuPrice: number) => void
-  reset: () => void
-}
-
-interface OptionGroup {
-  optionGroupId: number
-  optionGroupName: string
-  options: Option[]
-}
-
-interface Option {
-  optionId: number
-  optionName: string
-  optionPrice: number
-}
+import { MenuSelectState, OptionGroup } from '../types'
 
 export const useMenuSelectStore = create<MenuSelectState>((set) => ({
   menuPrice: 0,

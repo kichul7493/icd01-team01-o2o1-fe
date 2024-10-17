@@ -2,7 +2,7 @@ import { Cross1Icon } from '@radix-ui/react-icons'
 import { CameraIcon } from 'lucide-react'
 import React from 'react'
 import Image from 'next/image'
-import { convertImageToCompressedBlob, loadImage, readFileAsDataURL } from '@/util/convertImage'
+import { convertImageToCompressedBlob, loadImage, readFileAsDataURL } from '@/lib/convertImage'
 
 const ImageUploader = () => {
   const [images, setImages] = React.useState<string[]>([])

@@ -1,4 +1,4 @@
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { StoreResponse } from '../types'
 import { Address } from '@/features/member/types'
 

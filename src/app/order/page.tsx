@@ -1,5 +1,4 @@
 'use client'
-import LoadingSpinner from '@/components/common/LoadingSpinner'
 import OrderCard from '@/app/order/_components/OrderCard'
 import Tabs from '@/app/order/_components/Tabs'
 import useOrder from '@/features/order/hooks/useOrder'

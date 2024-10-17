@@ -3,9 +3,27 @@ import { cn } from '@/lib/utils'
 interface LoadingSpinnerProps {
   className?: string
   size?: 'sm' | 'md' | 'lg'
+  isFullScreen?: boolean
 }
 
-export const LoadingSpinner = ({ className, size = 'sm' }: LoadingSpinnerProps) => {
+export const LoadingSpinner = ({ className, size = 'sm', isFullScreen }: LoadingSpinnerProps) => {
+  if (isFullScreen) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <LoadingIcon className={className} size={size} />
+      </div>
+    )
+  }
+
+  return <LoadingIcon className={className} size={size} />
+}
+
+interface LoadingSvgProps {
+  className?: string
+  size?: 'sm' | 'md' | 'lg'
+}
+
+const LoadingIcon = ({ className, size = 'sm' }: LoadingSvgProps) => {
   const sizeMap = {
     sm: '24',
     md: '48',

@@ -1,6 +1,6 @@
 'use client'
 import { Order } from '@/features/order/types'
-import { formatDate } from '@/util/formatDate'
+import { formatDate } from '@/lib/formatDate'
 import Link from 'next/link'
 import * as React from 'react'
 

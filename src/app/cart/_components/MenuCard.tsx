@@ -23,7 +23,7 @@ const MenuCard = ({ menuName, menuPrice, menuCount, optionGroups, menuId }: Menu
                 {group.optionGroupName}
                 <p className="pl-2 pt-1 text-sm/[14px]">
                   {group.options?.map((option) => (
-                    <span key={option.optionId} className="block flex items-center gap-1">
+                    <span key={option.optionId} className="flex items-center gap-1">
                       {option.optionName} (+{option.optionPrice.toLocaleString()}원)
                     </span>
                   ))}

@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import StoreCard from '.'
-import { Store } from '@/types/store'
+import { Store } from '@/features/store/types'
 
 const mockRestaurant: Store = {
   storeId: 1,

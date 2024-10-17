@@ -1,4 +1,4 @@
-import axiosInst from '@/util/axiosInst'
+import axiosInst from '@/lib/axiosInst'
 import { Order, OrderDetail } from '../types'
 
 export const getOrderList = async () => {
@@ -9,8 +9,6 @@ export const getOrderList = async () => {
     statusCode: number
     msg: string
   }>(`/order`)
-
-  console.log(res)
 
   return res.data
 }
