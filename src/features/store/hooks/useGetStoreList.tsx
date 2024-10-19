@@ -14,7 +14,7 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
 
   const mainAddress = addressData?.addresses.find((address) => address.addressStatus === 'main')
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError, refetch } =
     useInfiniteQuery({
       queryKey: ['storeList', category, keyword],
       queryFn: ({ pageParam }) =>
@@ -49,6 +49,7 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
     hasNextPage,
     isError,
     scrollPos,
+    refetch,
   }
 }
 
