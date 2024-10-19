@@ -8,6 +8,7 @@ import React, { useEffect } from 'react'
 import ReviewSkeleton from './_components/ReviewSkeleton'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 import throttle from 'lodash.throttle'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 export default function StoreReviewPage() {
   const params = useParams<{
@@ -16,8 +17,16 @@ export default function StoreReviewPage() {
 
   const router = useRouter()
 
-  const { pages, storeName, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useStoreReviewInfiniteQuery(params?.id || '')
+  const {
+    pages,
+    storeName,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isError,
+    refetch,
+  } = useStoreReviewInfiniteQuery(params?.id || '')
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -32,6 +41,12 @@ export default function StoreReviewPage() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [fetchNextPage, hasNextPage])
+
+  if (isError) {
+    return (
+      <ExceptionScreen refetch={refetch} message="리뷰 정보를 불러오는 중 에러가 발생했습니다." />
+    )
+  }
 
   return (
     <div className="pb-20">

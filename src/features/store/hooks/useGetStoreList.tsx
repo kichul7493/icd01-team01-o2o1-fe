@@ -10,7 +10,11 @@ interface useGetStoreList {
 }
 
 const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
-  const { data: addressData } = useGetMemberAddress()
+  const {
+    data: addressData,
+    isError: isAddressError,
+    refetch: addressRefetch,
+  } = useGetMemberAddress()
 
   const mainAddress = addressData?.addresses.find((address) => address.addressStatus === 'main')
 
@@ -41,15 +45,20 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
     hasNextPage,
   })
 
+  const refetchStoreList = () => {
+    addressRefetch()
+    refetch()
+  }
+
   return {
     pages: data?.pages,
     isFetchingNextPage,
     isLoading,
     fetchNextPage,
     hasNextPage,
-    isError,
+    isError: isError || isAddressError,
     scrollPos,
-    refetch,
+    refetch: refetchStoreList,
   }
 }
 

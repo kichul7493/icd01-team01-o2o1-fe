@@ -6,15 +6,19 @@ import SearchInput from './_components/SearchInput'
 import { CARD_HEIGHT, NODE_PADDING, TOP_BAR_HEIGHT } from '@/features/store/constants'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 import { Store } from '@/features/store/types'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
-  const { pages, isLoading, scrollPos, isError } = useGetStoreList({
+  const { pages, isLoading, scrollPos, isError, refetch } = useGetStoreList({
     keyword: searchTerm,
   })
 
   if (isLoading) return <LoadingSpinner isFullScreen size="lg" />
-  if (isError) return <div>에러 발생</div>
+  if (isError)
+    return (
+      <ExceptionScreen refetch={refetch} message="매장 정보를 불러오는 중 에러가 발생했습니다." />
+    )
 
   return (
     <div className="flex h-screen flex-col p-4 pb-[4.5rem]">

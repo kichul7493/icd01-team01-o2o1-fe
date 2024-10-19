@@ -4,6 +4,7 @@ import React from 'react'
 import Menu from './Menu'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { Skeleton } from '@/components/ui/skeleton'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 const MenuContainer = () => {
   const { data, isLoading } = useGetStoreDetailInfo()
