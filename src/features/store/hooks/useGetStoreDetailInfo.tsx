@@ -7,10 +7,10 @@ export const useGetStoreDetailInfo = () => {
     id: string
   }>()
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['store', params.id],
     queryFn: async () => getStoreDetailInfo(params.id),
   })
 
-  return { data, isLoading }
+  return { data, isLoading, isError, refetch }
 }

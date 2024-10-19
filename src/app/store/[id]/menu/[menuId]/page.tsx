@@ -12,11 +12,13 @@ import { useMenuSelectStore } from '@/features/menu/hooks/useMenuSelectHook'
 import { useManageCartStore } from '@/features/cart/hooks/useManageCartStore'
 import { MenuType } from '@/features/cart/types'
 import { useRouter } from 'next/navigation'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 
 const Page = () => {
   const router = useRouter()
   const { optionGroups, menuCount, menuPrice, reset } = useMenuSelectStore()
-  const { data, isLoading } = useGetStoreDetailInfo()
+  const { data, isLoading, isError, refetch } = useGetStoreDetailInfo()
   const params = useParams<{
     menuId: string
   }>()
@@ -108,6 +110,16 @@ const Page = () => {
     })
 
     router.push('/cart')
+  }
+
+  if (isError) {
+    return (
+      <ExceptionScreen refetch={refetch} message="메뉴 정보를 불러오는 중 에러가 발생했습니다." />
+    )
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner isFullScreen />
   }
 
   return (

@@ -11,6 +11,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { CARD_HEIGHT, NODE_PADDING, TOP_BAR_HEIGHT } from '@/features/store/constants'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 import { Store } from '@/features/store/types'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -22,6 +23,7 @@ export default function Home() {
     isLoading: storeLoading,
     isError: storeError,
     scrollPos,
+    refetch,
   } = useGetStoreList({
     category: selectedCategory || '',
   })
@@ -34,7 +36,10 @@ export default function Home() {
   }, 1000)
 
   if (storeLoading && categoryLoading) return <LoadingSpinner isFullScreen size="lg" />
-  if (storeError || categoryError) return <div>에러 발생</div>
+  if (storeError || categoryError)
+    return (
+      <ExceptionScreen refetch={refetch} message="매장 정보를 불러오는 중 에러가 발생했습니다." />
+    )
 
   return (
     <PullToRefresh elementRef={containerRef} handleRefresh={handleRefresh}>

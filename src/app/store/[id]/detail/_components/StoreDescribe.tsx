@@ -4,7 +4,16 @@ import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailI
 import { Skeleton } from '@/components/ui/skeleton'
 
 const StoreDescribe = () => {
-  const { data, isLoading } = useGetStoreDetailInfo()
+  const { data, isLoading, isError, refetch } = useGetStoreDetailInfo()
+
+  if (isError) {
+    return (
+      <div>
+        <div>매장 정보를 불러오는 중 에러가 발생했습니다.</div>
+        <button onClick={() => refetch()}>다시 시도</button>
+      </div>
+    )
+  }
 
   return isLoading ? (
     <div className="flex flex-col gap-2 text-base/[18px] font-normal">

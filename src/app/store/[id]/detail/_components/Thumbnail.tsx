@@ -4,16 +4,17 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { Skeleton } from '@/components/ui/skeleton'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 const Thumbnail = () => {
-  const { data, isLoading } = useGetStoreDetailInfo()
+  const { data, isLoading, isError: isStoreError } = useGetStoreDetailInfo()
   const [isError, setIsError] = useState(false)
 
   return (
     <figure className="relative h-[220px] w-full bg-gray-200">
       {isLoading ? (
         <Skeleton className="h-full w-full" />
-      ) : isError || !data?.thumbnails[0] ? (
+      ) : isError || isStoreError || !data?.thumbnails[0] ? (
         <div className="flex h-full w-full items-center justify-center bg-gray-300 text-gray-500">
           이미지 로드 실패
         </div>

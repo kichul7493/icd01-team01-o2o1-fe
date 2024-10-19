@@ -10,11 +10,15 @@ interface useGetStoreList {
 }
 
 const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
-  const { data: addressData } = useGetMemberAddress()
+  const {
+    data: addressData,
+    isError: isAddressError,
+    refetch: addressRefetch,
+  } = useGetMemberAddress()
 
   const mainAddress = addressData?.addresses.find((address) => address.addressStatus === 'main')
 
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError, refetch } =
     useInfiniteQuery({
       queryKey: ['storeList', category, keyword],
       queryFn: ({ pageParam }) =>
@@ -41,14 +45,20 @@ const useGetStoreList = ({ category, keyword }: useGetStoreList) => {
     hasNextPage,
   })
 
+  const refetchStoreList = () => {
+    addressRefetch()
+    refetch()
+  }
+
   return {
     pages: data?.pages,
     isFetchingNextPage,
     isLoading,
     fetchNextPage,
     hasNextPage,
-    isError,
+    isError: isError || isAddressError,
     scrollPos,
+    refetch: refetchStoreList,
   }
 }
 

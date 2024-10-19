@@ -5,10 +5,25 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 import { Skeleton } from '@/components/ui/skeleton'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 
 const StoreInfo = () => {
   const params = useParams<{ id: string }>()
-  const { data, isLoading } = useGetStoreDetailInfo()
+  const { data, isLoading, isError, refetch } = useGetStoreDetailInfo()
+
+  if (isError) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p>매장 정보를 불러오는 중 에러가 발생했습니다.</p>
+        <button onClick={() => refetch()}>다시 시도</button>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner isFullScreen />
+  }
 
   return (
     <section>

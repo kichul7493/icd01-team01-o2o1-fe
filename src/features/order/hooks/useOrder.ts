@@ -3,7 +3,7 @@ import React from 'react'
 import { getOrderList } from '../api'
 
 const useOrder = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['orders'],
     queryFn: getOrderList,
   })
@@ -11,6 +11,8 @@ const useOrder = () => {
   return {
     orders: data?.response.orders,
     isLoading,
+    isError,
+    refetch,
   }
 }
 

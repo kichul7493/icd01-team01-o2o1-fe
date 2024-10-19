@@ -5,10 +5,10 @@ import { getOrderStatus } from '../api'
 export const useOrderStatus = () => {
   const params = useParams<{ orderId: string }>()
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['order', params?.orderId],
     queryFn: async () => getOrderStatus(params?.orderId || ''),
   })
 
-  return { data, isLoading }
+  return { data, isLoading, isError, refetch }
 }

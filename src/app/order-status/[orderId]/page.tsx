@@ -9,21 +9,28 @@ import OrderDetail from './_components/OrderDetail'
 import OrderTrackMap from './_components/OrderTrackMap'
 import OrderStatusSkeleton from './_components/OrderStatusSkeleton'
 import BackButton from '@/components/shared/BackButton'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 export default function OrderStatusPage() {
   const router = useRouter()
 
-  const { data, isLoading } = useOrderStatus()
+  const { data, isLoading, isError, refetch } = useOrderStatus()
 
   if (isLoading) {
     return <OrderStatusSkeleton />
+  }
+
+  if (isError) {
+    return (
+      <ExceptionScreen refetch={refetch} message="주문 상태를 불러오는 중에 문제가 발생했습니다" />
+    )
   }
 
   if (!data) {
     return (
       <div>
         <BackButton />
-        <div className="flex items-center justify-center">Order not found</div>
+        <div className="flex items-center justify-center">주문이 없습니다.</div>
       </div>
     )
   }

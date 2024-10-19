@@ -7,6 +7,7 @@ import { convertImageToCompressedBlob, loadImage, readFileAsDataURL } from '@/li
 const ImageUploader = () => {
   const [images, setImages] = React.useState<string[]>([])
 
+  // 이미지 업로드 구현되지 않음.
   const handleUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return

@@ -4,11 +4,15 @@ import React from 'react'
 import ImageUploader from './ImageUploader'
 import Rating from './Rating'
 import usePostReview from '@/features/reviews/hooks/usePostReview'
+import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 const ReviewForm = () => {
   const { postReview, isPending } = usePostReview()
   const [rating, setRating] = React.useState<number>(0)
   const [contents, setContents] = React.useState<string>('')
+  const { data, isLoading, isError, refetch } = useGetStoreDetailInfo()
 
   const handleChangeContents = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContents(e.target.value)
@@ -28,9 +32,19 @@ const ReviewForm = () => {
     })
   }
 
+  if (isError) {
+    return (
+      <ExceptionScreen refetch={refetch} message="매장 정보를 불러오는 중 에러가 발생했습니다." />
+    )
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner isFullScreen />
+  }
+
   return (
     <form className="px-10" onSubmit={handleSubmit}>
-      <p className="mb-4 font-semibold">삼청당 고대안암점</p>
+      <p className="mb-4 font-semibold">{data?.storeName}</p>
       <Rating value={rating} handleChange={handleChangeRating} />
       <textarea
         onChange={handleChangeContents}
@@ -43,7 +57,7 @@ const ReviewForm = () => {
         className="absolute bottom-0 left-0 z-[100] h-24 w-full bg-main text-xl font-semibold text-white"
         type="submit"
       >
-        {isPending ? '리뷰 작성 중...' : '등록하기'}
+        {isPending ? <LoadingSpinner /> : '등록하기'}
       </button>
     </form>
   )
