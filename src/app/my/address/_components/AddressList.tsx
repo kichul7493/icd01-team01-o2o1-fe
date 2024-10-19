@@ -6,6 +6,8 @@ import { Separator } from '@/components/ui/separator'
 import { useAddressList, useDeleteAddress, useUpdateMainAddress } from '@/features/address/query'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 
 type AddressData = {
   addressId: number
@@ -18,7 +20,18 @@ type AddressData = {
 }
 
 const AddressList = () => {
-  const { data } = useAddressList()
+  const { data, isError, isLoading, refetch } = useAddressList()
+
+  if (isError) {
+    return (
+      <ExceptionScreen refetch={refetch} message="주소 목록을 불러오는 중에 문제가 발생했습니다." />
+    )
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner isFullScreen />
+  }
+
   return (
     <ul className="p-2">
       {data &&
