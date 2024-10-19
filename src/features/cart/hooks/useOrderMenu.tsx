@@ -11,7 +11,7 @@ const useOrderMenu = () => {
       router.push(`/order-status/${data.response.orderId}`)
     },
     onError: () => {
-      console.error('에러가 발생했습니다. 잠시 후 다시 시도해주세요.')
+      alert('주문 기능은 미구현 상태입니다.')
     },
   })
   return { mutate }
