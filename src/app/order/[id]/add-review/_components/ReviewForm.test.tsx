@@ -2,8 +2,10 @@ import { render, screen } from '@testing-library/react'
 import ReviewForm from './ReviewForm'
 import userEvent from '@testing-library/user-event'
 import usePostReview from '@/features/reviews/hooks/usePostReview'
+import { useGetStoreDetailInfo } from '@/features/store/hooks/useGetStoreDetailInfo'
 
 jest.mock('../../../../../features/reviews/hooks/usePostReview.ts')
+jest.mock('../../../../../features/store/hooks/useGetStoreDetailInfo.tsx')
 
 describe('ReviewForm', () => {
   const mockPostReview = jest.fn()
@@ -14,6 +16,14 @@ describe('ReviewForm', () => {
     ;(usePostReview as jest.Mock).mockReturnValue({
       postReview: mockPostReview,
       isPending: false,
+    })
+    ;(useGetStoreDetailInfo as jest.Mock).mockReturnValue({
+      data: {
+        storeName: '삼청당 고대안암점',
+      },
+      isLoading: false,
+      isError: false,
+      refetch: jest.fn(),
     })
 
     render(<ReviewForm />)
@@ -29,6 +39,14 @@ describe('ReviewForm', () => {
     ;(usePostReview as jest.Mock).mockReturnValue({
       postReview: mockPostReview,
       isPending: false,
+    })
+    ;(useGetStoreDetailInfo as jest.Mock).mockReturnValue({
+      data: {
+        storeName: '삼청당 고대안암점',
+      },
+      isLoading: false,
+      isError: false,
+      refetch: jest.fn(),
     })
 
     render(<ReviewForm />)
