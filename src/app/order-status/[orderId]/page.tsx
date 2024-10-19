@@ -13,17 +13,31 @@ import BackButton from '@/components/shared/BackButton'
 export default function OrderStatusPage() {
   const router = useRouter()
 
-  const { data, isLoading } = useOrderStatus()
+  const { data, isLoading, isError, refetch } = useOrderStatus()
 
   if (isLoading) {
     return <OrderStatusSkeleton />
+  }
+
+  if (isError) {
+    return (
+      <div>
+        <BackButton />
+        <div className="flex h-screen flex-col items-center justify-center">
+          주문 상태를 불러오는 중에 문제가 발생했습니다
+          <div className="mt-6 flex justify-center">
+            <button onClick={() => refetch()}>다시 시도하기</button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (!data) {
     return (
       <div>
         <BackButton />
-        <div className="flex items-center justify-center">Order not found</div>
+        <div className="flex items-center justify-center">주문이 없습니다.</div>
       </div>
     )
   }
