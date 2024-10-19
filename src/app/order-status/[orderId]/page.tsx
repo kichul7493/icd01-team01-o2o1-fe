@@ -9,6 +9,7 @@ import OrderDetail from './_components/OrderDetail'
 import OrderTrackMap from './_components/OrderTrackMap'
 import OrderStatusSkeleton from './_components/OrderStatusSkeleton'
 import BackButton from '@/components/shared/BackButton'
+import ExceptionScreen from '@/components/shared/ExceptionScreen/ExceptionScreen'
 
 export default function OrderStatusPage() {
   const router = useRouter()
@@ -21,15 +22,7 @@ export default function OrderStatusPage() {
 
   if (isError) {
     return (
-      <div>
-        <BackButton />
-        <div className="flex h-screen flex-col items-center justify-center">
-          주문 상태를 불러오는 중에 문제가 발생했습니다
-          <div className="mt-6 flex justify-center">
-            <button onClick={() => refetch()}>다시 시도하기</button>
-          </div>
-        </div>
-      </div>
+      <ExceptionScreen refetch={refetch} message="주문 상태를 불러오는 중에 문제가 발생했습니다" />
     )
   }
 
